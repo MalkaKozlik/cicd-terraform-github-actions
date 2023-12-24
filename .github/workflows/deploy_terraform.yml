@@ -60,6 +60,7 @@ jobs:
           client-id: $ARM_CLIENT_ID
           client-secret: $ARM_CLIENT_SECRET
           tenant-id: $ARM_TENANT_ID
+          enable-AzPSSession: true
       
 
       - name: 🏗️ Terraform Init
