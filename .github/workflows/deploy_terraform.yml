@@ -58,7 +58,7 @@ jobs:
  
       - name: 🏗️ Terraform Init
         id: init
-        run: terraform init -input=false 
+        run: terraform init 
  
       - name: 📋 Terraform Plan
         id: plan
