@@ -33,34 +33,34 @@ jobs:
   job1:
     runs-on: ubuntu-latest
 
-    steps:
-      # defaults:
-      #   run:
-      #     working-directory: terraform
+    defaults:
+      run:
+        working-directory: terraform
 
+    steps:
       - uses: actions/checkout@v3
 
       - name: try
         run: echo "hello terraform automation"
 
-      # - name: 🧩 HashiCorp - Setup Terraform
-      #   uses: hashicorp/setup-terraform@v2.0.0
+      - name: 🧩 HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.0
       
-      # - name : 🔑 az login
-      #   id: az login
-      #   uses: azure/login@v1
-      #   with:
-      #     creds: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
-      #     enable-AzPSSession: true 
+      - name : 🔑 az login
+        id: az login
+        uses: azure/login@v1
+        with:
+          creds: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
+          enable-AzPSSession: true 
 
-      # - name: 🏗️ Terraform Init
-      #   id: init
-      #   run: terraform init -input=false 
+      - name: 🏗️ Terraform Init
+        id: init
+        run: terraform init -input=false 
  
-      # - name: 📋 Terraform Plan
-      #   id: plan
-      #   run: terraform plan -out=tfplan -input=false 
+      - name: 📋 Terraform Plan
+        id: plan
+        run: terraform plan -out=tfplan -input=false 
 
-      # - name: ✅ Terraform Apply
-      #   id: apply
-      #   run: terraform apply -input=false -auto-approve tfplan
+      - name: ✅ Terraform Apply
+        id: apply
+        run: terraform apply -input=false -auto-approve tfplan
