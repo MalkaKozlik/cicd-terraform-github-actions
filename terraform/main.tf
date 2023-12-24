@@ -3,7 +3,7 @@ terraform {
     resource_group_name      = "NetworkWatcherRG"
     storage_account_name     = "myfirsttrail"
     container_name           = "terraformstate-demo"
-    key                      = "terraform.tfstate"
+    key                      = "terraform1.tfstate"
   }
   
 }
