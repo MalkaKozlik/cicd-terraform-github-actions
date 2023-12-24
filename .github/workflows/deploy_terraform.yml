@@ -37,9 +37,9 @@ jobs:
   job1:
     runs-on: ubuntu-latest
 
-    # defaults:
-    #   run:
-    #     working-directory: terraform
+    defaults:
+      run:
+        working-directory: terraform
 
     steps:
       - uses: actions/checkout@v3
@@ -84,18 +84,18 @@ jobs:
       - name: 🏗️ Terraform Init
         id: init
         run: terraform init 
-        working-directory: ./terraform
+        # working-directory: ./terraform
 
  
       - name: 📋 Terraform Plan
         id: plan
         run: terraform plan -out=tfplan -input=false 
-        working-directory: ./terraform
+        # working-directory: ./terraform
 
       - name: ✅ Terraform Apply
         id: apply
         run: terraform apply -input=false -auto-approve tfplan
-        working-directory: ./terraform
+        # working-directory: ./terraform
 
       # - name: ✅ Terraform Destroy
       #   id: destroy
