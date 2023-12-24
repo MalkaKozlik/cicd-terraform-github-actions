@@ -89,6 +89,8 @@ jobs:
         run: terraform plan -out=tfplan -input=false 
         working-directory: ./terraform
 
-      # - name: ✅ Terraform Apply
-      #   id: apply
-      #   run: terraform apply -input=false -auto-approve tfplan
+      - name: ✅ Terraform Apply
+        id: apply
+        run: terraform apply -input=false -auto-approve tfplan
+        working-directory: ./terraform
+
