@@ -1,12 +1,12 @@
-# terraform {
-#   backend "azurerm" {
-#     resource_group_name      = "NetworkWatcherRG"
-#     storage_account_name     = "myfirsttrail"
-#     container_name           = "terraformstate-demo"
-#     key                      = "terraform.tfstate"
-#   }
+terraform {
+  backend "azurerm" {
+    resource_group_name      = "NetworkWatcherRG"
+    storage_account_name     = "myfirsttrail"
+    container_name           = "terraformstate-demo"
+    key                      = "terraform.tfstate"
+  }
   
-# }
+}
 
 provider "azurerm" {
   features {
@@ -15,7 +15,7 @@ provider "azurerm" {
     }
   }
 
-  # subscription_id = var.subscription_id
+  subscription_id = var.subscription_id
 }
 
 # resource "azurerm_resource_group" "vnet_resource_group" {
