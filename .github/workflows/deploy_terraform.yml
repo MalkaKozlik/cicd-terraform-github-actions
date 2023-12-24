@@ -100,7 +100,7 @@ jobs:
 
       - name: ✅ Terraform Destroy
         id: destroy
-        run: terraform destroy -input=false -auto-approve tfplan
+        run: terraform destroy -input=false -auto-approve 
         working-directory: ./terraform
 
 
