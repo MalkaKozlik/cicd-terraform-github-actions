@@ -65,14 +65,14 @@ jobs:
       #     tenant-id: ${{ secrets.ARM_TENANT_ID }}
       #     subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
  
-      - name: 🏗️ Terraform Init
-        id: init
-        run: terraform init 
+      # - name: 🏗️ Terraform Init
+      #   id: init
+      #   run: terraform init 
  
-      - name: 📋 Terraform Plan
-        id: plan
-        run: terraform plan -out=tfplan -input=false 
+      # - name: 📋 Terraform Plan
+      #   id: plan
+      #   run: terraform plan -out=tfplan -input=false 
 
-      - name: ✅ Terraform Apply
-        id: apply
-        run: terraform apply -input=false -auto-approve tfplan
+      # - name: ✅ Terraform Apply
+      #   id: apply
+      #   run: terraform apply -input=false -auto-approve tfplan
