@@ -84,17 +84,23 @@ jobs:
       #     tf_working_directory: ./terraform
 
 
-      - name: 🏗️ Terraform Init
-        id: init
-        run: terraform init -reconfigure
+      # - name: 🏗️ Terraform Init
+      #   id: init
+      #   run: terraform init -reconfigure
  
-      - name: 📋 Terraform Plan
-        id: plan
-        run: terraform plan -out=tfplan -input=false 
+      # - name: 📋 Terraform Plan
+      #   id: plan
+      #   run: terraform plan -out=tfplan -input=false 
+      #   working-directory: ./terraform
+
+      # - name: ✅ Terraform Apply
+      #   id: apply
+      #   run: terraform apply -input=false -auto-approve tfplan
+      #   working-directory: ./terraform
+
+      - name: ✅ Terraform Destroy
+        id: destroy
+        run: terraform destroy -input=false -auto-approve tfplan
         working-directory: ./terraform
 
-      - name: ✅ Terraform Apply
-        id: apply
-        run: terraform apply -input=false -auto-approve tfplan
-        working-directory: ./terraform
 
