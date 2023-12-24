@@ -43,15 +43,13 @@ jobs:
       - name: try
         run: echo "hello terraform automation"
 
-      - name: 🧩 HashiCorp - Setup Terraform
-        uses: hashicorp/setup-terraform@v2.0.0
-      
+
       - name : 🔑 az login
         id: az-login
         uses: azure/login@v1
         with:
           creds: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
-          # enable-AzPSSession: true 
+          enable-AzPSSession: true 
       # - name : 🔑 az login
       #   id : az-login
       #   run : az login --service-principal -u ${{ secrets.ARM_CLIENT_ID }} -p ${{ secrets.ARM_CLIENT_SECRET }} --tenant ${{ secrets.ARM_TENANT_ID }}
@@ -63,6 +61,10 @@ jobs:
       #     client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
       #     tenant-id: ${{ secrets.ARM_TENANT_ID }}
       #     subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
+
+      - name: 🧩 HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.0
+      
  
       - name: 🏗️ Terraform Init
         id: init
