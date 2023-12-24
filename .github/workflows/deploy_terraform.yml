@@ -68,10 +68,7 @@ jobs:
       #     client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
       #     tenant-id: ${{ secrets.ARM_TENANT_ID }}
       #     subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
-
-      # - name: 🔑 az login
-      #   id: az-login
-      #   run: az login --service-principal --username ${{secrets.ARM_CLIENT_ID}} --password ${{secrets.ARM_CLIENT_SECRET}} --tenant ${{secrets.ARM_TENANT_ID}}
+      
       # - name: Terraform init azurerm backend
       #   uses: ahmedig/terraform-azurerm-backend@v4
       #   with:
