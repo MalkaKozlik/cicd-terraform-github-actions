@@ -1,16 +1,9 @@
 terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "=3.58.0"
-    }
-  }
   backend "azurerm" {
     resource_group_name      = "NetworkWatcherRG"
     storage_account_name     = "myfirsttrail"
     container_name           = "terraformstate-demo"
     key                      = "terraform.tfstate"
-    use_oidc = true
   }
 }
 
@@ -21,7 +14,6 @@ provider "azurerm" {
     }
   }
 
-  use_oidc = true
   subscription_id = var.subscription_id
 }
 
