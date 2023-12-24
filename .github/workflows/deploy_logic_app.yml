@@ -1,0 +1,29 @@
+name: "deploy logic app template"
+
+on:
+  workflow_run:
+    workflows: [Build and deploy container app to Azure Function App]
+    types:
+      - completed
+
+
+jobs:
+  deploy-template:
+    runs-on: ubuntu-latest
+
+    steps:
+      # - uses: actions/checkout@v2
+      # - uses: azure/login@v1
+      #   with:
+      #     creds: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
+      #     enable-AzPSSession: true 
+      - name: print some thing 
+        run: echo "hello deploy logic app template"
+      
+      - name: deploy template
+        id: deploy
+        uses: azure/powershell@v1
+        with: 
+          inlineScript: |
+            az deployment group create -g NetworkWatcherRG --template-file ./templates/template.json --parameters workflows_logic_app_storage_management_name=logic-app-storage-management 
+          azPSVersion: latest

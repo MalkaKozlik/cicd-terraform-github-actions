@@ -1,0 +1,95 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workflows_logic_app_storage_management_name": {
+            "type": "String"
+        },
+        "connections_office365_1_externalid": {
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/connections/office365-1",
+            "type": "String"
+        },
+        "resource_group_location":{
+            "defaultValue": "westeurope",
+            "type": "String"
+        },
+        "frequency":{
+            "defaultValue": "Minute",
+            "type": "String",
+            "allowedValues": [  "Second", "Minute", "Hour", "Day", "Week", "Month"]
+        },
+        "interval":{
+            "defaultValue": 10,
+            "type": "int"
+        }
+
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Logic/workflows",
+            "apiVersion": "2017-07-01",
+            "name": "[parameters('workflows_logic_app_storage_management_name')]",
+            "location": "[parameters('resource_group_location')]",
+            "properties": {
+                "state": "Enabled",
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "$connections": {
+                            "defaultValue": {},
+                            "type": "Object"
+                        }
+                    },
+                    "triggers": {
+                        "Recurrence": {
+                            "recurrence": {
+                                "frequency": "[parameters('frequency')]",
+                                "interval": "[parameters('interval')]"
+                            },
+                            "evaluatedRecurrence": {
+                                "frequency": "[parameters('frequency')]",
+                                "interval": "[parameters('interval')]"
+                            },
+                            "type": "Recurrence"
+                        }
+                    },
+                    "actions": {
+                        "Send_an_email_(V2)": {
+                            "runAfter": {},
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "body": {
+                                    "Body": "<p>succeed</p>",
+                                    "Importance": "Normal",
+                                    "Subject": "deploy",
+                                    "To": "MalkaK@skyvar.co.il"
+                                },
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['office365']['connectionId']"
+                                    }
+                                },
+                                "method": "post",
+                                "path": "/v2/Mail"
+                            }
+                        }
+                    },
+                    "outputs": {}
+                },
+                "parameters": {
+                    "$connections": {
+                        "value": {
+                            "office365": {
+                                "connectionId": "[parameters('connections_office365_1_externalid')]",
+                                "connectionName": "office365-1",
+                                "id": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/providers/Microsoft.Web/locations/westeurope/managedApis/office365"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

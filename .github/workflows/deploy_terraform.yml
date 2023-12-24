@@ -1,0 +1,66 @@
+name: 'Terraform Automation'
+
+on:
+  workflow_dispatch: 
+    inputs:
+      workspaceId:
+        required: true
+      httpTriggerURL:
+        required: true
+      mainManager: 
+        required: true
+      
+      
+      # logLevel:
+      #   description: 'Log level'
+      #   required: true
+      #   default: 'warning'
+      #   type: choice
+      #   options:
+      #   - info
+      #   - warning
+      #   - debug
+
+
+
+env:
+  TF_VAR_subscription_id: ${{secrets.SUBSCRIPTION_ID}}
+  TF_VAR_WORKSPACE_ID:  ${{inputs.workspaceId}}
+  TF_VAR_HTTP_TRIGGER_URL:  ${{inputs.httpTriggerURL}}
+  TF_VAR_MAIN_MANAGER: ${{inputs.mainManager}}
+  
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+
+    steps:
+      # defaults:
+      #   run:
+      #     working-directory: terraform
+
+      - uses: actions/checkout@v3
+
+      - name: try
+        run: echo "hello terraform automation"
+
+      # - name: 🧩 HashiCorp - Setup Terraform
+      #   uses: hashicorp/setup-terraform@v2.0.0
+      
+      # - name : 🔑 az login
+      #   id: az login
+      #   uses: azure/login@v1
+      #   with:
+      #     creds: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
+      #     enable-AzPSSession: true 
+
+      # - name: 🏗️ Terraform Init
+      #   id: init
+      #   run: terraform init -input=false 
+ 
+      # - name: 📋 Terraform Plan
+      #   id: plan
+      #   run: terraform plan -out=tfplan -input=false 
+
+      # - name: ✅ Terraform Apply
+      #   id: apply
+      #   run: terraform apply -input=false -auto-approve tfplan
