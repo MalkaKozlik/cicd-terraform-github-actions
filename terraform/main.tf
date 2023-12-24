@@ -10,6 +10,7 @@ terraform {
     storage_account_name     = "myfirsttrail"
     container_name           = "terraformstate-demo"
     key                      = "terraform.tfstate"
+    use_oidc = true
   }
 }
 
@@ -20,6 +21,7 @@ provider "azurerm" {
     }
   }
 
+  use_oidc = true
   subscription_id = var.subscription_id
 }
 
