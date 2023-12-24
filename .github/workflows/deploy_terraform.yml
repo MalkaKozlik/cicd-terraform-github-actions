@@ -43,7 +43,9 @@ jobs:
       - name: try
         run: echo "hello terraform automation"
 
-
+      - name: 🧩 HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.0
+      
       - name : 🔑 az login
         id: az-login
         uses: azure/login@v1
@@ -61,10 +63,6 @@ jobs:
       #     client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
       #     tenant-id: ${{ secrets.ARM_TENANT_ID }}
       #     subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
-
-      - name: 🧩 HashiCorp - Setup Terraform
-        uses: hashicorp/setup-terraform@v2.0.0
-      
  
       - name: 🏗️ Terraform Init
         id: init
