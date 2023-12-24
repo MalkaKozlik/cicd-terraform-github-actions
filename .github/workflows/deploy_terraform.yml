@@ -57,9 +57,9 @@ jobs:
       #     creds: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
       #     enable-AzPSSession: true 
         
-      - name : 🔑 az login
-        id : az-login
-        run : az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID  
+      # - name : 🔑 az login
+      #   id : az-login
+      #   run : az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID  
 
       # - name: Log in with Azure
       #   uses: azure/login@v1
@@ -69,24 +69,24 @@ jobs:
       #     tenant-id: ${{ secrets.ARM_TENANT_ID }}
       #     subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
 
-      # - name: 🔑 az login
-      #   id: az-login
-      #   run: az login --service-principal --username ${{secrets.ARM_CLIENT_ID}} --password ${{secrets.ARM_CLIENT_SECRET}} --tenant ${{secrets.ARM_TENANT_ID}}
-      # - name: Terraform init azurerm backend
-      #   uses: ahmedig/terraform-azurerm-backend@v4
-      #   with:
-      #     azure_credentials: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
-      #     resource_group_name: NetworkWatcherRG
-      #     container_name: terraformstate-demo
-      #     storage_account_name: myfirsttrail
-      #     file_name: terraform.tfstate
-      #     subscription_id: ${{secrets.SUBSCRIPTION_ID}}
-      #     tf_working_directory: ./terraform
+      - name: 🔑 az login
+        id: az-login
+        run: az login --service-principal --username ${{secrets.ARM_CLIENT_ID}} --password ${{secrets.ARM_CLIENT_SECRET}} --tenant ${{secrets.ARM_TENANT_ID}}
+      - name: Terraform init azurerm backend
+        uses: ahmedig/terraform-azurerm-backend@v4
+        with:
+          azure_credentials: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
+          resource_group_name: NetworkWatcherRG
+          container_name: terraformstate-demo
+          storage_account_name: myfirsttrail
+          file_name: terraform.tfstate
+          subscription_id: ${{secrets.SUBSCRIPTION_ID}}
+          tf_working_directory: ./terraform
 
 
       # - name: 🏗️ Terraform Init
       #   id: init
-      #   run: terraform init -reconfigure
+      #   run: terraform init 
  
       # - name: 📋 Terraform Plan
       #   id: plan
