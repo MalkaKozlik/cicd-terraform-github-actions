@@ -153,7 +153,7 @@ resource "azurerm_function_app" "function_app" {
   } : count.index==2 ? {
     FUNCTIONS_WORKER_RUNTIME = "python"
 
-    ESSENTIAL_TAG=''
+    ESSENTIAL_TAG=" "
   
     SECRET = " "
     KEYVAULT_NAME = " "
