@@ -33,6 +33,8 @@ jobs:
         
     steps:
       - uses: actions/checkout@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🧩 HashiCorp - Setup Terraform
         uses: hashicorp/setup-terraform@v2.0.0
@@ -62,6 +64,6 @@ jobs:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: r'${{ secrets.GITHUB_TOKEN }}'
+          # token: '${{ secrets.GITHUB_TOKEN }}'
           event-type: succeeded
           client-payload: '{"function_app_name": steps.apply.outputs.functions_app_name}'
