@@ -67,6 +67,18 @@ variable function_app_name {
   default = ["log-analytics","start-function","for-each-subsription","test-storages","end-function"]
 }
 
+variable DOCKER_REGISTRY_SERVER_PASSWORD {
+  type        = string
+}
+
+variable DOCKER_REGISTRY_SERVER_USERNAME {
+  type        = string
+}
+
+variable DOCKER_REGISTRY_SERVER_URL {
+  type        = string
+}
+
 variable linux_fx_version {
   type        = string
   default     = "DOCKER|mcr.microsoft.com/azure-functions/dotnet:4-appservice-quickstart"
