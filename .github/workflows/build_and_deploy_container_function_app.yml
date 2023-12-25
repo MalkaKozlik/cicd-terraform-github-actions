@@ -2,7 +2,7 @@ name: Build and deploy container app to Azure Function App
 
 on:
   repository_dispatch:
-    types: [uucceeded]
+    types: [succeeded]
 
 
 jobs:
