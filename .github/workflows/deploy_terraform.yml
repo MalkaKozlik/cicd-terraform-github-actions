@@ -27,9 +27,6 @@ jobs:
     defaults:
       run:
         working-directory: terraform
-
-    permissions:
-      actions: write
         
     steps:
       - uses: actions/checkout@v3
@@ -65,6 +62,6 @@ jobs:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: '${{ secrets.GITHUB_TOKEN }}'
+          token: ${{ secrets.GITHUB_TOKEN }}
           event-type: succeeded
           client-payload: '{"function_app_name": steps.apply.outputs.functions_app_name}'
