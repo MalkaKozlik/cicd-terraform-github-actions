@@ -123,9 +123,9 @@ resource "azurerm_function_app" "function_app" {
 
   app_settings ={
     FUNCTIONS_WORKER_RUNTIME = "python"
-    DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH = 30 ? count.index==0 
-    TIME_INDEX_FOR_CHECK_LAST_FETCH = "days" ? count.index==0 
-    WORKSPACE_ID = "fa9e707a-28c1-4528-b7b2-54d03360d4c9" ? count.index==0 
+    DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH = 30 ? count.index==0 : null
+    TIME_INDEX_FOR_CHECK_LAST_FETCH = "days" ? count.index==0 : null
+    WORKSPACE_ID = "fa9e707a-28c1-4528-b7b2-54d03360d4c9" ? count.index==0 : null
 
     SECRET = " "
     KEYVAULT_NAME = " "
