@@ -59,9 +59,9 @@ jobs:
       #   working-directory: ./terraform
 
 
-      - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          event-type: succeeded
-          client-payload: '{"function_app_name": steps.apply.outputs.functions_app_name}'
+      # - name: Repository Dispatch
+      #   uses: peter-evans/repository-dispatch@v1
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     event-type: succeeded
+      #     client-payload: '{"function_app_name": steps.apply.outputs.functions_app_name}'
