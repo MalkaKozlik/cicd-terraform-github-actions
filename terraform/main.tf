@@ -116,7 +116,7 @@ resource "azurerm_function_app" "function_app" {
   name                      =  var.function_app_name[count.index]
   location                  = data.azurerm_storage_account.vnet_storage_account.location
   resource_group_name       = data.azurerm_storage_account.vnet_storage_account.resource_group_name
-  app_service_plan_id       = azurerm_app_service_plan.app_service_plan[var.app_service_plan_name[count.index]].id
+  app_service_plan_id       = azurerm_app_service_plan.app_service_plan[count.index].id
   storage_account_name      = data.azurerm_storage_account.vnet_storage_account.name
   storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
   version                   = "~4"
