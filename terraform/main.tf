@@ -65,87 +65,87 @@ data "azurerm_storage_account" "vnet_storage_account"{
 }
 
 
-# data "azurerm_client_config" "current_client" {}
+data "azurerm_client_config" "current_client" {}
 
-# resource "azurerm_key_vault" "key_vault" {
-#   name                = var.key_vault_name
-#   location            = "West Europe"
-#   resource_group_name = data.azurerm_storage_account.vnet_storage_account.resource_group_name
-#   soft_delete_retention_days  = 7
-#   tenant_id           = data.azurerm_client_config.current_client.tenant_id
-#   sku_name            = var.key_vault_sku_name
-
-#   access_policy {
-#     tenant_id = data.azurerm_client_config.current_client.tenant_id
-#     object_id = data.azurerm_client_config.current_client.object_id
-
-#     certificate_permissions = var.key_vault_certificate_permissions
-
-#     key_permissions = var.key_vault_key_permissions
-
-#     secret_permissions = var.key_vault_secret_permissions
-
-#     storage_permissions = var.key_vault_storage_permissions
-#   }
-# }
-
-# resource "azurerm_key_vault_secret" "key_vault_secret" {
-#   name         = var.key_vault_secret_name
-#   value        = data.azurerm_storage_account.vnet_storage_account.primary_connection_string
-#   key_vault_id = azurerm_key_vault.key_vault.id
-# }
-
-
-resource "azurerm_app_service_plan" "app_service_plan" {
-  name                = var.app_service_plan_name
-  location            = data.azurerm_storage_account.vnet_storage_account.location
+resource "azurerm_key_vault" "key_vault" {
+  name                = var.key_vault_name
+  location            = "West Europe"
   resource_group_name = data.azurerm_storage_account.vnet_storage_account.resource_group_name
-  kind                = "FunctionApp"
-  reserved            = true
-  sku {
-    tier = "Dynamic"
-    size = "Y1"
+  soft_delete_retention_days  = 7
+  tenant_id           = data.azurerm_client_config.current_client.tenant_id
+  sku_name            = var.key_vault_sku_name
+
+  access_policy {
+    tenant_id = data.azurerm_client_config.current_client.tenant_id
+    object_id = data.azurerm_client_config.current_client.object_id
+
+    certificate_permissions = var.key_vault_certificate_permissions
+
+    key_permissions = var.key_vault_key_permissions
+
+    secret_permissions = var.key_vault_secret_permissions
+
+    storage_permissions = var.key_vault_storage_permissions
   }
- 
+}
+
+resource "azurerm_key_vault_secret" "key_vault_secret" {
+  name         = var.key_vault_secret_name
+  value        = data.azurerm_storage_account.vnet_storage_account.primary_connection_string
+  key_vault_id = azurerm_key_vault.key_vault.id
 }
 
 
+resource "azurerm_app_service_plan" "app_service_plan" {
+  name                = var.app_service_plan_name[count.index]
+  location            = data.azurerm_storage_account.vnet_storage_account.location
+  resource_group_name = data.azurerm_storage_account.vnet_storage_account.resource_group_name
+  kind                = "Linux"
+  reserved            = true
+  sku {
+    tier = "Premium"
+    size = "P1V2"
+  }
+
+  count = length(var.app_service_plan_name)
+  
+}
+
+# ["log-analytics","start-function","for-each-subsription","test-storages","end-function"]
 resource "azurerm_function_app" "function_app" {
-  name                      = var.function_app_name
+  name                      =  var.function_app_name[count.index]
   location                  = data.azurerm_storage_account.vnet_storage_account.location
   resource_group_name       = data.azurerm_storage_account.vnet_storage_account.resource_group_name
-  app_service_plan_id       = azurerm_app_service_plan.app_service_plan.id
+  app_service_plan_id       = azurerm_app_service_plan.app_service_plan[var.app_service_plan_name[count.index]].id
   storage_account_name      = data.azurerm_storage_account.vnet_storage_account.name
   storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
-  os_type                   = "linux"
   version                   = "~4"
 
-  app_settings = {
+  app_settings ={
     FUNCTIONS_WORKER_RUNTIME = "python"
-    DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH =  var.DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH
-    DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_USED_CAPACITY =  var.DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_USED_CAPACITY
-    TIME_INDEX_FOR_CHECK_LAST_FETCH =  var.TIME_INDEX_FOR_CHECK_LAST_FETCH
-    TIME_INDEX_FOR_CHECK_USED_CAPACITY = var.TIME_INDEX_FOR_CHECK_USED_CAPACITY
-    FREQ_AUTOMATION_TEST_TYPE =  var.FREQ_AUTOMATION_TEST_TYPE
-    FREQ_AUTOMATION_TEST_NUMBER =  var.FREQ_AUTOMATION_TEST_NUMBER
-    ALERTS_DOCUMENTATION = var.ALERTS_DOCUMENTATION
-    DOCUMENTATION_TABLE = var.DOCUMENTATION_TABLE
-    DELETED_ACCOUNTS_TABLE = var.DELETED_ACCOUNTS_TABLE
-    DOCUMENTATION_STORAGE_NAME = var.DOCUMENTATION_STORAGE_NAME
-    WORKSPACE_ID = var.WORKSPACE_ID
-    HTTP_TRIGGER_URL = var.HTTP_TRIGGER_URL
-    MAIN_MANAGER = var.MAIN_MANAGER
-    ESSENTIAL_TAG = var.ESSENTIAL_TAG
+    DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH = 30 ? count.index==0 
+    TIME_INDEX_FOR_CHECK_LAST_FETCH = "days" ? count.index==0 
+    WORKSPACE_ID = "fa9e707a-28c1-4528-b7b2-54d03360d4c9" ? count.index==0 
+
+    SECRET = " "
+    KEYVAULT_NAME = " "
+    KEYVAULT_URI = " "
+    https_only                          = true
+    DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
+    DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
+    DOCKER_REGISTRY_SERVER_PASSWORD     = var.DOCKER_REGISTRY_SERVER_PASSWORD
+    WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
   }
   
   site_config {
-    linux_fx_version = "python|3.11"
+    always_on         = true
+    linux_fx_version  = var.linux_fx_version 
   }
 
   identity {
     type = "SystemAssigned"
   }
-  
+  count= length(var.function_app_name)
 }
 
 resource "azurerm_logic_app_workflow" "logic_app_workflow" {
@@ -153,8 +153,3 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
   location            = data.azurerm_resource_group.vnet_resource_group.location
   resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
 }
-
-output functions_app_name {
-  value       = azurerm_function_app.function_app.name
-}
-

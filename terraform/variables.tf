@@ -58,13 +58,18 @@ variable vnet_storage_account_name {
 }
 
 variable app_service_plan_name{
-  type = string
-  default = "app-storage-accounts"
+  type = list(string)
+  default = ["app-log-analytics","app-start-function","app-for-each-subsription","app-test-storages","app-end-function"]
 }
 
 variable function_app_name {
+  type        = list(string)
+  default = ["log-analytics","start-function","for-each-subsription","test-storages","end-function"]
+}
+
+variable linux_fx_version {
   type        = string
-  default = "func-storage-accounts"
+  default     = "DOCKER|mcr.microsoft.com/azure-functions/dotnet:4-appservice-quickstart"
 }
 
 variable DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH {

@@ -2,35 +2,46 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "workflows_logic_app_storage_management_name": {
+        "workflows_logic_app_try_http_name": {
+            "defaultValue": "logic-app-try-http",
             "type": "String"
         },
-        "connections_office365_1_externalid": {
-            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/connections/office365-1",
+        "sites_test_storages_externalid": {
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/test-storages",
             "type": "String"
         },
-        "resource_group_location":{
-            "defaultValue": "westeurope",
+        "sites_for_each_subsription_function_externalid": {
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/for-each-subsription-function",
             "type": "String"
         },
-        "frequency":{
-            "defaultValue": "Minute",
-            "type": "String",
-            "allowedValues": [  "Second", "Minute", "Hour", "Day", "Week", "Month"]
+        "sites_start_function_externalid": {
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/start-function",
+            "type": "String"
         },
-        "interval":{
-            "defaultValue": 10,
-            "type": "int"
+        "sites_end_function_externalid": {
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/end-function",
+            "type": "String"
+        },
+        "sites_log_analytics_function_app_externalid": {
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/log-analytics-function-app",
+            "type": "String"
+        },
+        "connections_office365_2_externalid": {
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/connections/office365-2",
+            "type": "String"
         }
-
     },
     "variables": {},
     "resources": [
         {
             "type": "Microsoft.Logic/workflows",
             "apiVersion": "2017-07-01",
-            "name": "[parameters('workflows_logic_app_storage_management_name')]",
-            "location": "[parameters('resource_group_location')]",
+            "name": "[parameters('workflows_logic_app_try_http_name')]",
+            "location": "eastus",
+            "tags": {
+                "CreationDateTime": "2023-12-03T07:38:03.8784231Z",
+                "environment": "Dev"
+            },
             "properties": {
                 "state": "Enabled",
                 "definition": {
@@ -45,26 +56,491 @@
                     "triggers": {
                         "Recurrence": {
                             "recurrence": {
-                                "frequency": "[parameters('frequency')]",
-                                "interval": "[parameters('interval')]"
+                                "frequency": "Week",
+                                "interval": 1
                             },
                             "evaluatedRecurrence": {
-                                "frequency": "[parameters('frequency')]",
-                                "interval": "[parameters('interval')]"
+                                "frequency": "Week",
+                                "interval": 1
                             },
                             "type": "Recurrence"
                         }
                     },
                     "actions": {
-                        "Send_an_email_(V2)": {
+                        "Compose_to_call_end_function": {
+                            "runAfter": {
+                                "For_each_-_subscriptions": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Compose",
+                            "inputs": {
+                                "alerts_to_excel": "@variables('alerts_to_excel')",
+                                "all_storages": "@variables('all_storages')",
+                                "partition_key": "@body('Parse_JSON_-_array_of_subscriptions')?['partition_key']"
+                            }
+                        },
+                        "For_each_-_subscriptions": {
+                            "foreach": "@body('Parse_JSON_-_array_of_subscriptions')?['subscriptions']",
+                            "actions": {
+                                "For_each_-_storages": {
+                                    "foreach": "@body('Parse_JSON_array_of_storages')",
+                                    "actions": {
+                                        "Compose": {
+                                            "runAfter": {
+                                                "Increment_Row_key_variable": [
+                                                    "Succeeded"
+                                                ]
+                                            },
+                                            "type": "Compose",
+                                            "inputs": {
+                                                "last_fetch_time": "@variables('temp')",
+                                                "partition_key": "@body('Parse_JSON_-_array_of_subscriptions')?['partition_key']",
+                                                "row_key": "@variables('Row_key')",
+                                                "storage_account": {
+                                                    "id": "@items('For_each_-_storages')['id']",
+                                                    "name": "@items('For_each_-_storages')['name']",
+                                                    "tag": "@items('For_each_-_storages')['tags']"
+                                                },
+                                                "subscription_id": "@items('For_each_-_subscriptions')?['subscription_id']",
+                                                "subscription_name": "@items('For_each_-_subscriptions')?['subscription_name']"
+                                            }
+                                        },
+                                        "Filter_array": {
+                                            "runAfter": {},
+                                            "type": "Query",
+                                            "inputs": {
+                                                "from": "@body('Parse_JSON_-_log_analytics')",
+                                                "where": "@equals(item()['storage_name'], items('For_each_-_storages')['name'])"
+                                            }
+                                        },
+                                        "For_each": {
+                                            "foreach": "@body('Filter_array')",
+                                            "actions": {
+                                                "Set_variable_temp=time": {
+                                                    "runAfter": {},
+                                                    "type": "SetVariable",
+                                                    "inputs": {
+                                                        "name": "temp",
+                                                        "value": "@items('For_each')?['time']"
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {
+                                                "Filter_array": [
+                                                    "Succeeded"
+                                                ]
+                                            },
+                                            "type": "Foreach"
+                                        },
+                                        "For_each_checking": {
+                                            "foreach": "@body('Parse_JSON_test_storages')?['value']",
+                                            "actions": {
+                                                "Condition_storage_name_is_not_equal_to_null": {
+                                                    "actions": {
+                                                        "Append_to_all_storages_array_": {
+                                                            "runAfter": {},
+                                                            "type": "AppendToArrayVariable",
+                                                            "inputs": {
+                                                                "name": "all_storages",
+                                                                "value": " @{items('For_each_checking')?['storage_account']}"
+                                                            }
+                                                        },
+                                                        "Condition_-_contains_alert_result": {
+                                                            "actions": {
+                                                                "Append_to_array_variable": {
+                                                                    "runAfter": {},
+                                                                    "type": "AppendToArrayVariable",
+                                                                    "inputs": {
+                                                                        "name": "alerts_to_excel",
+                                                                        "value": "@items('For_each_checking')"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "runAfter": {
+                                                                "Append_to_all_storages_array_": [
+                                                                    "Succeeded"
+                                                                ]
+                                                            },
+                                                            "expression": {
+                                                                "and": [
+                                                                    {
+                                                                        "not": {
+                                                                            "equals": [
+                                                                                "@items('For_each_checking')?['alert_body']",
+                                                                                "null"
+                                                                            ]
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "type": "If"
+                                                        }
+                                                    },
+                                                    "runAfter": {},
+                                                    "else": {
+                                                        "actions": {
+                                                            "Send_an_email_(V2)_3": {
+                                                                "runAfter": {},
+                                                                "type": "ApiConnection",
+                                                                "inputs": {
+                                                                    "body": {
+                                                                        "Body": "<p>!!!!!!!!!!!!!!!!<br>\n@{variables('Row_key')}</p>",
+                                                                        "Importance": "Normal",
+                                                                        "Subject": "False",
+                                                                        "To": "yafiv@skyvar.co.il"
+                                                                    },
+                                                                    "host": {
+                                                                        "connection": {
+                                                                            "name": "@parameters('$connections')['office365']['connectionId']"
+                                                                        }
+                                                                    },
+                                                                    "method": "post",
+                                                                    "path": "/v2/Mail"
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "expression": {
+                                                        "and": [
+                                                            {
+                                                                "not": {
+                                                                    "equals": [
+                                                                        "@items('For_each_checking')?['storage_account']",
+                                                                        "null"
+                                                                    ]
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    "type": "If"
+                                                }
+                                            },
+                                            "runAfter": {
+                                                "Parse_JSON_test_storages": [
+                                                    "Succeeded"
+                                                ]
+                                            },
+                                            "type": "Foreach"
+                                        },
+                                        "HttpTrigger_test_storages": {
+                                            "runAfter": {
+                                                "Compose": [
+                                                    "Succeeded"
+                                                ]
+                                            },
+                                            "type": "Function",
+                                            "inputs": {
+                                                "body": "@outputs('Compose')",
+                                                "function": {
+                                                    "id": "[concat(parameters('sites_test_storages_externalid'), '/functions/HttpTrigger1')]"
+                                                }
+                                            },
+                                            "operationOptions": "DisableAsyncPattern",
+                                            "runtimeConfiguration": {
+                                                "paginationPolicy": {
+                                                    "minimumItemCount": 5000
+                                                }
+                                            }
+                                        },
+                                        "Increment_Row_key_variable": {
+                                            "runAfter": {
+                                                "For_each": [
+                                                    "Succeeded"
+                                                ]
+                                            },
+                                            "type": "IncrementVariable",
+                                            "inputs": {
+                                                "name": "Row_key",
+                                                "value": 1
+                                            }
+                                        },
+                                        "Parse_JSON_test_storages": {
+                                            "runAfter": {
+                                                "HttpTrigger_test_storages": [
+                                                    "Succeeded"
+                                                ]
+                                            },
+                                            "type": "ParseJson",
+                                            "inputs": {
+                                                "content": "@body('HttpTrigger_test_storages')",
+                                                "schema": {
+                                                    "properties": {
+                                                        "nextLink": {},
+                                                        "value": {
+                                                            "items": {
+                                                                "properties": {
+                                                                    "alert_body": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "storage_account": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "subscription_manager_email": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "subscription_name": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "storage_account"
+                                                                ],
+                                                                "type": "object"
+                                                            },
+                                                            "type": "array"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Parse_JSON_array_of_storages": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "Foreach"
+                                },
+                                "HttpTrigger_for_each_subscription": {
+                                    "runAfter": {},
+                                    "type": "Function",
+                                    "inputs": {
+                                        "body": "@items('For_each_-_subscriptions')",
+                                        "function": {
+                                            "id": "[concat(parameters('sites_for_each_subsription_function_externalid'), '/functions/HttpTrigger1')]"
+                                        }
+                                    },
+                                    "operationOptions": "DisableAsyncPattern"
+                                },
+                                "Parse_JSON_array_of_storages": {
+                                    "runAfter": {
+                                        "HttpTrigger_for_each_subscription": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "ParseJson",
+                                    "inputs": {
+                                        "content": "@body('HttpTrigger_for_each_subscription')",
+                                        "schema": {
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "tags": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name",
+                                                    "id",
+                                                    "tags"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    }
+                                }
+                            },
+                            "runAfter": {
+                                "Parse_JSON_-_array_of_subscriptions": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Foreach",
+                            "runtimeConfiguration": {
+                                "concurrency": {
+                                    "repetitions": 1
+                                }
+                            }
+                        },
+                        "HttpTrigger_-_start_function": {
+                            "runAfter": {
+                                "Parse_JSON_-_log_analytics": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Function",
+                            "inputs": {
+                                "function": {
+                                    "id": "[concat(parameters('sites_start_function_externalid'), '/functions/HttpTrigger1')]"
+                                }
+                            }
+                        },
+                        "HttpTrigger_end_function": {
+                            "runAfter": {
+                                "Compose_to_call_end_function": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Function",
+                            "inputs": {
+                                "body": "@outputs('Compose_to_call_end_function')",
+                                "function": {
+                                    "id": "[concat(parameters('sites_end_function_externalid'), '/functions/HttpTrigger1')]"
+                                }
+                            }
+                        },
+                        "HttpTrigger_log-analytics": {
+                            "runAfter": {
+                                "Initialize_variable": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Function",
+                            "inputs": {
+                                "function": {
+                                    "id": "[concat(parameters('sites_log_analytics_function_app_externalid'), '/functions/HttpTrigger1')]"
+                                }
+                            }
+                        },
+                        "Initialize_all_storages": {
+                            "runAfter": {
+                                "Initialize_variable_2": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "all_storages",
+                                        "type": "array"
+                                    }
+                                ]
+                            }
+                        },
+                        "Initialize_row_key": {
+                            "runAfter": {
+                                "Initialize_all_storages": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "Row_key",
+                                        "type": "integer",
+                                        "value": -1
+                                    }
+                                ]
+                            }
+                        },
+                        "Initialize_variable": {
+                            "runAfter": {
+                                "Initialize_row_key": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "alerts_to_excel",
+                                        "type": "array",
+                                        "value": []
+                                    }
+                                ]
+                            }
+                        },
+                        "Initialize_variable_2": {
                             "runAfter": {},
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "temp",
+                                        "type": "string"
+                                    }
+                                ]
+                            }
+                        },
+                        "Parse_JSON_-_array_of_subscriptions": {
+                            "runAfter": {
+                                "HttpTrigger_-_start_function": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "ParseJson",
+                            "inputs": {
+                                "content": "@body('HttpTrigger_-_start_function')",
+                                "schema": {
+                                    "properties": {
+                                        "partition_key": {
+                                            "type": "string"
+                                        },
+                                        "subscriptions": {
+                                            "items": {
+                                                "properties": {
+                                                    "subscription_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "subscription_name": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "subscription_id",
+                                                    "subscription_name"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "Parse_JSON_-_log_analytics": {
+                            "runAfter": {
+                                "HttpTrigger_log-analytics": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "ParseJson",
+                            "inputs": {
+                                "content": "@body('HttpTrigger_log-analytics')",
+                                "schema": {
+                                    "items": {
+                                        "properties": {
+                                            "storage_name": {
+                                                "type": "string"
+                                            },
+                                            "time": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "storage_name",
+                                            "time"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "Send_an_email_(V2)": {
+                            "runAfter": {
+                                "HttpTrigger_end_function": [
+                                    "Succeeded"
+                                ]
+                            },
                             "type": "ApiConnection",
                             "inputs": {
                                 "body": {
-                                    "Body": "<p>succeed</p>",
+                                    "Body": "<p>finished!!!<br>\n<br>\n</p>",
                                     "Importance": "Normal",
-                                    "Subject": "deploy",
-                                    "To": "MalkaK@skyvar.co.il"
+                                    "Subject": "WOW",
+                                    "To": "yafiv@skyvar.co.il"
                                 },
                                 "host": {
                                     "connection": {
@@ -82,9 +558,9 @@
                     "$connections": {
                         "value": {
                             "office365": {
-                                "connectionId": "[parameters('connections_office365_1_externalid')]",
-                                "connectionName": "office365-1",
-                                "id": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/providers/Microsoft.Web/locations/westeurope/managedApis/office365"
+                                "connectionId": "[parameters('connections_office365_2_externalid')]",
+                                "connectionName": "office365-2",
+                                "id": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/providers/Microsoft.Web/locations/eastus/managedApis/office365"
                             }
                         }
                     }
