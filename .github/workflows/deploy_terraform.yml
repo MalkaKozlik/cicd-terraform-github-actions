@@ -19,7 +19,6 @@ env:
   ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
   ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
   ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
-  # GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
   
 jobs:
   job1:
@@ -57,12 +56,10 @@ jobs:
       #   run: terraform destroy -input=false -auto-approve 
       #   working-directory: ./terraform
 
-      # - name: run
-        # run: echo ${{github.token}}
-
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v1
         with:
-          # token: $GITHUB_TOKEN
+          token: $GITHUB_TOKEN
           event-type: succeeded
           # client-payload: '{"function_app_name": steps.apply.outputs.functions_app_name}'
+        env: GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
