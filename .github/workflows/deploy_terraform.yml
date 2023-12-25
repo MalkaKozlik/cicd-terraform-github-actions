@@ -9,19 +9,6 @@ on:
         required: true
       mainManager: 
         required: true
-      
-      
-      # logLevel:
-      #   description: 'Log level'
-      #   required: true
-      #   default: 'warning'
-      #   type: choice
-      #   options:
-      #   - info
-      #   - warning
-      #   - debug
-
-
 
 env:
   TF_VAR_subscription_id: ${{secrets.SUBSCRIPTION_ID}}
@@ -54,15 +41,6 @@ jobs:
         id : az-login
         run : az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID  
 
-      # - name: Log in with Azure
-      #   uses: azure/login@v1
-      #   with:
-      #     client-id: $ARM_CLIENT_ID
-      #     client-secret: $ARM_CLIENT_SECRET
-      #     tenant-id: $ARM_TENANT_ID
-      #     enable-AzPSSession: true
-      
-
       - name: 🏗️ Terraform Init
         id: init
         run: terraform init 
@@ -81,4 +59,11 @@ jobs:
       #   run: terraform destroy -input=false -auto-approve 
       #   working-directory: ./terraform
 
-
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          event-type: succeeded
+          client-payload: -|
+          {
+            "function_app_name": steps.apply.outputs.functions_app_name
+          }

@@ -1,10 +1,8 @@
 name: Build and deploy container app to Azure Function App
 
 on:
-  workflow_run:
-    workflows: [Terraform Automation]
-    types:
-      - completed
+  repository_dispatch:
+    types: [succeeded]
 
 
 jobs:
@@ -28,7 +26,7 @@ jobs:
         fetch-depth: 0
 
     - name: print something
-      run: echo "hello world!"
+      run: echo "${{ github.event.client_payload.function_app_name }}"
 
     # - name: 🔎 Determine modified directory
     #   id: determine_directory

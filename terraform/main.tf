@@ -153,3 +153,8 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
   location            = data.azurerm_resource_group.vnet_resource_group.location
   resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
 }
+
+output functions_app_name {
+  value       = azurerm_function_app.function_app.name
+}
+
