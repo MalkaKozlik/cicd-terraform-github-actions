@@ -63,7 +63,4 @@ jobs:
         uses: peter-evans/repository-dispatch@v1
         with:
           event-type: succeeded
-          client-payload: -|
-          {
-            "function_app_name": steps.apply.outputs.functions_app_name
-          }
+          client-payload: '{"function_app_name": steps.apply.outputs.functions_app_name}'
