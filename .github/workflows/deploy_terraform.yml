@@ -60,5 +60,5 @@ jobs:
         uses: peter-evans/repository-dispatch@v1
         with:
           token: '${{ secrets.GITHUB_TOKEN }}'
-          event-type: 'succeeded'
+          event-type: 'uucceeded'
           client-payload: '{"function_app_name": steps.apply.outputs.functions_app_name}'
