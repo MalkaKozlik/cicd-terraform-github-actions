@@ -193,7 +193,7 @@ resource "azurerm_function_app" "function_app" {
     DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
     DOCKER_REGISTRY_SERVER_PASSWORD     = var.DOCKER_REGISTRY_SERVER_PASSWORD
     WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
-  }
+  }: {}
 
   site_config {
     always_on         = true
