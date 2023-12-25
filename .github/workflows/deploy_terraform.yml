@@ -61,6 +61,6 @@ jobs:
         env: 
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
-          token: $GITHUB_TOKEN
+          token: '${{$GITHUB_TOKEN}}'
           event-type: succeeded
           client-payload: '{"function_app_name": steps.apply.outputs.functions_app_name}'
