@@ -27,9 +27,7 @@ jobs:
     defaults:
       run:
         working-directory: terraform
-    
-    permissions:
-
+        
     steps:
       - uses: actions/checkout@v3
 
