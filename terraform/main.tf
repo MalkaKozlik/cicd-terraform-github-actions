@@ -121,7 +121,7 @@ resource "azurerm_function_app" "function_app" {
   storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
   version                   = "~4"
 
-  app_settings = {
+  app_settings =count.index==0 ? {
     FUNCTIONS_WORKER_RUNTIME = "python"
 
     DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH=30
@@ -136,7 +136,7 @@ resource "azurerm_function_app" "function_app" {
     DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
     DOCKER_REGISTRY_SERVER_PASSWORD     = var.DOCKER_REGISTRY_SERVER_PASSWORD
     WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
-  } ? count.index==0 : {}
+  } : {}
   
   site_config {
     always_on         = true
