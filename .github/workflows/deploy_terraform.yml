@@ -56,6 +56,9 @@ jobs:
       #   run: terraform destroy -input=false -auto-approve 
       #   working-directory: ./terraform
 
+      - name: run
+        run: echo "${{ github.token }}"
+
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v1
         with:
