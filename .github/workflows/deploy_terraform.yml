@@ -57,7 +57,7 @@ jobs:
       #   working-directory: ./terraform
 
       - name: run
-        run: echo github.token
+        run: echo ${{github.token}}
 
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v1
