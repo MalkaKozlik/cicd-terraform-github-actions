@@ -64,7 +64,7 @@ variable app_service_plan_name{
 
 variable function_app_name {
   type        = list(string)
-  default = ["log-analytics","start-function","for-each-subsription","test-storages","end-function"]
+  default = ["func-log-analytics","func-start-function","func-for-each-subsription","func-test-storages","func-end-function"]
 }
 
 variable DOCKER_REGISTRY_SERVER_PASSWORD {
