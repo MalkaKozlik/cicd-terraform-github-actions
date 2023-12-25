@@ -59,12 +59,12 @@ variable vnet_storage_account_name {
 
 variable app_service_plan_name{
   type = list(string)
-  default = ["app-log-analytics","app-start-function","app-for-each-subsription","app-test-storages","app-end-function"]
+  default = ["app-log-analytics","app-start-function","app-for-each-subscription","app-test-storages","app-end-function"]
 }
 
 variable function_app_name {
   type        = list(string)
-  default = ["func-log-analytics","func-start-function","func-for-each-subsription","func-test-storages","func-end-function"]
+  default = ["func-log-analytics","func-start-function","func-for-each-subscription","func-test-storages","func-end-function"]
 }
 
 variable DOCKER_REGISTRY_SERVER_PASSWORD {
