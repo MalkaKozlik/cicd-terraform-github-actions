@@ -109,8 +109,8 @@ jobs:
         push: true
         tags: ghcr.io/${{ env.REPO }}-${{ matrix.directory }}:${{ steps.get_release.outputs.tag_name }}
         labels: ${{ steps.docker_meta.outputs.labels }}
-        file: ./${{ matrix.directory }}/Dockerfile
-        working-directory: function_apps
+        file: ./function_apps/${{ matrix.directory }}/Dockerfile
+        # working-directory: function_apps
       if: env.DIRECTORY == matrix.directory
 
     - name: 🔑 Login to Azure
