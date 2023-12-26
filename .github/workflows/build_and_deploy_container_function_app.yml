@@ -1,9 +1,18 @@
 name: Build and deploy container app to Azure Function App
 
-on:
-  repository_dispatch:
-    types: [succeeded]
+# on:
+#   repository_dispatch:
+#     types: [succeeded]
 
+on:
+  workflow_dispatch: 
+    # inputs:
+    #   workspaceId:
+    #     required: true
+    #   httpTriggerURL:
+    #     required: true
+    #   mainManager: 
+    #     required: true
 
 jobs:
   build-and-deploy:
@@ -13,11 +22,14 @@ jobs:
     # environment:
     #   name: 'production'
     #   url: ${{ steps.deploy-to-functions.outputs.app-url }}
-      
-    # strategy:
-    #   matrix:
-    #     directory:
-    #       - funciton_apps/function_app1
+
+    strategy:
+      matrix:
+        directory:
+          - function_apps/func-log-analytics
+          - function_apps/func-start-function
+          - function_apps/func-for-each-subscription
+          - function_apps/func-end-function
 
     steps:
     - name: 📂 Checkout repository
@@ -26,7 +38,7 @@ jobs:
         fetch-depth: 0
 
     - name: print something
-      run: echo "${{ github.event.client_payload.function_app_name }}"
+      run: echo "${{ matrix.directory}}"
 
     # - name: 🔎 Determine modified directory
     #   id: determine_directory
