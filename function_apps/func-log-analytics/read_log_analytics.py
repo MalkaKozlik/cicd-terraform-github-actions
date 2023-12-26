@@ -6,7 +6,7 @@ from datetime import timedelta
 from itertools import groupby
 from operator import itemgetter
 
-# //////////////////////
+
 def get_array_of_last_fetch_time():
     
     times=get_times()
@@ -14,7 +14,7 @@ def get_array_of_last_fetch_time():
     
     return max_time_foreach_storage
 
-# //////////////////////////
+
 def get_times():
 
     storage_types=['Table','Queue','Blob','File']
@@ -24,15 +24,14 @@ def get_times():
         data_for_type_query = get_workspace_table(type)
         times_array = get_times_logs(data_for_type_query)
         times.extend(times_array)
+
     return times
 
 
-# ///////////////////
 def get_workspace_table(type_query):
 
     type_query=f"""Storage{type_query}Logs"""
     time_object = {"type_of_time": time_index, "number": int(time_period_for_check_last_fetch)}
-    print(type_query)
 
     LogsQuery_client=create_log_query_client()
     seconds=return_seconds(time_object)
@@ -43,19 +42,20 @@ def get_workspace_table(type_query):
             query=type_query,
             timespan=timedelta(seconds=seconds)
         )
-        return response.tables
+        try:
+            return response.tables
     
-    except AttributeError as e:
-        return response.partial_data
+        except AttributeError as e:
+            return response.partial_data
     
     except Exception as e:
-        print(f"exception----------------{e}")
         raise Exception('Failed to retrieve the data')
 
 
 def create_log_query_client():
     log_query_client=LogsQueryClient(credential=DefaultAzureCredential())
     return log_query_client
+
 
 def return_seconds(obj_time):
     match obj_time["type_of_time"]:
@@ -78,7 +78,7 @@ def get_times_logs(data):
         arr.extend(get_times_logs_per_table(table))
     return arr
 
-# //////////////////
+
 def get_times_logs_per_table(table):
     arr = []
     for i in range(len(table.rows)):
