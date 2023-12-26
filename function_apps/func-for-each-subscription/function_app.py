@@ -23,6 +23,6 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         
     
     except Exception as e:
-        logging.info(f"-<<->>-{e}")
+        logging.info(f"-<<>>-{e}")
 
     return func.HttpResponse(str(storage_accounts), status_code=200)
