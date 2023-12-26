@@ -11,7 +11,6 @@ def deleted_storages(table_name,  test_number, all_storages):
     delete_storages = check_deleted_storage(all_storages, last_test_storages)
     upload_deleted_storages_table(connection_string, table_name, delete_storages)
 
-
 def retrieve_data_from_table(flag,con_str, table_name, query_filter, parameters="None", select=["*"]):
     try:
         table = TableClient.from_connection_string(con_str, table_name)
