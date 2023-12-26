@@ -8,6 +8,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: function_apps
+
     environment:
       name: 'production'
       url: ${{ steps.deploy-to-functions.outputs.app-url }}
@@ -15,11 +19,11 @@ jobs:
     strategy:
       matrix:
         directory:
-          - function_apps/func-log-analytics
-          - function_apps/func-start-function
-          - function_apps/func-for-each-subscription
-          - function_apps/func-test-storages
-          - function_apps/func-end-function
+          - func-log-analytics
+          - func-start-function
+          - func-for-each-subscription
+          - func-test-storages
+          - func-end-function
 
     steps:
     - name: 📂 Checkout repository
