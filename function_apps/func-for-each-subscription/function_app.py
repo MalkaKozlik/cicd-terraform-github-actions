@@ -12,9 +12,6 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
     try: 
-        
-        
-        
         fix_bytes_value = req.get_body().replace(b"'", b'"')
         subscriptions_json = json.load(io.BytesIO(fix_bytes_value))
                 

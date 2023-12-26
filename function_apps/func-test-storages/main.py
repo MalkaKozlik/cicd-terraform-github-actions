@@ -2,10 +2,7 @@ from project.config_variables import documentation_storage_name
 from project.storage_account_test import *
 
 def test_function():
-    print("hello")
-    # body=req.get_body()
-    # my_json = body.decode('utf8').replace("'", '"')
-    # data = json.loads(my_json)
+
     data={
         "last_fetch_time": "2023-12-24 15:33:26.221635+00:00",
         "partition_key": "329",
