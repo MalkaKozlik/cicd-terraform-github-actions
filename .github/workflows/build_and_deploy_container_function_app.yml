@@ -35,7 +35,7 @@ jobs:
       run: echo "${{ matrix.directory}}"
 
     - name: print working-directory
-      run: ls -a 
+      run: pwd
 
     - name: 🔎 Determine modified directory
       id: determine_directory
