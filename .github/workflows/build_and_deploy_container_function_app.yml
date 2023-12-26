@@ -3,6 +3,12 @@ name: Build and deploy container app to Azure Function App
 on:
   workflow_dispatch: 
 
+env:
+  ARM_SUBSCRIPTION_ID: ${{secrets.SUBSCRIPTION_ID}}
+  ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
+  ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
+  ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
+
 jobs:
   build-and-deploy:
 
