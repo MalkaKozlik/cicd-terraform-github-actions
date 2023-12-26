@@ -35,13 +35,13 @@ jobs:
       run: echo "${{ matrix.directory}}"
 
     - name: print working-directory
-      run: ls -a $GITHUB_WORKSPACE
+      run: ls -a 
 
     - name: 🔎 Determine modified directory
       id: determine_directory
       run: |
         git diff --name-only HEAD~1 ${{ github.sha }} > changes.txt
-        if grep -q '^function_apps${{ matrix.directory }}' changes.txt; then
+        if grep -q '^${{ matrix.directory }}' changes.txt; then
           echo "${{ matrix.directory }} has changes"
           # echo "::set-output name=directory::${{ matrix.directory }}"
           echo "DIRECTORY=${{ matrix.directory }}" >> "$GITHUB_ENV"
@@ -49,6 +49,7 @@ jobs:
           echo "No changes in ${{ matrix.directory }}"
           exit 0
         fi
+      working-directory: function_apps
 
 
       # run: |
@@ -57,6 +58,7 @@ jobs:
     - name: 🛠️ Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
       if: env.DIRECTORY == matrix.directory
+      
 
     - name: 🔑 Log in to registry
       uses: docker/login-action@v2
