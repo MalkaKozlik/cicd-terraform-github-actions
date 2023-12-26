@@ -31,19 +31,19 @@ jobs:
 
     - name: 🔎 Determine modified directory
       id: determine_directory
-      # run: |
-      #   git diff --name-only HEAD~1 ${{ github.sha }} > changes.txt
-      #   if grep -q '^${{ matrix.directory }}' changes.txt; then
-      #     echo "${{ matrix.directory }} has changes"
-      #     # echo "::set-output name=directory::${{ matrix.directory }}"
-      #     echo "DIRECTORY=${{ matrix.directory }}" >> "$GITHUB_ENV"
-      #   else
-      #     echo "No changes in ${{ matrix.directory }}"
-      #     exit 0
-      #   fi
-
       run: |
-        echo "DIRECTORY=${{ matrix.directory }}" >> "$GITHUB_ENV"
+        git diff --name-only HEAD~1 ${{ github.sha }} > changes.txt
+        if grep -q '^${{ matrix.directory }}' changes.txt; then
+          echo "${{ matrix.directory }} has changes"
+          # echo "::set-output name=directory::${{ matrix.directory }}"
+          echo "DIRECTORY=${{ matrix.directory }}" >> "$GITHUB_ENV"
+        else
+          echo "No changes in ${{ matrix.directory }}"
+          exit 0
+        fi
+
+      # run: |
+      #   echo "DIRECTORY=${{ matrix.directory }}" >> "$GITHUB_ENV"
 
     - name: 🛠️ Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
