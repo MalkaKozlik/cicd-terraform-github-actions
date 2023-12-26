@@ -111,6 +111,7 @@ jobs:
         labels: ${{ steps.docker_meta.outputs.labels }}
         file: ./${{ matrix.directory }}/Dockerfile
       if: env.DIRECTORY == matrix.directory
+      working-directory: function_apps
 
     - name: 🔑 Login to Azure
       uses: azure/login@v1
