@@ -1,18 +1,7 @@
 name: Build and deploy container app to Azure Function App
 
-# on:
-#   repository_dispatch:
-#     types: [succeeded]
-
 on:
   workflow_dispatch: 
-    # inputs:
-    #   workspaceId:
-    #     required: true
-    #   httpTriggerURL:
-    #     required: true
-    #   mainManager: 
-    #     required: true
 
 jobs:
   build-and-deploy:
