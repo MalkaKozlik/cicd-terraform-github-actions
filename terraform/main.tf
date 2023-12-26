@@ -181,7 +181,7 @@ resource "azurerm_function_app" "function_app" {
     EXCEL_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=sachayasubscriptiof6c98f;AccountKey=7VR6ivUm5kKambo7z4sEkrjEL8zx/CjYXz+9f9qwBi6ATKs4LBSbHPajZJF5DnG5LrVJQ7+rQ7Uc+AStDAwauA==;EndpointSuffix=core.windows.net"
     #HTTP_TRIGGER_URL = function_app_email
     HTTP_TRIGGER_URL="https://func-try-2.azurewebsites.net/api/HttpTrigger1?code=vqQyTSrot8Byr3-PUAWsHWWUBRImjzQp9DO_i8itYgKmAzFueI86Pg=="
-    MAIN_MANAGER=" "
+    MAIN_MANAGER="malkak@skyvar.co.il"
     DOCUMENTATION_TABLE ="documentation"
     DELETED_ACCOUNTS_TABLE="deletedStorages"
 
