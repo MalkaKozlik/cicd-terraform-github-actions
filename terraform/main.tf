@@ -165,7 +165,20 @@ resource "azurerm_function_app" "function_app" {
     WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
   }: count.index==3 ? {
     FUNCTIONS_WORKER_RUNTIME = "python"
-  
+
+    DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH = 30
+    DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_USED_CAPACITY = 30
+    # TIME_INDEX="days"/"weeks"/"months"/"years"
+    TIME_INDEX_FOR_CHECK_LAST_FETCH="days"
+    TIME_INDEX_FOR_CHECK_USED_CAPACITY="days"
+    CONNECTION_STRING= data.azurerm_storage_account.vnet_storage_account.primary_connection_string
+    FREQ_AUTOMATION_TEST_TYPE="weeks"
+    FREQ_AUTOMATION_TEST_NUMBER=1
+    DOCUMENTATION_TABLE ="documentation"
+    HTTP_TRIGGER_URL="https://func-try-2.azurewebsites.net/api/HttpTrigger1?code=vqQyTSrot8Byr3-PUAWsHWWUBRImjzQp9DO_i8itYgKmAzFueI86Pg=="
+    ALERTS_DOCUMENTATION="alertsDocumentation"
+    DOCUMENTATION_STORAGE_NAME="myfirsttrail"
+
     SECRET = " "
     KEYVAULT_NAME = " "
     KEYVAULT_URI = " "
