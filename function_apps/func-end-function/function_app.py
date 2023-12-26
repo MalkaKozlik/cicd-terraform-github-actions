@@ -13,6 +13,7 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
 
     logging.info('Python HTTP trigger function processed a request.')
 
+
     try:
         
         body = req.get_body()
