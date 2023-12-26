@@ -9,4 +9,4 @@ ENV SSL_CERT_FILE=/etc/ca-bundle.crt
 # --- END NETFREE CERT INTSALL ---
 
 COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+# RUN pip install -r requirements.txt
