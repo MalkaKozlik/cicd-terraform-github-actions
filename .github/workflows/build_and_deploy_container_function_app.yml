@@ -41,7 +41,7 @@ jobs:
       id: determine_directory
       run: |
         git diff --name-only HEAD~1 ${{ github.sha }} > changes.txt
-        if grep -q '^${{ matrix.directory }}' changes.txt; then
+        if grep -q '^function_apps/${{ matrix.directory }}' changes.txt; then
           echo "${{ matrix.directory }} has changes"
           # echo "::set-output name=directory::${{ matrix.directory }}"
           echo "DIRECTORY=${{ matrix.directory }}" >> "$GITHUB_ENV"
