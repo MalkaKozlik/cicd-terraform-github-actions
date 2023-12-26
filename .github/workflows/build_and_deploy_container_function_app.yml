@@ -35,7 +35,7 @@ jobs:
       run: echo "${{ matrix.directory}}"
 
     - name: print working-directory
-      run: echo "${{ github.workspace }}"
+      run: echo $GITHUB_WORKSPACE
 
     - name: 🔎 Determine modified directory
       id: determine_directory
