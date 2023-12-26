@@ -3,12 +3,6 @@ name: Build and deploy container app to Azure Function App
 on:
   workflow_dispatch: 
 
-env:
-  ARM_SUBSCRIPTION_ID: ${{secrets.SUBSCRIPTION_ID}}
-  ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
-  ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
-  ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
-
 jobs:
   build-and-deploy:
 
@@ -113,10 +107,7 @@ jobs:
     - name: 🔑 Login to Azure
       uses: azure/login@v1
       with:
-        client-id: $ARM_CLIENT_ID
-        tenant-id: $ARM_TENANT_ID
-        subscription-id: $ARM_SUBSCRIPTION_ID
-        enable-AzPSSession: true
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
       if: env.DIRECTORY == matrix.directory
  
     - name: 🚀 Deploy to Azure Functions
