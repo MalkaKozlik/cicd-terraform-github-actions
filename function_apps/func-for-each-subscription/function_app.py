@@ -21,6 +21,7 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         for storage_account in storage_account_list:
             storage_accounts.append({'name':storage_account.name,'id':storage_account.id,'tags':'true' if storage_account.tags.get(essential_tag) else 'false'})
         
+    
     except Exception as e:
         logging.info(f"-<<->>-{e}")
 
