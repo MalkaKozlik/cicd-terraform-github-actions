@@ -2,33 +2,47 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "workflows_logic_app_try_http_name": {
-            "defaultValue": "logic-app-try-http",
-            "type": "String"
+        "workflows_logic_app_name": {
+            "defaultValue": "logic-app-storage-management",
+            "type": "string"
         },
         "sites_test_storages_externalid": {
             "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/test-storages",
-            "type": "String"
+            "type": "string"
         },
         "sites_for_each_subsription_function_externalid": {
             "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/for-each-subsription-function",
-            "type": "String"
+            "type": "string"
         },
         "sites_start_function_externalid": {
             "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/start-function",
-            "type": "String"
+            "type": "string"
         },
         "sites_end_function_externalid": {
             "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/end-function",
-            "type": "String"
+            "type": "string"
         },
         "sites_log_analytics_function_app_externalid": {
             "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/log-analytics-function-app",
-            "type": "String"
+            "type": "string"
         },
         "connections_office365_2_externalid": {
             "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/connections/office365-2",
-            "type": "String"
+            "type": "string"
+        },
+        "location":{
+            "type": "string"
+        },
+        "frequency":{
+            "defaultValue": "Week",
+            "type": "string"
+        },
+        "interval":{
+            "defaultValue": 1,
+            "type": "int"
+        },
+        "subscription_id": {
+            "type":"string"
         }
     },
     "variables": {},
@@ -36,12 +50,8 @@
         {
             "type": "Microsoft.Logic/workflows",
             "apiVersion": "2017-07-01",
-            "name": "[parameters('workflows_logic_app_try_http_name')]",
-            "location": "eastus",
-            "tags": {
-                "CreationDateTime": "2023-12-03T07:38:03.8784231Z",
-                "environment": "Dev"
-            },
+            "name": "[parameters('workflows_logic_app_name')]",
+            "location": "[parameters('location')]",
             "properties": {
                 "state": "Enabled",
                 "definition": {
@@ -56,12 +66,12 @@
                     "triggers": {
                         "Recurrence": {
                             "recurrence": {
-                                "frequency": "Week",
-                                "interval": 1
+                                "frequency": "[parameters('frequency')]",
+                                "interval": "[parameters('interval')]"
                             },
                             "evaluatedRecurrence": {
-                                "frequency": "Week",
-                                "interval": 1
+                                "frequency": "[parameters('frequency')]",
+                                "interval": "[parameters('interval')]"
                             },
                             "type": "Recurrence"
                         }
@@ -389,7 +399,7 @@
                         },
                         "HttpTrigger_log-analytics": {
                             "runAfter": {
-                                "Initialize_variable": [
+                                "Initialize_variable_alert_to_excel": [
                                     "Succeeded"
                                 ]
                             },
@@ -433,7 +443,19 @@
                                 ]
                             }
                         },
-                        "Initialize_variable": {
+                        "Initialize_variable_2": {
+                            "runAfter": {},
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "temp",
+                                        "type": "string"
+                                    }
+                                ]
+                            }
+                        },
+                        "Initialize_variable_alert_to_excel": {
                             "runAfter": {
                                 "Initialize_row_key": [
                                     "Succeeded"
@@ -446,18 +468,6 @@
                                         "name": "alerts_to_excel",
                                         "type": "array",
                                         "value": []
-                                    }
-                                ]
-                            }
-                        },
-                        "Initialize_variable_2": {
-                            "runAfter": {},
-                            "type": "InitializeVariable",
-                            "inputs": {
-                                "variables": [
-                                    {
-                                        "name": "temp",
-                                        "type": "string"
                                     }
                                 ]
                             }
@@ -560,7 +570,7 @@
                             "office365": {
                                 "connectionId": "[parameters('connections_office365_2_externalid')]",
                                 "connectionName": "office365-2",
-                                "id": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/providers/Microsoft.Web/locations/eastus/managedApis/office365"
+                                "id": "[concat('/subscriptions/',parameters(subscription_id),'/providers/Microsoft.Web/locations/',parameters('location'),'/managedApis/office365')]"
                             }
                         }
                     }
