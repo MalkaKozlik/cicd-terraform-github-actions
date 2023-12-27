@@ -7,10 +7,7 @@ jobs:
   build-and-deploy:
 
     runs-on: ubuntu-latest
-
-    # env:
-    #   work_directory: function_apps
-
+    
     defaults:
       run:
         working-directory: function_apps
