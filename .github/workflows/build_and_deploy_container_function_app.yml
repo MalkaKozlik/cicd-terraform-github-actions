@@ -8,8 +8,8 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      work_directory: function_apps
+    # env:
+    #   work_directory: function_apps
 
     defaults:
       run:
@@ -48,7 +48,7 @@ jobs:
     #     fi
 
 
-      run: |
+    - run: |
         echo "DIRECTORY=${{ matrix.directory }}" >> "$GITHUB_ENV"
 
     - name: 🛠️ Set up Docker Buildx
