@@ -8,9 +8,12 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      WORKING-DIRECTORY: function_apps
+
     defaults:
       run:
-        working-directory: function_apps
+        working-directory: $WORKING-DIRECTORY
 
     environment:
       name: 'production'
@@ -30,12 +33,6 @@ jobs:
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
-
-    - name: print something
-      run: echo "${{ matrix.directory}}"
-
-    - name: print working-directory
-      run: echo "DIRECTORY=${{ matrix.directory }}" >> "$GITHUB_ENV"
 
     # - name: 🔎 Determine modified directory
     #   id: determine_directory
@@ -105,12 +102,11 @@ jobs:
     - name: 🏗️ Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
-        context: ./function_apps/${{ matrix.directory }}
+        context: ./$WORKING-DIRECTORY/${{ matrix.directory }}
         push: true
         tags: ghcr.io/${{ env.REPO }}-${{ matrix.directory }}:${{ steps.get_release.outputs.tag_name }}
         labels: ${{ steps.docker_meta.outputs.labels }}
-        file: ./function_apps/${{ matrix.directory }}/Dockerfile
-        # working-directory: function_apps
+        file: ./$WORKING-DIRECTORY/${{ matrix.directory }}/Dockerfile
       if: env.DIRECTORY == matrix.directory
 
     - name: 🔑 Login to Azure
