@@ -128,9 +128,9 @@ resource "azurerm_function_app" "function_app" {
     TIME_INDEX_FOR_CHECK_LAST_FETCH="days"
     WORKSPACE_ID="fa9e707a-28c1-4528-b7b2-54d03360d4c9"
 
-    SECRET = " "
-    KEYVAULT_NAME = " "
-    KEYVAULT_URI = " "
+    SECRET = azurerm_key_vault_secret.key_vault_secret.name
+    KEYVAULT_NAME = azurerm_key_vault.key_vault.name
+    KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
     DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
@@ -142,9 +142,9 @@ resource "azurerm_function_app" "function_app" {
     CONNECTION_STRING = data.azurerm_storage_account.vnet_storage_account.primary_connection_string
     DOCUMENTATION_TABLE = "documentation"
   
-    SECRET = " "
-    KEYVAULT_NAME = " "
-    KEYVAULT_URI = " "
+    SECRET = azurerm_key_vault_secret.key_vault_secret.name
+    KEYVAULT_NAME = azurerm_key_vault.key_vault.name
+    KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
     DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
@@ -155,9 +155,9 @@ resource "azurerm_function_app" "function_app" {
 
     ESSENTIAL_TAG=" "
   
-    SECRET = " "
-    KEYVAULT_NAME = " "
-    KEYVAULT_URI = " "
+    SECRET = azurerm_key_vault_secret.key_vault_secret.name
+    KEYVAULT_NAME = azurerm_key_vault.key_vault.name
+    KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
     DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
@@ -179,9 +179,9 @@ resource "azurerm_function_app" "function_app" {
     ALERTS_DOCUMENTATION="alertsDocumentation"
     DOCUMENTATION_STORAGE_NAME="myfirsttrail"
 
-    SECRET = " "
-    KEYVAULT_NAME = " "
-    KEYVAULT_URI = " "
+    SECRET = azurerm_key_vault_secret.key_vault_secret.name
+    KEYVAULT_NAME = azurerm_key_vault.key_vault.name
+    KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
     DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
@@ -198,9 +198,9 @@ resource "azurerm_function_app" "function_app" {
     DOCUMENTATION_TABLE ="documentation"
     DELETED_ACCOUNTS_TABLE="deletedStorages"
 
-    SECRET = " "
-    KEYVAULT_NAME = " "
-    KEYVAULT_URI = " "
+    SECRET = azurerm_key_vault_secret.key_vault_secret.name
+    KEYVAULT_NAME = azurerm_key_vault.key_vault.name
+    KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
     DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
