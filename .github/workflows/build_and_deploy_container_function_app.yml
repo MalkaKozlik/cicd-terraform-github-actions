@@ -9,7 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     defaults:
-      working-directory: function_apps
+      run:
+        working-directory: function_apps
 
     environment:
       name: 'production'
