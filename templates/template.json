@@ -7,23 +7,23 @@
             "type": "string"
         },
         "sites_test_storages_externalid": {
-            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/test-storages",
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func-test-storages",
             "type": "string"
         },
         "sites_for_each_subsription_function_externalid": {
-            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/for-each-subsription-function",
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func-for-each-subscription",
             "type": "string"
         },
         "sites_start_function_externalid": {
-            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/start-function",
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func-start-function",
             "type": "string"
         },
         "sites_end_function_externalid": {
-            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/end-function",
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func-end-function",
             "type": "string"
         },
         "sites_log_analytics_function_app_externalid": {
-            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/log-analytics-function-app",
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func-log-analytics",
             "type": "string"
         },
         "connections_office365_2_externalid": {
@@ -31,7 +31,7 @@
             "type": "string"
         },
         "location":{
-            "defaultValue": "eastus",
+            "defaultValue": "westeurope",
             "type": "string"
         },
         "frequency":{
@@ -580,7 +580,7 @@
                             "office365": {
                                 "connectionId": "[parameters('connections_office365_2_externalid')]",
                                 "connectionName": "office365-2",
-                                "id": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/providers/Microsoft.Web/locations/eastus/managedApis/office365"
+                                "id": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/providers/Microsoft.Web/locations/westeurope/managedApis/office365"
                             }
                         }
                     }
