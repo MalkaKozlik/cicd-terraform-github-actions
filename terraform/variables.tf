@@ -104,17 +104,13 @@ variable key_vault_secret_name {
 }
 
 variable app_service_plan_name{
-  # type = list(string)
-  # default = ["app-log-analytics","app-start-function","app-for-each-subscription","app-test-storages","app-end-function"]
-  type = string
-  default = "app-log-analytics"
+  type = list(string)
+  default = ["app-log-analytics","app-start-function","app-for-each-subscription","app-test-storages","app-end-function"]
 }
 
 variable function_app_name {
-  # type        = list(string)
-  # default = ["func-log-analytics","func-start-function","func-for-each-subscription","func-test-storages","func-end-function"]
-  type = string
-  default = "func-log-analytics"
+  type        = list(string)
+  default = ["func-log-analytics","func-start-function","func-for-each-subscription","func-test-storages","func-end-function"]
 }
 
 variable DOCKER_REGISTRY_SERVER_PASSWORD {

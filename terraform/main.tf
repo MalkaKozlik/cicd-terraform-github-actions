@@ -97,7 +97,7 @@ resource "azurerm_key_vault_secret" "key_vault_secret" {
 
 
 resource "azurerm_app_service_plan" "app_service_plan" {
-  name                = var.app_service_plan_name
+  name                = var.app_service_plan_name[count.index]
   location            = data.azurerm_storage_account.vnet_storage_account.location
   resource_group_name = data.azurerm_storage_account.vnet_storage_account.resource_group_name
   kind                = "FunctionApp"
@@ -107,90 +107,21 @@ resource "azurerm_app_service_plan" "app_service_plan" {
     size = "Y1"
   }
 
-  # count = length(var.app_service_plan_name)
+  count = length(var.app_service_plan_name)
   
 }
 
 # ["log-analytics","start-function","for-each-subsription","test-storages","end-function"]
 resource "azurerm_function_app" "function_app" {
-  name                      =  var.function_app_name
+  name                      =  var.function_app_name[count.index]
   location                  = data.azurerm_storage_account.vnet_storage_account.location
   resource_group_name       = data.azurerm_storage_account.vnet_storage_account.resource_group_name
-  app_service_plan_id       = azurerm_app_service_plan.app_service_plan.id
+  app_service_plan_id       = azurerm_app_service_plan.app_service_plan[count.index].id
   storage_account_name      = data.azurerm_storage_account.vnet_storage_account.name
   storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
   version                   = "~4"
 
-  # app_settings = count.index==0 ? {
-  #   FUNCTIONS_WORKER_RUNTIME = "python"
-  #   DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH=30
-  #   TIME_INDEX_FOR_CHECK_LAST_FETCH="days"
-  #   WORKSPACE_ID="fa9e707a-28c1-4528-b7b2-54d03360d4c9"
-  #   https_only                          = true
-  #   DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
-  #   DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
-  #   DOCKER_REGISTRY_SERVER_PASSWORD     = var.DOCKER_REGISTRY_SERVER_PASSWORD
-  #   WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
-  # } : count.index==1 ? {
-  #   FUNCTIONS_WORKER_RUNTIME = "python"
-
-  #   DOCUMENTATION_TABLE = "documentation"
-  
-  #   SECRET = azurerm_key_vault_secret.key_vault_secret.name
-  #   KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
-  #   https_only                          = true
-  #   DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
-  #   DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
-  #   DOCKER_REGISTRY_SERVER_PASSWORD     = var.DOCKER_REGISTRY_SERVER_PASSWORD
-  #   WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
-  # } : count.index==2 ? {
-  #   FUNCTIONS_WORKER_RUNTIME = "python"
-  #   ESSENTIAL_TAG=" "
-  #   https_only                          = true
-  #   DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
-  #   DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
-  #   DOCKER_REGISTRY_SERVER_PASSWORD     = var.DOCKER_REGISTRY_SERVER_PASSWORD
-  #   WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
-  # }: count.index==3 ? {
-  #   FUNCTIONS_WORKER_RUNTIME = "python"
-
-  #   DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH = 30
-  #   DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_USED_CAPACITY = 30
-  #   # TIME_INDEX="days"/"weeks"/"months"/"years"
-  #   TIME_INDEX_FOR_CHECK_LAST_FETCH="days"
-  #   TIME_INDEX_FOR_CHECK_USED_CAPACITY="days"
-  #   FREQ_AUTOMATION_TEST_TYPE="weeks"
-  #   FREQ_AUTOMATION_TEST_NUMBER=1
-  #   DOCUMENTATION_TABLE ="documentation"
-  #   HTTP_TRIGGER_URL="https://func-try-2.azurewebsites.net/api/HttpTrigger1?code=vqQyTSrot8Byr3-PUAWsHWWUBRImjzQp9DO_i8itYgKmAzFueI86Pg=="
-  #   ALERTS_DOCUMENTATION="alertsDocumentation"
-  #   DOCUMENTATION_STORAGE_NAME="myfirsttrail"
-
-  #   SECRET = azurerm_key_vault_secret.key_vault_secret.name
-  #   KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
-  #   https_only                          = true
-  #   DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
-  #   DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
-  #   DOCKER_REGISTRY_SERVER_PASSWORD     = var.DOCKER_REGISTRY_SERVER_PASSWORD
-  #   WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
-  # } : count.index==4 ? {
-  #   FUNCTIONS_WORKER_RUNTIME = "python"
-  #   EXCEL_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=sachayasubscriptiof6c98f;AccountKey=7VR6ivUm5kKambo7z4sEkrjEL8zx/CjYXz+9f9qwBi6ATKs4LBSbHPajZJF5DnG5LrVJQ7+rQ7Uc+AStDAwauA==;EndpointSuffix=core.windows.net"
-  #   #HTTP_TRIGGER_URL = function_app_email
-  #   HTTP_TRIGGER_URL="https://func-try-2.azurewebsites.net/api/HttpTrigger1?code=vqQyTSrot8Byr3-PUAWsHWWUBRImjzQp9DO_i8itYgKmAzFueI86Pg=="
-  #   MAIN_MANAGER="malkak@skyvar.co.il"
-  #   DOCUMENTATION_TABLE ="documentation"
-  #   DELETED_ACCOUNTS_TABLE="deletedStorages"
-  #   SECRET = azurerm_key_vault_secret.key_vault_secret.name
-  #   KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
-  #   https_only                          = true
-  #   DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
-  #   DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
-  #   DOCKER_REGISTRY_SERVER_PASSWORD     = var.DOCKER_REGISTRY_SERVER_PASSWORD
-  #   WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
-  # }: {}
-
-  app_settings = {
+  app_settings = count.index==0 ? {
     FUNCTIONS_WORKER_RUNTIME = "python"
     DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH=30
     TIME_INDEX_FOR_CHECK_LAST_FETCH="days"
@@ -200,7 +131,64 @@ resource "azurerm_function_app" "function_app" {
     DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
     DOCKER_REGISTRY_SERVER_PASSWORD     = var.DOCKER_REGISTRY_SERVER_PASSWORD
     WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
-  }
+  } : count.index==1 ? {
+    FUNCTIONS_WORKER_RUNTIME = "python"
+
+    DOCUMENTATION_TABLE = "documentation"
+  
+    SECRET = azurerm_key_vault_secret.key_vault_secret.name
+    KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
+    https_only                          = true
+    DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
+    DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
+    DOCKER_REGISTRY_SERVER_PASSWORD     = var.DOCKER_REGISTRY_SERVER_PASSWORD
+    WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
+  } : count.index==2 ? {
+    FUNCTIONS_WORKER_RUNTIME = "python"
+    ESSENTIAL_TAG=" "
+    https_only                          = true
+    DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
+    DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
+    DOCKER_REGISTRY_SERVER_PASSWORD     = var.DOCKER_REGISTRY_SERVER_PASSWORD
+    WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
+  }: count.index==3 ? {
+    FUNCTIONS_WORKER_RUNTIME = "python"
+
+    DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH = 30
+    DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_USED_CAPACITY = 30
+    # TIME_INDEX="days"/"weeks"/"months"/"years"
+    TIME_INDEX_FOR_CHECK_LAST_FETCH="days"
+    TIME_INDEX_FOR_CHECK_USED_CAPACITY="days"
+    FREQ_AUTOMATION_TEST_TYPE="weeks"
+    FREQ_AUTOMATION_TEST_NUMBER=1
+    DOCUMENTATION_TABLE ="documentation"
+    HTTP_TRIGGER_URL="https://func-try-2.azurewebsites.net/api/HttpTrigger1?code=vqQyTSrot8Byr3-PUAWsHWWUBRImjzQp9DO_i8itYgKmAzFueI86Pg=="
+    ALERTS_DOCUMENTATION="alertsDocumentation"
+    DOCUMENTATION_STORAGE_NAME="myfirsttrail"
+
+    SECRET = azurerm_key_vault_secret.key_vault_secret.name
+    KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
+    https_only                          = true
+    DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
+    DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
+    DOCKER_REGISTRY_SERVER_PASSWORD     = var.DOCKER_REGISTRY_SERVER_PASSWORD
+    WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
+  } : count.index==4 ? {
+    FUNCTIONS_WORKER_RUNTIME = "python"
+    EXCEL_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=sachayasubscriptiof6c98f;AccountKey=7VR6ivUm5kKambo7z4sEkrjEL8zx/CjYXz+9f9qwBi6ATKs4LBSbHPajZJF5DnG5LrVJQ7+rQ7Uc+AStDAwauA==;EndpointSuffix=core.windows.net"
+    #HTTP_TRIGGER_URL = function_app_email
+    HTTP_TRIGGER_URL="https://func-try-2.azurewebsites.net/api/HttpTrigger1?code=vqQyTSrot8Byr3-PUAWsHWWUBRImjzQp9DO_i8itYgKmAzFueI86Pg=="
+    MAIN_MANAGER="malkak@skyvar.co.il"
+    DOCUMENTATION_TABLE ="documentation"
+    DELETED_ACCOUNTS_TABLE="deletedStorages"
+    SECRET = azurerm_key_vault_secret.key_vault_secret.name
+    KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
+    https_only                          = true
+    DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
+    DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
+    DOCKER_REGISTRY_SERVER_PASSWORD     = var.DOCKER_REGISTRY_SERVER_PASSWORD
+    WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
+  }: {}
 
   site_config {
     always_on         = true
@@ -210,19 +198,18 @@ resource "azurerm_function_app" "function_app" {
   identity {
     type = "SystemAssigned"
   }
-  # count= length(var.function_app_name)
+  count= length(var.function_app_name)
 }
 
 resource "azurerm_function_app_slot" "function_app_slot" {
   name                       = "development"
   location                   = data.azurerm_storage_account.vnet_storage_account.location
   resource_group_name        = data.azurerm_storage_account.vnet_storage_account.resource_group_name
-  app_service_plan_id        = azurerm_app_service_plan.app_service_plan.id
-  function_app_name          = azurerm_function_app.function_app.name
+  app_service_plan_id        = azurerm_app_service_plan.app_service_plan[count.index].id
+  function_app_name          = azurerm_function_app.function_app[count.index].name
   storage_account_name       = data.azurerm_storage_account.vnet_storage_account.name
   storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
-  # count = length(var.function_app_name)
-  # depends_on = [azurerm_function_app.function_app]
+  count = length(var.function_app_name)
 }
 
 # resource "azurerm_logic_app_workflow" "logic_app_workflow" {
