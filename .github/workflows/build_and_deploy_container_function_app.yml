@@ -13,7 +13,7 @@ jobs:
         working-directory: function_apps
 
     environment:
-      name: 'production'
+      name: 'development'
       url: ${{ steps.deploy-to-functions.outputs.app-url }}
 
     strategy:
