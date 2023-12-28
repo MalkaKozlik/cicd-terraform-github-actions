@@ -201,22 +201,22 @@ resource "azurerm_function_app" "function_app" {
   count= length(var.function_app_name)
 }
 
-resource "azurerm_function_app_slot" "function_app_slot" {
-  name                       = "development"
-  location                   = data.azurerm_storage_account.vnet_storage_account.location
-  resource_group_name        = data.azurerm_storage_account.vnet_storage_account.resource_group_name
-  app_service_plan_id        = azurerm_app_service_plan.app_service_plan[count.index].id
-  function_app_name          = azurerm_function_app.function_app[count.index].name
-  storage_account_name       = data.azurerm_storage_account.vnet_storage_account.name
-  storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
-  count = length(var.function_app_name)
-}
-
-# resource "azurerm_logic_app_workflow" "logic_app_workflow" {
-#   name                = var.logic_app_workflow_name
-#   location            = data.azurerm_resource_group.vnet_resource_group.location
-#   resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
+# resource "azurerm_function_app_slot" "function_app_slot" {
+#   name                       = "development"
+#   location                   = data.azurerm_storage_account.vnet_storage_account.location
+#   resource_group_name        = data.azurerm_storage_account.vnet_storage_account.resource_group_name
+#   app_service_plan_id        = azurerm_app_service_plan.app_service_plan[count.index].id
+#   function_app_name          = azurerm_function_app.function_app[count.index].name
+#   storage_account_name       = data.azurerm_storage_account.vnet_storage_account.name
+#   storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
+#   count = length(var.function_app_name)
 # }
+
+resource "azurerm_logic_app_workflow" "logic_app_workflow" {
+  name                = var.logic_app_workflow_name
+  location            = data.azurerm_resource_group.vnet_resource_group.location
+  resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
+}
 
 output kevault_name {
   value       = azurerm_key_vault.key_vault.name
