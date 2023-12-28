@@ -62,6 +62,12 @@ variable key_vault_name {
   default = "kv-manage-storages"
 }
 
+variable key_vault_resource_group_name {
+  type        = string
+  default     = "NetworkWatcherRG"
+}
+
+
 variable key_vault_sku_name {
   type        = string
   default     = "standard"
@@ -86,6 +92,11 @@ variable key_vault_storage_permissions {
   type        = list
   default =  ["Get", ]
 }
+
+# variable key_vault_secret_name {
+#   type        = string
+#   default     = "CONNECTION-STRING-STORAGES"
+# }
 
 variable key_vault_secret_name {
   type        = string
