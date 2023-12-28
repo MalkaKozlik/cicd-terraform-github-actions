@@ -26,8 +26,8 @@
             "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func-log-analytics",
             "type": "string"
         },
-        "connections_office365_2_externalid": {
-            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/connections/office365-2",
+        "connections_office365_1_externalid": {
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/connections/office365-1",
             "type": "string"
         },
         "location":{
@@ -578,8 +578,8 @@
                     "$connections": {
                         "value": {
                             "office365": {
-                                "connectionId": "[parameters('connections_office365_2_externalid')]",
-                                "connectionName": "office365-2",
+                                "connectionId": "[parameters('connections_office365_1_externalid')]",
+                                "connectionName": "office365-1",
                                 "id": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/providers/Microsoft.Web/locations/westeurope/managedApis/office365"
                             }
                         }
