@@ -27,5 +27,5 @@ jobs:
         uses: azure/powershell@v1
         with: 
           inlineScript: |
-            az deployment group create -g NetworkWatcherRG --template-file ./templates/template.json --parameters workflows_logic_app_storage_management_name=logic-app-storage-management 
+            az deployment group create -g NetworkWatcherRG --template-file ./templates/template.json --parameters workflows_logic_app_name=logic-app-storage-management 
           azPSVersion: latest
