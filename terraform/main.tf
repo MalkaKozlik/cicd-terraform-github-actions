@@ -212,11 +212,11 @@ resource "azurerm_function_app" "function_app" {
 #   count = length(var.function_app_name)
 # }
 
-resource "azurerm_logic_app_workflow" "logic_app_workflow" {
-  name                = var.logic_app_workflow_name
-  location            = data.azurerm_resource_group.vnet_resource_group.location
-  resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
-}
+# resource "azurerm_logic_app_workflow" "logic_app_workflow" {
+#   name                = var.logic_app_workflow_name
+#   location            = data.azurerm_resource_group.vnet_resource_group.location
+#   resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
+# }
 
 output kevault_name {
   value       = azurerm_key_vault.key_vault.name
