@@ -97,7 +97,7 @@ resource "azurerm_key_vault_secret" "key_vault_secret" {
 
 
 resource "azurerm_app_service_plan" "app_service_plan" {
-  name                = var.app_service_plan_name[count.index]
+  name                = var.app_service_plan_name
   location            = data.azurerm_storage_account.vnet_storage_account.location
   resource_group_name = data.azurerm_storage_account.vnet_storage_account.resource_group_name
   kind                = "FunctionApp"
@@ -107,16 +107,16 @@ resource "azurerm_app_service_plan" "app_service_plan" {
     size = "Y1"
   }
 
-  count = length(var.app_service_plan_name)
+  # count = length(var.app_service_plan_name)
   
 }
 
 # ["log-analytics","start-function","for-each-subsription","test-storages","end-function"]
 resource "azurerm_function_app" "function_app" {
-  name                      =  var.function_app_name[count.index]
+  name                      =  var.function_app_name
   location                  = data.azurerm_storage_account.vnet_storage_account.location
   resource_group_name       = data.azurerm_storage_account.vnet_storage_account.resource_group_name
-  app_service_plan_id       = azurerm_app_service_plan.app_service_plan[count.index].id
+  app_service_plan_id       = azurerm_app_service_plan.app_service_plan.id
   storage_account_name      = data.azurerm_storage_account.vnet_storage_account.name
   storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
   version                   = "~4"
@@ -198,7 +198,7 @@ resource "azurerm_function_app" "function_app" {
   identity {
     type = "SystemAssigned"
   }
-  count= length(var.function_app_name)
+  # count= length(var.function_app_name)
 }
 
 resource "azurerm_function_app_slot" "function_app_slot" {
