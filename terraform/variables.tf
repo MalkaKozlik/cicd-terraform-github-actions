@@ -59,7 +59,7 @@ variable vnet_storage_account_name {
 
 variable key_vault_name {
   type        = string
-  default = "kv-mange-storages"
+  default = "kv-manage-storages"
 }
 
 variable key_vault_sku_name {
