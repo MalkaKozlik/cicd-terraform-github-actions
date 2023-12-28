@@ -205,12 +205,12 @@ resource "azurerm_function_app_slot" "function_app_slot" {
   name                       = "development"
   location                   = data.azurerm_storage_account.vnet_storage_account.location
   resource_group_name        = data.azurerm_storage_account.vnet_storage_account.resource_group_name
-  app_service_plan_id        = azurerm_app_service_plan.app_service_plan[count.index].id
-  function_app_name          = azurerm_function_app.function_app[count.index].name
+  app_service_plan_id        = azurerm_app_service_plan.app_service_plan.id
+  function_app_name          = azurerm_function_app.function_app.name
   storage_account_name       = data.azurerm_storage_account.vnet_storage_account.name
   storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
-  count = length(var.function_app_name)
-  depends_on = [azurerm_function_app.function_app]
+  # count = length(var.function_app_name)
+  # depends_on = [azurerm_function_app.function_app]
 }
 
 # resource "azurerm_logic_app_workflow" "logic_app_workflow" {
