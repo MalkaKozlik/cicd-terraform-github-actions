@@ -580,7 +580,7 @@
                             "office365": {
                                 "connectionId": "[parameters('connections_office365_2_externalid')]",
                                 "connectionName": "office365-2",
-                                "id": "[concat([concat('/subscriptions/',parameters(subscription_id))],[concat([concat('/providers/Microsoft.Web/locations/',parameters('location'))],'/managedApis/office365')])]"
+                                "id": "/subscriptions/@{parameters('subscription_id')}/providers/Microsoft.Web/locations/@{parameters('location')}/managedApis/office365"
                             }
                         }
                     }
