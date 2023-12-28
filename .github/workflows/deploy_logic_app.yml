@@ -1,10 +1,14 @@
 name: "deploy logic app template"
 
 on:
-  workflow_run:
-    workflows: [Build and deploy container app to Azure Function App]
-    types:
-      - completed
+  workflow_dispatch: 
+    # inputs:
+    #   workspaceId:
+    #     required: true
+    #   httpTriggerURL:
+    #     required: true
+    #   mainManager: 
+    #     required: true
 
 
 jobs:
