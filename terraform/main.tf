@@ -100,11 +100,11 @@ resource "azurerm_app_service_plan" "app_service_plan" {
   name                = var.app_service_plan_name[count.index]
   location            = data.azurerm_storage_account.vnet_storage_account.location
   resource_group_name = data.azurerm_storage_account.vnet_storage_account.resource_group_name
-  kind                = "FunctionApp"
+  kind                = "Linux"
   reserved            = true
   sku {
-    tier = "Dynamic"
-    size = "Y1"
+    tier = "Premium"
+    size = "P1V2"
   }
 
   count = length(var.app_service_plan_name)
