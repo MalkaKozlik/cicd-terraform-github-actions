@@ -123,14 +123,9 @@ resource "azurerm_function_app" "function_app" {
 
   app_settings = count.index==0 ? {
     FUNCTIONS_WORKER_RUNTIME = "python"
-
     DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH=30
     TIME_INDEX_FOR_CHECK_LAST_FETCH="days"
     WORKSPACE_ID="fa9e707a-28c1-4528-b7b2-54d03360d4c9"
-
-    SECRET = azurerm_key_vault_secret.key_vault_secret.name
-    KEYVAULT_NAME = azurerm_key_vault.key_vault.name
-    KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
     DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
@@ -143,7 +138,6 @@ resource "azurerm_function_app" "function_app" {
     DOCUMENTATION_TABLE = "documentation"
   
     SECRET = azurerm_key_vault_secret.key_vault_secret.name
-    KEYVAULT_NAME = azurerm_key_vault.key_vault.name
     KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
@@ -152,12 +146,7 @@ resource "azurerm_function_app" "function_app" {
     WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
   } : count.index==2 ? {
     FUNCTIONS_WORKER_RUNTIME = "python"
-
     ESSENTIAL_TAG=" "
-  
-    SECRET = azurerm_key_vault_secret.key_vault_secret.name
-    KEYVAULT_NAME = azurerm_key_vault.key_vault.name
-    KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
     DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
@@ -180,7 +169,6 @@ resource "azurerm_function_app" "function_app" {
     DOCUMENTATION_STORAGE_NAME="myfirsttrail"
 
     SECRET = azurerm_key_vault_secret.key_vault_secret.name
-    KEYVAULT_NAME = azurerm_key_vault.key_vault.name
     KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
@@ -189,7 +177,6 @@ resource "azurerm_function_app" "function_app" {
     WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
   } : count.index==4 ? {
     FUNCTIONS_WORKER_RUNTIME = "python"
-
     CONNECTION_STRING=data.azurerm_storage_account.vnet_storage_account.primary_connection_string
     EXCEL_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=sachayasubscriptiof6c98f;AccountKey=7VR6ivUm5kKambo7z4sEkrjEL8zx/CjYXz+9f9qwBi6ATKs4LBSbHPajZJF5DnG5LrVJQ7+rQ7Uc+AStDAwauA==;EndpointSuffix=core.windows.net"
     #HTTP_TRIGGER_URL = function_app_email
@@ -197,9 +184,7 @@ resource "azurerm_function_app" "function_app" {
     MAIN_MANAGER="malkak@skyvar.co.il"
     DOCUMENTATION_TABLE ="documentation"
     DELETED_ACCOUNTS_TABLE="deletedStorages"
-
     SECRET = azurerm_key_vault_secret.key_vault_secret.name
-    KEYVAULT_NAME = azurerm_key_vault.key_vault.name
     KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL

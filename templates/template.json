@@ -31,7 +31,7 @@
             "type": "string"
         },
         "location":{
-            "defaultValue": "westeurope",
+            "defaultValue": "eastus",
             "type": "string"
         },
         "frequency":{
