@@ -134,7 +134,6 @@ resource "azurerm_function_app" "function_app" {
   } : count.index==1 ? {
     FUNCTIONS_WORKER_RUNTIME = "python"
 
-    CONNECTION_STRING = data.azurerm_storage_account.vnet_storage_account.primary_connection_string
     DOCUMENTATION_TABLE = "documentation"
   
     SECRET = azurerm_key_vault_secret.key_vault_secret.name
@@ -160,7 +159,6 @@ resource "azurerm_function_app" "function_app" {
     # TIME_INDEX="days"/"weeks"/"months"/"years"
     TIME_INDEX_FOR_CHECK_LAST_FETCH="days"
     TIME_INDEX_FOR_CHECK_USED_CAPACITY="days"
-    CONNECTION_STRING= data.azurerm_storage_account.vnet_storage_account.primary_connection_string
     FREQ_AUTOMATION_TEST_TYPE="weeks"
     FREQ_AUTOMATION_TEST_NUMBER=1
     DOCUMENTATION_TABLE ="documentation"
@@ -177,7 +175,6 @@ resource "azurerm_function_app" "function_app" {
     WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
   } : count.index==4 ? {
     FUNCTIONS_WORKER_RUNTIME = "python"
-    CONNECTION_STRING=data.azurerm_storage_account.vnet_storage_account.primary_connection_string
     EXCEL_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=sachayasubscriptiof6c98f;AccountKey=7VR6ivUm5kKambo7z4sEkrjEL8zx/CjYXz+9f9qwBi6ATKs4LBSbHPajZJF5DnG5LrVJQ7+rQ7Uc+AStDAwauA==;EndpointSuffix=core.windows.net"
     #HTTP_TRIGGER_URL = function_app_email
     HTTP_TRIGGER_URL="https://func-try-2.azurewebsites.net/api/HttpTrigger1?code=vqQyTSrot8Byr3-PUAWsHWWUBRImjzQp9DO_i8itYgKmAzFueI86Pg=="
@@ -204,16 +201,16 @@ resource "azurerm_function_app" "function_app" {
   count= length(var.function_app_name)
 }
 
-resource "azurerm_function_app_slot" "function_app_slot" {
-  name                       = "development"
-  location                   = data.azurerm_storage_account.vnet_storage_account.location
-  resource_group_name        = data.azurerm_storage_account.vnet_storage_account.resource_group_name
-  app_service_plan_id        = azurerm_app_service_plan.app_service_plan[count.index].id
-  function_app_name          = azurerm_function_app.function_app[count.index].name
-  storage_account_name       = data.azurerm_storage_account.vnet_storage_account.name
-  storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
-  count = length(var.function_app_name)
-}
+# resource "azurerm_function_app_slot" "function_app_slot" {
+#   name                       = "development"
+#   location                   = data.azurerm_storage_account.vnet_storage_account.location
+#   resource_group_name        = data.azurerm_storage_account.vnet_storage_account.resource_group_name
+#   app_service_plan_id        = azurerm_app_service_plan.app_service_plan[count.index].id
+#   function_app_name          = azurerm_function_app.function_app[count.index].name
+#   storage_account_name       = data.azurerm_storage_account.vnet_storage_account.name
+#   storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
+#   count = length(var.function_app_name)
+# }
 
 resource "azurerm_logic_app_workflow" "logic_app_workflow" {
   name                = var.logic_app_workflow_name
