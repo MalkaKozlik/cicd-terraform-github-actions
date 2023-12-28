@@ -31,6 +31,7 @@
             "type": "string"
         },
         "location":{
+            "defaultValue": "westeurope",
             "type": "string"
         },
         "frequency":{
@@ -42,7 +43,16 @@
             "type": "int"
         },
         "subscription_id": {
+            "defaultValue": "a173eef2-33d7-4d55-b0b5-18b271f8d42b",
             "type":"string"
+        },
+        "function_app_resource_group_name":{
+            "defaultValue": "NetworkWatcherRG",
+            "type":"string"
+        },
+        "function_app_names":{
+            "defaultValue": ["func-log-analytics","func-start-function","func-for-each-subscription","func-test-storages","func-end-function"],
+            "type":"array"
         }
     },
     "variables": {},
