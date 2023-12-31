@@ -30,15 +30,15 @@ jobs:
         uses: azure/powershell@v1
         with: 
           inlineScript: |
-            az deployment group create -g ${{inputs.resourceGroupName}} --template-file ./templates/template.json --parameters workflows_logic_app_name=${{inputs.logicAppName}},
-                                                                                                                  sites_test_storages_externalid='/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/sites/func-test-storages'
-                                                                                                                  sites_for_each_subscription_function_externalid=/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/sites/func-for-each-subscription
-                                                                                                                  sites_start_function_externalid=/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/sites/func-start-function
-                                                                                                                  sites_end_function_externalid=/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/sites/func-end-function
-                                                                                                                  sites_log_analytics_function_app_externalid=/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/sites/func-log-analytics
-                                                                                                                  connections_office365_1_externalid=/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/connections/office365-1
-                                                                                                                  location=${{inputs.location}}
-                                                                                                                  frequency=${{inputs.frequency}}
+            az deployment group create -g ${{inputs.resourceGroupName}} --template-file ./templates/template.json --parameters workflows_logic_app_name=${{inputs.logicAppName}} `
+                                                                                                                  sites_test_storages_externalid=/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/sites/func-test-storages `
+                                                                                                                  sites_for_each_subscription_function_externalid=/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/sites/func-for-each-subscription `
+                                                                                                                  sites_start_function_externalid=/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/sites/func-start-function `
+                                                                                                                  sites_end_function_externalid=/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/sites/func-end-function `
+                                                                                                                  sites_log_analytics_function_app_externalid=/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/sites/func-log-analytics `
+                                                                                                                  connections_office365_1_externalid=/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/connections/office365-1 `
+                                                                                                                  location=${{inputs.location}} `
+                                                                                                                  frequency=${{inputs.frequency}} `
                                                                                                                   interval=${{inputs.interval}}
           azPSVersion: latest
 
