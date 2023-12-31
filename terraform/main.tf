@@ -195,24 +195,18 @@ resource "azurerm_linux_function_app" "linux_function_app" {
         image_tag = var.IMAGE_TAG
       }
     }
-    # linux_fx_version  = var.linux_fx_version 
   } 
-
-  # application_stack {
-
-  #   docker {
-  #     registry_url = var.DOCKER_REGISTRY_SERVER_URL
-  #     image_name = var.IMAGE_NAME
-  #     image_tag = var.IMAGE_TAG
-    
-  #   }
-  # }
 
   identity {
     type = "SystemAssigned"
   }
   count= length(var.function_app_name)
 }
+
+output hello {
+  value       = azurerm_linux_function_app.linux_function_app.site_config.container_registry_use_managed_identity 
+}
+
 
 
 
