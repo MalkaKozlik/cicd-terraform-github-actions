@@ -114,9 +114,7 @@ resource "azurerm_linux_function_app" "linux_function_app" {
 
   storage_account_name       = data.azurerm_storage_account.vnet_storage_account.name
   storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
-  service_plan_id            = azurerm_app_service_plan.app_service_plan[count.index].id
-
-  version                   = "~4"
+  service_plan_id            = azurerm_service_plan.service_plan[count.index].id
 
 
   app_settings = count.index==0 ? {
@@ -190,8 +188,15 @@ resource "azurerm_linux_function_app" "linux_function_app" {
 
   site_config {
     always_on         = true
-    linux_fx_version  = var.linux_fx_version 
+    # linux_fx_version  = var.linux_fx_version 
   } 
+
+  docker {
+    registry_url = var.DOCKER_REGISTRY_SERVER_URL
+    image_name = var.IMAGE_NAME
+    image_tag = var.IMAGE_TAG
+    
+  }
 
   identity {
     type = "SystemAssigned"

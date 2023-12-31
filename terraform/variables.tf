@@ -130,6 +130,18 @@ variable linux_fx_version {
   default     = "DOCKER|mcr.microsoft.com/azure-functions/dotnet:4-appservice-quickstart"
 }
 
+variable IMAGE_NAME {
+  type        = string
+  default     = "mcr.microsoft.com/azure-functions/dotnet"
+}
+
+variable IMAGE_TAG {
+  type        = string
+  default     = "4-appservice-quickstart"
+}
+
+
+
 variable DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH {
   type        = string
   default     = "30"
