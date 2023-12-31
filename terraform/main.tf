@@ -95,7 +95,7 @@ resource "azurerm_key_vault_secret" "key_vault_secret" {
   key_vault_id = azurerm_key_vault.key_vault.id
 }
 
-resource "azurerm_service_plan" "example" {
+resource "azurerm_service_plan" "service_plan" {
   name                = var.app_service_plan_name[count.index]
   resource_group_name = data.azurerm_storage_account.vnet_storage_account.resource_group_name
   location            = data.azurerm_storage_account.vnet_storage_account.location
@@ -105,6 +105,8 @@ resource "azurerm_service_plan" "example" {
 
   count = length(var.app_service_plan_name)
 }
+
+
 
 
 
