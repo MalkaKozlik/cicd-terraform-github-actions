@@ -13,7 +13,7 @@ jobs:
         working-directory: function_apps
 
     environment:
-      name: 'development'
+      name: 'production'
       url: ${{ steps.deploy-to-functions.outputs.app-url }}
 
     strategy:
@@ -121,5 +121,7 @@ jobs:
       with:
         app-name: ${{ matrix.directory }}
         image: 'ghcr.io/${{ env.REPO }}-${{ matrix.directory }}:${{ steps.get_release.outputs.tag_name }}'
+        scm-do-build-during-deployment: true
+        enable-oryx-build: true
       if: env.DIRECTORY == matrix.directory
 
