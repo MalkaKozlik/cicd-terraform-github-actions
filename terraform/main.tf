@@ -204,7 +204,7 @@ resource "azurerm_linux_function_app" "linux_function_app" {
 }
 
 output hello {
-  value       = azurerm_linux_function_app.linux_function_app[0].site_config.container_registry_use_managed_identity 
+  value       = azurerm_linux_function_app.linux_function_app[0].site_config[0].container_registry_use_managed_identity 
 }
 
 
