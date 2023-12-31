@@ -100,7 +100,7 @@ resource "azurerm_service_plan" "service_plan" {
   resource_group_name = data.azurerm_storage_account.vnet_storage_account.resource_group_name
   location            = data.azurerm_storage_account.vnet_storage_account.location
   os_type             = "Linux"
-  reserved            = true
+  # reserved            = true
   sku_name            = "P1v2"
 
   count = length(var.app_service_plan_name)
