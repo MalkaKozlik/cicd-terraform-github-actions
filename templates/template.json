@@ -10,7 +10,7 @@
             "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func-test-storages",
             "type": "string"
         },
-        "sites_for_each_subsription_function_externalid": {
+        "sites_for_each_subscription_function_externalid": {
             "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func-for-each-subscription",
             "type": "string"
         },
@@ -318,7 +318,7 @@
                                     "inputs": {
                                         "body": "@items('For_each_-_subscriptions')",
                                         "function": {
-                                            "id": "[concat(parameters('sites_for_each_subsription_function_externalid'), '/functions/HttpTrigger1')]"
+                                            "id": "[concat(parameters('sites_for_each_subscription_function_externalid'), '/functions/HttpTrigger1')]"
                                         }
                                     },
                                     "operationOptions": "DisableAsyncPattern"
