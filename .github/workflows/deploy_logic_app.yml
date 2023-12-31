@@ -12,12 +12,12 @@ on:
       frequency:
         required: true
         options: 
-        - Second
-        - Minute
-        - Hour
-        - Day
-        - Week
-        - Month
+          - Second
+          - Minute
+          - Hour
+          - Day
+          - Week
+          - Month
       interval:
         required: true
 
