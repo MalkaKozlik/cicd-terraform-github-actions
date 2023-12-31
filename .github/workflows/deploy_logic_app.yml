@@ -12,6 +12,7 @@ on:
       frequency:
         required: true
         type: choice
+        default: Week
         options: 
           - Second
           - Minute
