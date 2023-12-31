@@ -11,6 +11,13 @@ on:
         required: true
       frequency:
         required: true
+        options: 
+        - Second
+        - Minute
+        - Hour
+        - Day
+        - Week
+        - Month
       interval:
         required: true
 
