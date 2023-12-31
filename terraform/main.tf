@@ -100,7 +100,6 @@ resource "azurerm_service_plan" "service_plan" {
   resource_group_name = data.azurerm_storage_account.vnet_storage_account.resource_group_name
   location            = data.azurerm_storage_account.vnet_storage_account.location
   os_type             = "Linux"
-  # reserved            = true
   sku_name            = "P1v2"
 
   count = length(var.app_service_plan_name)
@@ -204,14 +203,6 @@ resource "azurerm_linux_function_app" "linux_function_app" {
   }
   count= length(var.function_app_name)
 }
-
-output hello {
-  value       = azurerm_linux_function_app.linux_function_app[0].site_config[0].container_registry_use_managed_identity 
-}
-
-
-
-
 
 
 # resource "azurerm_app_service_plan" "app_service_plan" {
@@ -329,6 +320,28 @@ output hello {
 #   storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
 #   count = length(var.function_app_name)
 # }
+
+resource "azurerm_linux_function_app_slot" "linux_function_app_slot" {
+  name                 = "development"
+  function_app_id      = azurerm_linux_function_app.linux_function_app[count.index].id
+  storage_account_name = data.azurerm_storage_account.vnet_storage_account.name
+  storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
+
+  site_config {
+    always_on         = true
+    application_stack {
+      docker {
+        registry_url = var.DOCKER_REGISTRY_SERVER_URL
+        image_name = var.IMAGE_NAME
+        image_tag = var.IMAGE_TAG
+        registry_username = var.DOCKER_REGISTRY_SERVER_USERNAME
+        registry_password = var.DOCKER_REGISTRY_SERVER_PASSWORD
+      }
+    }
+  }
+  count = length(var.function_app_name)
+
+}
 
 resource "azurerm_logic_app_workflow" "logic_app_workflow" {
   name                = var.logic_app_workflow_name
