@@ -191,11 +191,14 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     # linux_fx_version  = var.linux_fx_version 
   } 
 
-  docker {
-    registry_url = var.DOCKER_REGISTRY_SERVER_URL
-    image_name = var.IMAGE_NAME
-    image_tag = var.IMAGE_TAG
+  application_stack {
+
+    docker {
+      registry_url = var.DOCKER_REGISTRY_SERVER_URL
+      image_name = var.IMAGE_NAME
+      image_tag = var.IMAGE_TAG
     
+    }
   }
 
   identity {
