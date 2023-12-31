@@ -2,13 +2,10 @@ name: "deploy logic app template"
 
 on:
   workflow_dispatch: 
-    # inputs:
-    #   workspaceId:
-    #     required: true
-    #   httpTriggerURL:
-    #     required: true
-    #   mainManager: 
-    #     required: true
+    inputs:
+      logicAppName:
+        required: true
+      
 
 
 jobs:
