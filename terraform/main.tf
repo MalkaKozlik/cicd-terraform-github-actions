@@ -204,6 +204,33 @@ resource "azurerm_linux_function_app" "linux_function_app" {
   count= length(var.function_app_name)
 }
 
+resource "azurerm_linux_function_app_slot" "linux_function_app_slot" {
+  name                 = "development"
+  function_app_id      = azurerm_linux_function_app.linux_function_app[count.index].id
+  storage_account_name = data.azurerm_storage_account.vnet_storage_account.name
+  storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
+
+  site_config {
+    always_on         = true
+    application_stack {
+      docker {
+        registry_url = var.DOCKER_REGISTRY_SERVER_URL
+        image_name = var.IMAGE_NAME
+        image_tag = var.IMAGE_TAG
+        registry_username = var.DOCKER_REGISTRY_SERVER_USERNAME
+        registry_password = var.DOCKER_REGISTRY_SERVER_PASSWORD
+      }
+    }
+  }
+  count = length(var.function_app_name)
+
+}
+
+resource "azurerm_logic_app_workflow" "logic_app_workflow" {
+  name                = var.logic_app_workflow_name
+  location            = data.azurerm_resource_group.vnet_resource_group.location
+  resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
+}
 
 # resource "azurerm_app_service_plan" "app_service_plan" {
 #   name                = var.app_service_plan_name[count.index]
@@ -320,31 +347,3 @@ resource "azurerm_linux_function_app" "linux_function_app" {
 #   storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
 #   count = length(var.function_app_name)
 # }
-
-resource "azurerm_linux_function_app_slot" "linux_function_app_slot" {
-  name                 = "development"
-  function_app_id      = azurerm_linux_function_app.linux_function_app[count.index].id
-  storage_account_name = data.azurerm_storage_account.vnet_storage_account.name
-  storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
-
-  site_config {
-    always_on         = true
-    application_stack {
-      docker {
-        registry_url = var.DOCKER_REGISTRY_SERVER_URL
-        image_name = var.IMAGE_NAME
-        image_tag = var.IMAGE_TAG
-        registry_username = var.DOCKER_REGISTRY_SERVER_USERNAME
-        registry_password = var.DOCKER_REGISTRY_SERVER_PASSWORD
-      }
-    }
-  }
-  count = length(var.function_app_name)
-
-}
-
-resource "azurerm_logic_app_workflow" "logic_app_workflow" {
-  name                = var.logic_app_workflow_name
-  location            = data.azurerm_resource_group.vnet_resource_group.location
-  resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
-}
