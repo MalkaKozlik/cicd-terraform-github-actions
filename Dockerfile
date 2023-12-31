@@ -5,8 +5,8 @@ ENV AzureWebJobsScriptRoot=/home/site/wwwroot \
     AzureWebJobsFeatureFlags=EnableWorkerIndexing \ 
     AzureWebJobsStorage=UseDevelopmentStorage=true \
     CORS_ALLOWED_ORIGINS='*'
-    
+
 COPY requirements.txt /
 RUN pip install -r /requirements.txt
 
-COPY . /home/site/wwwroot
+COPY ./function_apps/func-for-each-subscription /home/site/wwwroot
