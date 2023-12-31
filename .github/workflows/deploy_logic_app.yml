@@ -5,6 +5,7 @@ on:
     inputs:
       logicAppName:
         required: true
+        default: logic-app-storage-management
       resourceGroupName:
         required: true
       location:
