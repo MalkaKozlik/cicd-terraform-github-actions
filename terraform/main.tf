@@ -210,7 +210,7 @@ resource "azurerm_function_app_slot" "function_app_slot" {
   storage_account_name       = data.azurerm_storage_account.vnet_storage_account.name
   storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
   count = length(var.function_app_name)
-  cors {
+  cors = {
     allowed_origins = "*"
   }
 }
