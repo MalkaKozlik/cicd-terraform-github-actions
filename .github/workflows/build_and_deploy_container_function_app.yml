@@ -19,11 +19,11 @@ jobs:
     strategy:
       matrix:
         directory:
-          - func-log-analytics
-          - func-start-function
-          - func-for-each-subscription
-          - func-test-storages
-          - func-end-function
+          - func-get-last-fetch-time-for-each-storage-account
+          - func-get-subscription-list
+          - func-get-storage-list-by-subscription
+          - func-test-storage
+          - func-sending-excel-by-email-and-mark-storages-for-deletion
 
     steps:
     - name: 📂 Checkout repository
