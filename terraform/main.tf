@@ -232,8 +232,8 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
   resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
 }
 
-data "azurerm_subscription" "primary" {
-}
+# data "azurerm_subscription" "primary" {
+# }
 
 # resource "azurerm_role_assignment" "role_assignment" {
 #   scope                = data.azurerm_subscription.primary.id
