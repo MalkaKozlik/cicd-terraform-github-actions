@@ -5,11 +5,12 @@ import os
 
 load_dotenv()
 
-KVUri=os.getenv("KVUri")
+keyvault_uri=os.getenv("KEYVAULT_URI")
+secret_name = os.getenv("SECRET")
 credential = DefaultAzureCredential()
-client = SecretClient(vault_url=KVUri, credential=credential)
+client = SecretClient(vault_url=keyvault_uri, credential=credential)
+connection_string = client.get_secret(secret_name).value
 
-connection_string = client.get_secret("CONNECTION-STRING").value
 time_period_for_check_last_fetch=os.getenv("DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH")
 time_period_for_check_used_capacity=os.getenv("DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_USED_CAPACITY")
 time_index_for_check_last_fetch=os.getenv("TIME_INDEX_FOR_CHECK_LAST_FETCH")

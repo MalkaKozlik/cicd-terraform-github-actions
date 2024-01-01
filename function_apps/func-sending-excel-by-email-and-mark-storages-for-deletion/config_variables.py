@@ -5,10 +5,12 @@ import os
 
 load_dotenv()
 
-KVUri=os.getenv("KVUri")
+keyvault_uri=os.getenv("KEYVAULT_URI")
+secret_name = os.getenv("SECRET")
 credential = DefaultAzureCredential()
-client = SecretClient(vault_url=KVUri, credential=credential)
-connection_string = client.get_secret("CONNECTION-STRING").value
+client = SecretClient(vault_url=keyvault_uri, credential=credential)
+connection_string = client.get_secret(secret_name).value
+
 excel_connection_string=os.getenv('EXCEL_CONNECTION_STRING')
 http_trigger_url = os.getenv("HTTP_TRIGGER_URL")
 deleted_accounts_table=os.getenv("DELETED_ACCOUNTS_TABLE")
