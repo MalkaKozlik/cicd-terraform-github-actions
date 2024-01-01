@@ -121,6 +121,7 @@ variable DOCKER_REGISTRY_SERVER_USERNAME {
   type        = string
 }
 
+
 variable DOCKER_REGISTRY_SERVER_URL {
   type        = string
 }
