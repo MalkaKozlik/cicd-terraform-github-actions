@@ -113,6 +113,7 @@ variable function_app_name {
   default = ["func-get-last-fetch-time-for-each-storage-account","func-get-subscription-list","func-get-storage-list-by-subscription","func-test-storage","func-sending-excel-by-email-and-mark-storages-for-deletion"]
 }
 
+
 variable DOCKER_REGISTRY_SERVER_PASSWORD {
   type        = string
 }
