@@ -232,6 +232,22 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
   resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
 }
 
+data "azurerm_subscription" "primary" {
+}
+
+resource "azurerm_role_assignment" "role_assignment" {
+  scope                = data.azurerm_subscription.primary.id
+  role_definition_name = "Reader"
+  principal_id         = azurerm_linux_function_app.linux_function_app[1].identity[0].principal_id 
+}
+
+# resource "azurerm_role_assignment" "key_vault_access" {
+#   scope                = data.azurerm_key_vault.key_vault.id 
+#   role_definition_name = "Key Vault Administrator"  
+#   principal_id         = azurerm_function_app.example.identity[0].principal_id
+# }
+
+
 # resource "azurerm_app_service_plan" "app_service_plan" {
 #   name                = var.app_service_plan_name[count.index]
 #   location            = data.azurerm_storage_account.vnet_storage_account.location
