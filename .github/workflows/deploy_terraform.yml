@@ -40,24 +40,25 @@ jobs:
       - name: 🧩 HashiCorp - Setup Terraform
         uses: hashicorp/setup-terraform@v2.0.0
         
-      - name : 🔑 az login
-        id : az-login
-        run : az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID  
+      - name: 🔑 Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: 🏗️ Terraform Init
         id: init
         run: terraform init 
 
  
-      # - name: 📋 Terraform Plan
-      #   id: plan
-      #   run: terraform plan -out=tfplan -input=false 
+      - name: 📋 Terraform Plan
+        id: plan
+        run: terraform plan -out=tfplan -input=false 
 
-      # - name: ✅ Terraform Apply
-      #   id: apply
-      #   run: terraform apply -input=false -auto-approve tfplan
+      - name: ✅ Terraform Apply
+        id: apply
+        run: terraform apply -input=false -auto-approve tfplan
 
-      - name: ✅ Terraform Destroy
-        id: destroy
-        run: terraform destroy -input=false -auto-approve 
-        working-directory: ./terraform
+      # - name: ✅ Terraform Destroy
+      #   id: destroy
+      #   run: terraform destroy -input=false -auto-approve 
+      #   working-directory: ./terraform
