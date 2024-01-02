@@ -9,7 +9,7 @@ keyvault_uri=os.getenv("KEYVAULT_URI")
 secret_name = os.getenv("SECRET")
 credential = DefaultAzureCredential()
 client = SecretClient(vault_url=keyvault_uri, credential=credential)
-connection_string = client.get_secret(secret_name).value
+connection_string = client.get_secret(secret_name)
 # connection_string = os.getenv("CONNECTION_STRING")
 
 time_period_for_check_last_fetch=os.getenv("DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH")
