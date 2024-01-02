@@ -6,6 +6,6 @@ azure.core==1.29.5
 azure.identity==1.14.1
 azure.mgmt.storage==21.0.0
 azure.mgmt.monitor==5.0.0
-azure.keyvault.secrets
+azure-keyvault-secrets
 pandas==2.1.1
 pytest-cov
