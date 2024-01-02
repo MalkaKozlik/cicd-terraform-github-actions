@@ -21,8 +21,10 @@ jobs:
         directory:
           - func-get-last-fetch-time-for-each-storage-account
           - func-get-subscription-list
-          - func-get-storage-list-by-subscription
-          
+          # - func-get-storage-list-by-subscription
+          - func-test-storage
+          # - func-sending-excel-by-email-and-mark-storages-for-deletion
+
     steps:
     - name: 📂 Checkout repository
       uses: actions/checkout@v4
