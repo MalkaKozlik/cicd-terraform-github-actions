@@ -1,4 +1,4 @@
-# from azure.keyvault.secrets import SecretClient
+from azure.keyvault.secrets import SecretClient
 from azure.identity import DefaultAzureCredential
 from dotenv import load_dotenv
 import os
