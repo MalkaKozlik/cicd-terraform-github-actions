@@ -364,4 +364,3 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
 #   storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
 #   count = length(var.function_app_name)
 # }
-
