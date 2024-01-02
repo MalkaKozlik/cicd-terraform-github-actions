@@ -161,6 +161,7 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     HTTP_TRIGGER_URL="https://func-try-2.azurewebsites.net/api/HttpTrigger1?code=vqQyTSrot8Byr3-PUAWsHWWUBRImjzQp9DO_i8itYgKmAzFueI86Pg=="
     ALERTS_DOCUMENTATION="alertsDocumentation"
     DOCUMENTATION_STORAGE_NAME="myfirsttrail"
+    CONNECTION_STRING = data.azurerm_storage_account.vnet_storage_account.primary_connection_string
 
     SECRET = azurerm_key_vault_secret.key_vault_secret.name
     KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
@@ -177,6 +178,8 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     MAIN_MANAGER="malkak@skyvar.co.il"
     DOCUMENTATION_TABLE ="documentation"
     DELETED_ACCOUNTS_TABLE="deletedStorages"
+    CONNECTION_STRING = data.azurerm_storage_account.vnet_storage_account.primary_connection_string
+
     SECRET = azurerm_key_vault_secret.key_vault_secret.name
     KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
@@ -364,4 +367,3 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
 #   storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
 #   count = length(var.function_app_name)
 # }
-
