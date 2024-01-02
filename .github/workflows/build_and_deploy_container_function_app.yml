@@ -25,7 +25,6 @@ jobs:
           # - func-test-storage          
           - func-sending-excel-by-email-and-mark-storages-for-deletion
 
-
     steps:
     - name: 📂 Checkout repository
       uses: actions/checkout@v4
