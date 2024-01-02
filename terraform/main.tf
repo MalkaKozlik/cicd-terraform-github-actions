@@ -129,7 +129,6 @@ resource "azurerm_linux_function_app" "linux_function_app" {
   } : count.index==1 ? {
     FUNCTIONS_WORKER_RUNTIME = "python"
 
-    CONNECTION_STRING = data.azurerm_storage_account.vnet_storage_account.primary_connection_string
     DOCUMENTATION_TABLE = "documentation"
   
     SECRET = azurerm_key_vault_secret.key_vault_secret.name
