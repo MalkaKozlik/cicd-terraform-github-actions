@@ -25,7 +25,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt  
         
-
+      - name: print ref
+        run: echo "${{ github.ref }}"
+      
       - name: 🔖 Create Release
         id: create_release
         uses: actions/create-release@v1
