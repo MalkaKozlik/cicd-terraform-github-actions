@@ -114,6 +114,7 @@ resource "azurerm_linux_function_app" "linux_function_app" {
   storage_account_name       = data.azurerm_storage_account.vnet_storage_account.name
   storage_account_access_key = data.azurerm_storage_account.vnet_storage_account.primary_access_key
   service_plan_id            = azurerm_service_plan.service_plan[count.index].id
+  minimum_tls_version = 1.2
   functions_extension_version = "~4"
 
   app_settings = count.index==0 ? {

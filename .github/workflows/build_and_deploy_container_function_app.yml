@@ -90,11 +90,6 @@ jobs:
         echo "REPO=$REPO" >> "$GITHUB_ENV"
       if: env.DIRECTORY == matrix.directory
 
-    - name: print tag and repo
-      run: |
-        echo "$TAG"
-        echo "${{ env.REPO }}-${{ matrix.directory }}:${{ steps.get_release.outputs.tag_name }}"
-
     - name: 🐳 Docker metadata
       id: docker_meta
       uses: docker/metadata-action@v5
@@ -105,12 +100,6 @@ jobs:
           type=semver,pattern={{major}}.{{minor}},value=${{ env.TAG }}
           type=semver,pattern={{major}},value=${{ env.TAG }}
       if: env.DIRECTORY == matrix.directory
-
-    - name: print pwd
-      run: pwd
-
-    - name: print ls
-      run: ls ./${{ matrix.directory }}
  
     - name: 🏗️ Build and push container image to registry
       uses: docker/build-push-action@v3
@@ -136,4 +125,3 @@ jobs:
         image: 'ghcr.io/${{ env.REPO }}-${{ matrix.directory }}:${{ steps.get_release.outputs.tag_name }}'
         # slot-name: 'development'
       if: env.DIRECTORY == matrix.directory
-
