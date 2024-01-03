@@ -192,6 +192,7 @@ resource "azurerm_linux_function_app" "linux_function_app" {
   site_config {
     always_on         = true
     minimum_tls_version = 1.2
+    scm_minimum_tls_version = 1.2
     application_stack {
       docker {
         registry_url = var.DOCKER_REGISTRY_SERVER_URL
