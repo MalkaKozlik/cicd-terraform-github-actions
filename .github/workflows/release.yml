@@ -4,11 +4,12 @@ on:
   push:
     tags:
     - 'v*' 
+  workflow_dispatch: 
 
 jobs:
 
   build:
-    permissions: [write-all, read-all]
+    permissions: write-all
     name: Upload Python Release Asset
     runs-on: ubuntu-latest
     steps:
