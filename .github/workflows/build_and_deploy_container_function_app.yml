@@ -73,6 +73,8 @@ jobs:
         latest: true
       if: env.DIRECTORY == matrix.directory
 
+    
+
     - name: 🔄 downcase REPO
       uses: ASzc/change-string-case-action@v1
       id: downcase
@@ -87,6 +89,11 @@ jobs:
         REPO=${{ steps.downcase.outputs.lowercase }}
         echo "REPO=$REPO" >> "$GITHUB_ENV"
       if: env.DIRECTORY == matrix.directory
+
+    - name: print tag and repo
+      run: |
+        echo "$TAG"
+        echo "${{ env.REPO }}-${{ matrix.directory }}:${{ steps.get_release.outputs.tag_name }}"
 
     - name: 🐳 Docker metadata
       id: docker_meta
