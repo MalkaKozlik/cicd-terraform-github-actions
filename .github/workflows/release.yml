@@ -23,6 +23,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt  
         
+        
       - name: 🔖 Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -49,4 +50,3 @@ jobs:
           asset_path: ./repository.zip
           asset_name: repository.zip
           asset_content_type: application/zip 
-          
