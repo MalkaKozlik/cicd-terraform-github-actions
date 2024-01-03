@@ -9,7 +9,6 @@ on:
 jobs:
 
   build:
-    permissions: write-all
     name: Upload Python Release Asset
     runs-on: ubuntu-latest
     steps:
