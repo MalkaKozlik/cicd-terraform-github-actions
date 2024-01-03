@@ -106,6 +106,9 @@ jobs:
           type=semver,pattern={{major}},value=${{ env.TAG }}
       if: env.DIRECTORY == matrix.directory
 
+    - name: print pwd
+      run: pwd
+
     - name: print ls
       run: ls ./${{ env.WORKING_DIRECTORY }}/${{ matrix.directory }}
  
