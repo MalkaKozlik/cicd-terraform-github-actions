@@ -110,7 +110,7 @@ jobs:
       run: pwd
 
     - name: print ls
-      run: ls ./${{ env.WORKING_DIRECTORY }}/${{ matrix.directory }}
+      run: ls ./${{ matrix.directory }}
  
     - name: 🏗️ Build and push container image to registry
       uses: docker/build-push-action@v3
