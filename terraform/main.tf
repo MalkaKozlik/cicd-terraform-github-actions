@@ -236,7 +236,7 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
   name                = var.logic_app_workflow_name
   location            = data.azurerm_resource_group.vnet_resource_group.location
   resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
-  parameters = {
+  workflow_parameters = {
     workflows_logic_app_name = "logic-app-storage-management"
     sites_func_get_last_fetch_time_for_each_storage_account_externalid = "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func_get_last_fetch_time_for_each_storage_account"
     sites_func_get_subscription_list_externalid = "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func_get_subscription_list"
@@ -247,6 +247,16 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
     location = "westeurope"
     frequency = "Week"
     interval = "1"
+  }
+  workflow_parameters = {
+    "workflows_logic_app_name": {
+      "type": "string",
+      "defaultValue": "logic-app-storage-management",
+      # "allowedValues": [ <array-with-permitted-parameter-values> ],
+      # "metadata": {
+        #  "description": "<parameter-description>"
+      # }
+    }
   }
 }
 
