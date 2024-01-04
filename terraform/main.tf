@@ -243,6 +243,7 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
     sites_func_get_storage_list_by_subscription_externalid = azurerm_linux_function_app.linux_function_app[2].id
     sites_func_test_storage_externalid = azurerm_linux_function_app.linux_function_app[3].id
     sites_func_sending_excel_by_email_and_mark_storages_for_deletion_externalid = azurerm_linux_function_app.linux_function_app[4].id
+    connections_office365_1_externalid = "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/connections/office365-1"
     location = data.azurerm_resource_group.vnet_resource_group.location
     frequency = "Week"
     interval = 1
