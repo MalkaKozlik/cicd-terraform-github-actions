@@ -238,7 +238,7 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
   resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
   parameters = {
     workflows_logic_app_name = var.logic_app_workflow_name
-    sites_func_get_last_fetch_time_for_each_storage_account_externalid = azurerm_linux_function_app.linux_function_app[0].id
+    sites_func_get_last_fetch_time_for_each_storage_account_externalid = "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func_get_last_fetch_time_for_each_storage_account"
     sites_func_get_subscription_list_externalid = azurerm_linux_function_app.linux_function_app[1].id
     sites_func_get_storage_list_by_subscription_externalid = azurerm_linux_function_app.linux_function_app[2].id
     sites_func_test_storage_externalid = azurerm_linux_function_app.linux_function_app[3].id
