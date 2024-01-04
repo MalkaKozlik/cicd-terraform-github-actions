@@ -246,7 +246,7 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
     connections_office365_1_externalid = "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/connections/office365-1"
     location = data.azurerm_resource_group.vnet_resource_group.location
     frequency = "Week"
-    interval = 1
+    interval = "1"
   }
 }
 
