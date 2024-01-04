@@ -3,26 +3,7 @@ name: "deploy logic app template"
 on:
   workflow_dispatch: 
     inputs:
-      logicAppName:
-        required: true
-        default: logic-app-storage-management
-      resourceGroupName:
-        required: true
-      location:
-        required: true
-      frequency:
-        required: true
-        type: choice
-        default: Week
-        options: 
-          - Second
-          - Minute
-          - Hour
-          - Day
-          - Week
-          - Month
-      interval:
-        required: true
+      
 
 jobs:
   deploy-template:
@@ -40,14 +21,5 @@ jobs:
         uses: azure/powershell@v1
         with: 
           inlineScript: |
-            az deployment group create -g ${{inputs.resourceGroupName}} --template-file ./templates/template.json --parameters workflows_logic_app_name=${{inputs.logicAppName}} `
-                                                                                                                  sites_test_storages_externalid=/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/sites/func-test-storage `
-                                                                                                                  sites_for_each_subscription_function_externalid=/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/sites/func-get-storage-list-by-subscription `
-                                                                                                                  sites_start_function_externalid=/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/sites/func-get-subscription-list `
-                                                                                                                  sites_end_function_externalid=/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/sites/func-sending-excel-by-email-and-mark-storages-for-deletion `
-                                                                                                                  sites_log_analytics_function_app_externalid=/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/sites/func-get-last-fetch-time-for-each-storage-account `
-                                                                                                                  connections_office365_1_externalid=/subscriptions/${{secrets.SUBSCRIPTION_ID}}/resourceGroups/${{inputs.resourceGroupName}}/providers/Microsoft.Web/connections/office365-1 `
-                                                                                                                  location=${{inputs.location}} `
-                                                                                                                  frequency=${{inputs.frequency}} `
-                                                                                                                  interval=${{inputs.interval}}
+            az deployment group create -g ${{inputs.resourceGroupName}} --template-file ./templates/template.json 
           azPSVersion: latest

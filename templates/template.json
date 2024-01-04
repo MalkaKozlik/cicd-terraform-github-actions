@@ -6,24 +6,24 @@
             "defaultValue": "logic-app-storage-management",
             "type": "string"
         },
-        "sites_test_storages_externalid": {
-            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func-test-storages",
+        "sites_func_test_storage_externalid": {
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func_test_storage",
             "type": "string"
         },
-        "sites_for_each_subscription_function_externalid": {
-            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func-for-each-subscription",
+        "sites_func_get_storage_list_by_subscription_externalid": {
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func_get_storage_list_by_subscription",
             "type": "string"
         },
-        "sites_start_function_externalid": {
-            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func-start-function",
+        "sites_func_get_subscription_list_externalid": {
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func_get_subscription_list",
             "type": "string"
         },
-        "sites_end_function_externalid": {
-            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func-end-function",
+        "sites_func_sending_excel_by_email_and_mark_storages_for_deletion_externalid": {
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func_sending_excel_by_email_and_mark_storages_for_deletion",
             "type": "string"
         },
-        "sites_log_analytics_function_app_externalid": {
-            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func-log-analytics",
+        "sites_func_get_last_fetch_time_for_each_storage_account_externalid": {
+            "defaultValue": "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func_get_last_fetch_time_for_each_storage_account",
             "type": "string"
         },
         "connections_office365_1_externalid": {
@@ -242,7 +242,7 @@
                                             "inputs": {
                                                 "body": "@outputs('Compose')",
                                                 "function": {
-                                                    "id": "[concat(parameters('sites_test_storages_externalid'), '/functions/HttpTrigger1')]"
+                                                    "id": "[concat(parameters('sites_func_test_storage_externalid'), '/functions/HttpTrigger1')]"
                                                 }
                                             },
                                             "operationOptions": "DisableAsyncPattern",
@@ -318,7 +318,7 @@
                                     "inputs": {
                                         "body": "@items('For_each_-_subscriptions')",
                                         "function": {
-                                            "id": "[concat(parameters('sites_for_each_subscription_function_externalid'), '/functions/HttpTrigger1')]"
+                                            "id": "[concat(parameters('sites_func_get_storage_list_by_subscription_externalid'), '/functions/HttpTrigger1')]"
                                         }
                                     },
                                     "operationOptions": "DisableAsyncPattern"
@@ -378,7 +378,7 @@
                             "type": "Function",
                             "inputs": {
                                 "function": {
-                                    "id": "[concat(parameters('sites_start_function_externalid'), '/functions/HttpTrigger1')]"
+                                    "id": "[concat(parameters('sites_func_get_subscription_list_externalid'), '/functions/HttpTrigger1')]"
                                 }
                             }
                         },
@@ -392,7 +392,7 @@
                             "inputs": {
                                 "body": "@outputs('Compose_to_call_end_function')",
                                 "function": {
-                                    "id": "[concat(parameters('sites_end_function_externalid'), '/functions/HttpTrigger1')]"
+                                    "id": "[concat(parameters('sites_func_sending_excel_by_email_and_mark_storages_for_deletion_externalid'), '/functions/HttpTrigger1')]"
                                 }
                             }
                         },
@@ -405,7 +405,7 @@
                             "type": "Function",
                             "inputs": {
                                 "function": {
-                                    "id": "[concat(parameters('sites_log_analytics_function_app_externalid'), '/functions/HttpTrigger1')]"
+                                    "id": "[concat(parameters('sites_func_get_last_fetch_time_for_each_storage_account_externalid'), '/functions/HttpTrigger1')]"
                                 }
                             }
                         },

@@ -236,6 +236,17 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
   name                = var.logic_app_workflow_name
   location            = data.azurerm_resource_group.vnet_resource_group.location
   resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
+  parameters = {
+    workflows_logic_app_name = var.logic_app_workflow_name
+    sites_func_get_last_fetch_time_for_each_storage_account_externalid = azurerm_linux_function_app.linux_function_app[0].id
+    sites_func_get_subscription_list_externalid = azurerm_linux_function_app.linux_function_app[1].id
+    sites_func_get_storage_list_by_subscription_externalid = azurerm_linux_function_app.linux_function_app[2].id
+    sites_func_test_storage_externalid = azurerm_linux_function_app.linux_function_app[3].id
+    sites_func_sending_excel_by_email_and_mark_storages_for_deletion_externalid = azurerm_linux_function_app.linux_function_app[5].id
+    location = data.azurerm_resource_group.vnet_resource_group.location
+    frequency = "Week"
+    interval = 1
+  }
 }
 
 # data "azurerm_subscription" "primary" {
