@@ -9,6 +9,11 @@ on:
         required: true
       mainManager: 
         required: true
+      # frequencyLogicApp:
+      #   required: true 
+      #   type: choice
+      #   options: 
+      #     - 
   
 jobs:
   job1:
