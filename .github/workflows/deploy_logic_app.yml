@@ -3,8 +3,8 @@ name: "deploy logic app template"
 on:
   workflow_dispatch: 
     inputs:
-      resourceGroupName: string
-
+      resourceGroupName: 
+        required: true
 jobs:
   deploy-template:
     runs-on: ubuntu-latest
