@@ -255,7 +255,7 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
   # }
   workflow_parameters = {
     "workflows_logic_app_name" : "{ \"defaultValue\":\"logic-app-storage-management\", \"type\" : \"string\"}"
-    "sites_func_test_storage_externalid": "{ \"defaultValue\":${JSON.stringify(azurerm_linux_function_app.linux_function_app[4].id )}, \"type\": \"string\"}"
+    "sites_func_test_storage_externalid": "{ \"defaultValue\":\${JSON.stringify(azurerm_linux_function_app.linux_function_app[4].id )}, \"type\": \"string\"}"
     "interval": "{ \"defaultValue\": 1, \"type\": \"int\" }"
     #   defaultValue= "logic-app-storage-management"
     #   # "allowedValues": [ <array-with-permitted-parameter-values> ],
