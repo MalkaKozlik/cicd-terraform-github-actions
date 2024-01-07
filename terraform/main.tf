@@ -116,7 +116,6 @@ resource "azurerm_service_plan" "service_plan" {
   count = length(var.app_service_plan_name)
 }
 
-
 resource "azurerm_linux_function_app" "linux_function_app" {
   name                = var.function_app_name[count.index]
   resource_group_name = data.azurerm_storage_account.vnet_storage_account.resource_group_name
@@ -145,7 +144,7 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     CONNECTION_STRING = data.azurerm_storage_account.vnet_storage_account.primary_connection_string
     DOCUMENTATION_TABLE = "documentation"
     SECRET = azurerm_key_vault_secret.key_vault_secret.name
-    KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
+    KEYVAULT_URI = data.azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
     DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
@@ -176,7 +175,7 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     CONNECTION_STRING = data.azurerm_storage_account.vnet_storage_account.primary_connection_string
 
     SECRET = azurerm_key_vault_secret.key_vault_secret.name
-    KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
+    KEYVAULT_URI = data.azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
     DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
@@ -193,7 +192,7 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     CONNECTION_STRING = data.azurerm_storage_account.vnet_storage_account.primary_connection_string
 
     SECRET = azurerm_key_vault_secret.key_vault_secret.name
-    KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
+    KEYVAULT_URI = data.azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
     DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
