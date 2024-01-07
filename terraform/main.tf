@@ -255,7 +255,13 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
   # }
   workflow_parameters = {
     "workflows_logic_app_name" : "{ \"defaultValue\":\"logic-app-storage-management\", \"type\" : \"string\"}"
-    "sites_func_test_storage_externalid": "{ \"defaultValue\":\"${azurerm_linux_function_app.linux_function_app[4].id}\", \"type\": \"string\"}"
+    "sites_func_get_last_fetch_time_for_each_storage_account_externalid": "{\"defaultValue\": \"${azurerm_linux_function_app.linux_function_app[0].id}\",\"type\": \"string\"}"
+    "sites_func_get_subscription_list_externalid": "{\"defaultValue\": \"${azurerm_linux_function_app.linux_function_app[1].id}\", \"type\": \"string\"}"
+    "sites_func_get_storage_list_by_subscription_externalid": "{\"defaultValue\": \"${azurerm_linux_function_app.linux_function_app[2].id}\",\"type\": \"string\" }"
+    "sites_func_test_storage_externalid": "{ \"defaultValue\":\"${azurerm_linux_function_app.linux_function_app[3].id}\", \"type\": \"string\"}"
+    "sites_func_sending_excel_by_email_and_mark_storages_for_deletion_externalid": "{\"defaultValue\": \"${azurerm_linux_function_app.linux_function_app[4].id}\",\"type\": \"string\" }"
+    "connections_office365_1_externalid": "{\"defaultValue\": \"/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/connections/office365-1\",\"type\": \"string\"}"
+    "location":"{\"defaultValue\": \"${data.azurerm_resource_group.vnet_resource_group.location}\",\"type\": \"string\" }"
     "interval": "{ \"defaultValue\": 1, \"type\": \"int\" }"
     #   defaultValue= "logic-app-storage-management"
     #   # "allowedValues": [ <array-with-permitted-parameter-values> ],

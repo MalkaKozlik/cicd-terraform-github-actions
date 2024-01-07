@@ -36,7 +36,8 @@
         },
         "frequency":{
             "defaultValue": "Week",
-            "type": "string"
+            "type": "string",
+            "allowedValues": ["Month","Week","Day","Hour","Minute","Second"],
         },
         "interval":{
             "defaultValue": 1,
