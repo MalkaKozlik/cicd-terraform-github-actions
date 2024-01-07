@@ -233,7 +233,7 @@ resource "azurerm_linux_function_app" "linux_function_app" {
 # }
 
 locals {
-   "workflows_logic_app_name" = "logic-app-storage-management"
+   workflows_logic_app_name = "logic-app-storage-management"
 }
 
 
