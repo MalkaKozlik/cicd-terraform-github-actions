@@ -11,6 +11,7 @@ on:
         required: true
       frequencyLogicApp:
         type: choice
+        default: Week
         options: 
           - Month
           - Week
