@@ -254,7 +254,10 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
   #   interval = "1"
   # }
   workflow_parameters = {
-    "workflows_logic_app_name" : "{\"defaultValue\":\"logic-app-storage-management\"}"
+    "workflows_logic_app_name" : "{
+      \"defaultValue\":\"logic-app-storage-management\",
+      \"type\" : \"string\"
+    }"
       
     #   defaultValue= "logic-app-storage-management"
     #   # "allowedValues": [ <array-with-permitted-parameter-values> ],
