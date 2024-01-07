@@ -232,29 +232,12 @@ resource "azurerm_linux_function_app" "linux_function_app" {
 
 # }
 
-locals {
-   workflows_logic_app_name = "logic-app-storage-management"
-}
-
-
 resource "azurerm_logic_app_workflow" "logic_app_workflow" {
   name                = var.logic_app_workflow_name
   location            = data.azurerm_resource_group.vnet_resource_group.location
   resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
-  # workflow_parameters = {
-  #   workflows_logic_app_name = "logic-app-storage-management"
-  #   sites_func_get_last_fetch_time_for_each_storage_account_externalid = "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func_get_last_fetch_time_for_each_storage_account"
-  #   sites_func_get_subscription_list_externalid = "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func_get_subscription_list"
-  #   sites_func_get_storage_list_by_subscription_externalid = "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func_get_storage_list_by_subscription"
-  #   sites_func_test_storage_externalid = "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func_test_storage"
-  #   sites_func_sending_excel_by_email_and_mark_storages_for_deletion_externalid = "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/func_sending_excel_by_email_and_mark_storages_for_deletion"
-  #   connections_office365_1_externalid = "/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/connections/office365-1"
-  #   location = "westeurope"
-  #   frequency = "Week"
-  #   interval = "1"
-  # }
   workflow_parameters = {
-    "workflows_logic_app_name" : "{ \"defaultValue\":\"logic-app-storage-management\", \"type\" : \"string\"}"
+    "workflows_logic_app_name" : "{ \"defaultValue\":\"${var.logic_app_workflow_name}\", \"type\" : \"string\"}"
     "sites_func_get_last_fetch_time_for_each_storage_account_externalid": "{\"defaultValue\": \"${azurerm_linux_function_app.linux_function_app[0].id}\",\"type\": \"string\"}"
     "sites_func_get_subscription_list_externalid": "{\"defaultValue\": \"${azurerm_linux_function_app.linux_function_app[1].id}\", \"type\": \"string\"}"
     "sites_func_get_storage_list_by_subscription_externalid": "{\"defaultValue\": \"${azurerm_linux_function_app.linux_function_app[2].id}\",\"type\": \"string\" }"
@@ -262,14 +245,8 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
     "sites_func_sending_excel_by_email_and_mark_storages_for_deletion_externalid": "{\"defaultValue\": \"${azurerm_linux_function_app.linux_function_app[4].id}\",\"type\": \"string\" }"
     "connections_office365_1_externalid": "{\"defaultValue\": \"/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/connections/office365-1\",\"type\": \"string\"}"
     "location":"{\"defaultValue\": \"${data.azurerm_resource_group.vnet_resource_group.location}\",\"type\": \"string\" }"
-    "frequency":"{\"defaultValue\": \"Week\",\"type\": \"string\",\"allowedValues\": [\"Month\",\"Week\",\"Day\",\"Hour\",\"Minute\",\"Second\"]}"
-    "interval": "{ \"defaultValue\": 1, \"type\": \"int\" }"
-    #   defaultValue= "logic-app-storage-management"
-    #   # "allowedValues": [ <array-with-permitted-parameter-values> ],
-    #   # "metadata": {
-    #     #  "description": "<parameter-description>"
-    #   # }
-   
+    "frequency":"{\"defaultValue\": \"${var.frequency_of_logic_app_workflow}\",\"type\": \"string\",\"allowedValues\": [\"Month\",\"Week\",\"Day\",\"Hour\",\"Minute\",\"Second\"]}"
+    "interval": "{ \"defaultValue\": ${var.FREQ_AUTOMATION_TEST_NUMBER}, \"type\": \"int\" }"
   }
 }
 

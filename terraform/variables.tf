@@ -178,3 +178,11 @@ variable logic_app_workflow_name {
   default = "logic-app-storage-management"
 }
 
+variable frequency_of_logic_app_workflow{
+  type = string
+  default = "Week"
+  validation {
+    condition     = contains(["Month","Week","Day","Hour","Minute","Second"], var.frequency_of_logic_app_workflow)
+    error_message = "Valid values for var: frequency_of_logic_app_workflow are (Month,Week,Day,Hour,Minute,Second)."
+  } 
+}
