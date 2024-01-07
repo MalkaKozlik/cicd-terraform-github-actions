@@ -33,12 +33,12 @@
         "frequency":{
             "defaultValue": "Week",
             "type": "string",
-            "allowedValues": ["Month","Week","Day","Hour","Minute","Second"],
+            "allowedValues": ["Month","Week","Day","Hour","Minute","Second"]
         },
         "interval":{
             "defaultValue": 1,
             "type": "int"
-        },
+        }
     },
     "variables": {},
     "resources": [
