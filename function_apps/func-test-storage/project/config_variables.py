@@ -11,7 +11,6 @@ credential = DefaultAzureCredential()
 client = SecretClient(vault_url=keyvault_uri, credential=credential)
 secret = client.get_secret(secret_name)
 connection_string = secret.value
-# connection_string = os.getenv("CONNECTION_STRING")
 
 time_period_for_check_last_fetch=os.getenv("DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH")
 time_period_for_check_used_capacity=os.getenv("DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_USED_CAPACITY")

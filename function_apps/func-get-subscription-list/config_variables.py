@@ -12,6 +12,4 @@ client = SecretClient(vault_url=keyvault_uri, credential=credential)
 secret = client.get_secret(secret_name)
 connection_string = secret.value
 
-# connection_string = os.getenv("CONNECTION_STRING")
-
 documentation_table=os.getenv("DOCUMENTATION_TABLE")
