@@ -28,7 +28,6 @@ data "azurerm_resource_group" "vnet_resource_group" {
   # location = var.rg_location
 }
 
-
 resource "azurerm_virtual_network" "virtual_network" {
   name                = var.vnet_name
   location            = data.azurerm_resource_group.vnet_resource_group.location
@@ -63,7 +62,6 @@ data "azurerm_storage_account" "vnet_storage_account"{
   name = var.vnet_storage_account_name
   resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
 }
-
 
 data "azurerm_client_config" "current_client" {}
 
