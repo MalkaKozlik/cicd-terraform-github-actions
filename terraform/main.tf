@@ -128,10 +128,11 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
   } : count.index==1 ? {
     FUNCTIONS_WORKER_RUNTIME = "python"
+    WEBSITE_CONTENTOVERVNET = 1
+    WEBSITE_VNET_ROUTE_ALL=1
 
     CONNECTION_STRING = data.azurerm_storage_account.vnet_storage_account.primary_connection_string
     DOCUMENTATION_TABLE = "documentation"
-  
     SECRET = azurerm_key_vault_secret.key_vault_secret.name
     KEYVAULT_URI = azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
