@@ -3,7 +3,7 @@ name: "deploy logic app template"
 on:
   workflow_dispatch: 
     inputs:
-      
+      resourceGroupName: string
 
 jobs:
   deploy-template:
