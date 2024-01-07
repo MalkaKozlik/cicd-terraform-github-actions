@@ -245,7 +245,7 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
     "sites_func_sending_excel_by_email_and_mark_storages_for_deletion_externalid": "{\"defaultValue\": \"${azurerm_linux_function_app.linux_function_app[4].id}\",\"type\": \"string\" }"
     "connections_office365_1_externalid": "{\"defaultValue\": \"/subscriptions/a173eef2-33d7-4d55-b0b5-18b271f8d42b/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/connections/office365-1\",\"type\": \"string\"}"
     "location":"{\"defaultValue\": \"${data.azurerm_resource_group.vnet_resource_group.location}\",\"type\": \"string\" }"
-    "frequency":"{\"defaultValue\": \"weeks\",\"type\": \"string\",\"allowedValues\": [\"Month\",\"Week\",\"Day\",\"Hour\",\"Minute\",\"Second\"]}"
+    "frequency":"{\"defaultValue\": \"${var.frequency_of_logic_app_workflow}\",\"type\": \"string\",\"allowedValues\": [\"Month\",\"Week\",\"Day\",\"Hour\",\"Minute\",\"Second\"]}"
     "interval": "{ \"defaultValue\": ${var.FREQ_AUTOMATION_TEST_NUMBER}, \"type\": \"int\" }"
   }
 }

@@ -180,7 +180,7 @@ variable logic_app_workflow_name {
 
 variable frequency_of_logic_app_workflow{
   type = string
-  default = "Week"
+  default = "weeks"
   validation {
     condition     = contains(["Month","Week","Day","Hour","Minute","Second"], var.frequency_of_logic_app_workflow)
     error_message = "Valid values for var: frequency_of_logic_app_workflow are (Month,Week,Day,Hour,Minute,Second)."
