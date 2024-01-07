@@ -9,13 +9,15 @@ def get_date(time):
 
 def return_seconds(obj_time):
     match obj_time["type_of_time"]:
-        case "days":
+        case "Hour":
+            seconds = obj_time["number"] * 60 * 60
+        case "Day":
             seconds = obj_time["number"] * 24 * 60 * 60
-        case "weeks":
+        case "Week":
             seconds = obj_time["number"] * 24 * 60 * 60 * 7
-        case "months":
+        case "Month":
             seconds = obj_time["number"] * 24 * 60 * 60 * 30
-        case "years":
+        case "Year":
             seconds = obj_time["number"] * 24 * 60 * 60 * 365
         case _:
             seconds = -1

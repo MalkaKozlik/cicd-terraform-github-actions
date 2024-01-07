@@ -141,8 +141,6 @@ variable IMAGE_TAG {
   default     = "4-appservice-quickstart"
 }
 
-
-
 variable DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH {
   type        = string
   default     = "30"
@@ -155,17 +153,29 @@ variable DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_USED_CAPACITY {
 
 variable TIME_INDEX_FOR_CHECK_LAST_FETCH {
   type        = string
-  default     = "days"
+  default     = "Day"
+  validation {
+    condition     = contains(["Year","Month","Week","Day","Hour","Minute","Second"], var.TIME_INDEX_FOR_CHECK_LAST_FETCH)
+    error_message = "Valid values for var: TIME_INDEX_FOR_CHECK_LAST_FETCH are (Year,Month,Week,Day,Hour,Minute,Second)."
+  } 
 }
 
 variable TIME_INDEX_FOR_CHECK_USED_CAPACITY {
   type        = string
-  default     = "days"
+  default     = "Day"
+  validation {
+    condition     = contains(["Year","Month","Week","Day","Hour","Minute","Second"], var.TIME_INDEX_FOR_CHECK_USED_CAPACITY)
+    error_message = "Valid values for var: TIME_INDEX_FOR_CHECK_USED_CAPACITY are (Year,Month,Week,Day,Hour,Minute,Second)."
+  } 
 }
 
 variable FREQ_AUTOMATION_TEST_TYPE {
   type        = string
-  default     = "weeks"
+  default = "Week"
+  validation {
+    condition     = contains(["Month","Week","Day","Hour","Minute","Second"], var.FREQ_AUTOMATION_TEST_TYPE)
+    error_message = "Valid values for var: FREQ_AUTOMATION_TEST_TYPE are (Month,Week,Day,Hour,Minute,Second)."
+  } 
 }
 
 variable FREQ_AUTOMATION_TEST_NUMBER {
@@ -176,13 +186,4 @@ variable FREQ_AUTOMATION_TEST_NUMBER {
 variable logic_app_workflow_name {
   type        = string
   default = "logic-app-storage-management"
-}
-
-variable frequency_of_logic_app_workflow{
-  type = string
-  default = "Week"
-  validation {
-    condition     = contains(["Month","Week","Day","Hour","Minute","Second"], var.frequency_of_logic_app_workflow)
-    error_message = "Valid values for var: frequency_of_logic_app_workflow are (Month,Week,Day,Hour,Minute,Second)."
-  } 
 }

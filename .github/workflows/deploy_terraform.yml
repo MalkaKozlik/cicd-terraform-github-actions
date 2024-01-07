@@ -9,11 +9,17 @@ on:
         required: true
       mainManager: 
         required: true
-      # frequencyLogicApp:
-      #   required: true 
-      #   type: choice
-      #   options: 
-      #     - 
+      frequencyLogicApp:
+        type: choice
+        options: 
+          - Month
+          - Week
+          - Day
+          - Hour
+          - Minute
+          - Second
+      intervalLogicApp:
+        type: number
   
 jobs:
   job1:
@@ -41,6 +47,8 @@ jobs:
           echo "TF_VAR_DOCKER_REGISTRY_SERVER_PASSWORD=${{ secrets.GITHUB_TOKEN }}" >> "$GITHUB_ENV"
           echo "TF_VAR_DOCKER_REGISTRY_SERVER_USERNAME=${{ github.actor }}" >> "$GITHUB_ENV"
           echo "TF_VAR_DOCKER_REGISTRY_SERVER_URL=https://ghcr.io" >> "$GITHUB_ENV"
+          echo "TF_VAR_FREQ_AUTOMATION_TEST_TYPE=${{inputs.frequencyLogicApp}}" >> "$GITHUB_ENV"
+          echo "TF_VAR_FREQ_AUTOMATION_TEST_NUMBER=${{inputs.intervalLogicApp}}" >> "$GITHUB_ENV"
 
       - name: 🧩 HashiCorp - Setup Terraform
         uses: hashicorp/setup-terraform@v2.0.0
