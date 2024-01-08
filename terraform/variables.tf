@@ -49,7 +49,7 @@ variable subnet_name {
 
 variable subnet_address_prefix {
   type        = list
-  default = ["10.1.1.0/24"]
+  default = ["10.0.1.0/24"]
 }
 
 variable vnet_storage_account_name {
