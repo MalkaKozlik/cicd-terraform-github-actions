@@ -185,7 +185,7 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     FUNCTIONS_WORKER_RUNTIME = "python"
     EXCEL_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=sachayasubscriptiof6c98f;AccountKey=7VR6ivUm5kKambo7z4sEkrjEL8zx/CjYXz+9f9qwBi6ATKs4LBSbHPajZJF5DnG5LrVJQ7+rQ7Uc+AStDAwauA==;EndpointSuffix=core.windows.net"
     #HTTP_TRIGGER_URL = function_app_email
-    HTTP_TRIGGER_URL="https://func-try-2.azurewebsites.net/api/HttpTrigger1?code=vqQyTSrot8Byr3-PUAWsHWWUBRImjzQp9DO_i8itYgKmAzFueI86Pg=="
+    HTTP_TRIGGER_URL="https://func-try-3.azurewebsites.net/api/HttpTrigger1?code=kFFjaJblJ5UfMU3BLRrWZbfCBGE5Ox2_3sMZtGUjt9ouAzFu4Uj7Vg=="
     MAIN_MANAGER="malkak@skyvar.co.il"
     DOCUMENTATION_TABLE ="documentation"
     DELETED_ACCOUNTS_TABLE="deletedStorages"
