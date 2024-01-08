@@ -93,10 +93,10 @@ data "azurerm_client_config" "current_client" {}
 #   key_vault_id = azurerm_key_vault.key_vault.id
 # }
 
-# data "azurerm_key_vault" "key_vault" {
-#   name                = var.key_vault_name
-#   resource_group_name = var.key_vault_resource_group_name
-# }
+data "azurerm_key_vault" "key_vault" {
+  name                = var.key_vault_name
+  resource_group_name = var.key_vault_resource_group_name
+}
 
 # resource "azurerm_key_vault_secret" "key_vault_secret" {
 #   name         = var.key_vault_secret_name
@@ -140,7 +140,9 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     WEBSITE_VNET_ROUTE_ALL=1
 
     DOCUMENTATION_TABLE = "documentation"
-    SECRET = azurerm_key_vault_secret.key_vault_secret.name
+    # SECRET = azurerm_key_vault_secret.key_vault_secret.name
+    # KEYVAULT_URI = data.azurerm_key_vault.key_vault.vault_uri
+    SECRET = var.key_vault_secret_name
     KEYVAULT_URI = data.azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
@@ -170,7 +172,9 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     ALERTS_DOCUMENTATION="alertsDocumentation"
     DOCUMENTATION_STORAGE_NAME="myfirsttrail"
 
-    SECRET = azurerm_key_vault_secret.key_vault_secret.name
+    # SECRET = azurerm_key_vault_secret.key_vault_secret.name
+    # KEYVAULT_URI = data.azurerm_key_vault.key_vault.vault_uri
+    SECRET = var.key_vault_secret_name
     KEYVAULT_URI = data.azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
@@ -186,7 +190,9 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     DOCUMENTATION_TABLE ="documentation"
     DELETED_ACCOUNTS_TABLE="deletedStorages"
 
-    SECRET = azurerm_key_vault_secret.key_vault_secret.name
+    # SECRET = azurerm_key_vault_secret.key_vault_secret.name
+    # KEYVAULT_URI = data.azurerm_key_vault.key_vault.vault_uri
+    SECRET = var.key_vault_secret_name
     KEYVAULT_URI = data.azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
