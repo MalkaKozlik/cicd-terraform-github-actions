@@ -168,7 +168,7 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     FREQ_AUTOMATION_TEST_TYPE="weeks"
     FREQ_AUTOMATION_TEST_NUMBER=1
     DOCUMENTATION_TABLE ="documentation"
-    HTTP_TRIGGER_URL="https://func-try-2.azurewebsites.net/api/HttpTrigger1?code=vqQyTSrot8Byr3-PUAWsHWWUBRImjzQp9DO_i8itYgKmAzFueI86Pg=="
+    HTTP_TRIGGER_URL="https://func-try-3.azurewebsites.net/api/HttpTrigger1?code=kFFjaJblJ5UfMU3BLRrWZbfCBGE5Ox2_3sMZtGUjt9ouAzFu4Uj7Vg=="
     ALERTS_DOCUMENTATION="alertsDocumentation"
     DOCUMENTATION_STORAGE_NAME="myfirsttrail"
 
@@ -243,6 +243,7 @@ resource "azurerm_linux_function_app_slot" "linux_function_app_slot" {
   count = length(var.function_app_name)
 
 }
+
 
 resource "azurerm_logic_app_workflow" "logic_app_workflow" {
   name                = var.logic_app_workflow_name

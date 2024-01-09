@@ -105,12 +105,12 @@ variable key_vault_secret_name {
 
 variable app_service_plan_name{
   type = list(string)
-  default = ["app-get-last-fetch-time-for-each-storage-account","app-get-subscription-list","app-get-storage-list-by-subscription","app-test-storage","app-sending-excel-by-email-and-mark-storages-for-deletion"]
+  default = ["app-get-last-fetch-time-for-each-storage-account","app-get-subscription-list","app-get-storage-list-by-subscription","app-test-storage","app-sending-excel-by-email-and-mark-delete"]
 }
 
 variable function_app_name {
   type        = list(string)
-  default = ["func-get-last-fetch-time-for-each-storage-account","func-get-subscription-list","func-get-storage-list-by-subscription","func-test-storage","func-sending-excel-by-email-and-mark-storages-for-deletion"]
+  default = ["func-get-last-fetch-time-for-each-storage-account","func-get-subscription-list","func-get-storage-list-by-subscription","func-test-storage","func-sending-excel-by-email-and-mark-delete"]
 }
 
 variable DOCKER_REGISTRY_SERVER_PASSWORD {
