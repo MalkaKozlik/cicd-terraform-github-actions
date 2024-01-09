@@ -32,7 +32,7 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
                 "recipient_email": main_manager,
                 "subject": "Summary Alerts For Storage Accounts",
                 "body": "summary file",
-                "excel":'alert_file.xlsx'
+                "excel":"alert_file.xlsx"
         })
         
 
