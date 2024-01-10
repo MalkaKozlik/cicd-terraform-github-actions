@@ -1,5 +1,5 @@
-# from azure.data.tables import TableClient
-# from azure.core.exceptions import ResourceNotFoundError
+from azure.data.tables import TableClient
+from azure.core.exceptions import ResourceNotFoundError
 
 # from config_variables import connection_string, deleted_accounts_table
 # import pandas as pd
