@@ -168,7 +168,7 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     FREQ_AUTOMATION_TEST_TYPE="weeks"
     FREQ_AUTOMATION_TEST_NUMBER=1
     DOCUMENTATION_TABLE ="documentation"
-    HTTP_TRIGGER_URL="https://func-send-email-03.azurewebsites.net/api/HttpTrigger1?code=F_W7VCzqiw872WFUHhhjQHHOgl7qAsXJgl4LRo5FgN7AAzFuqhg8Bw=="
+    HTTP_TRIGGER_URL=var.HTTP_TRIGGER_URL
     ALERTS_DOCUMENTATION="alertsDocumentation"
     DOCUMENTATION_STORAGE_NAME="myfirsttrail"
 
@@ -185,7 +185,7 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     FUNCTIONS_WORKER_RUNTIME = "python"
     EXCEL_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=sachayasubscriptiof6c98f;AccountKey=7VR6ivUm5kKambo7z4sEkrjEL8zx/CjYXz+9f9qwBi6ATKs4LBSbHPajZJF5DnG5LrVJQ7+rQ7Uc+AStDAwauA==;EndpointSuffix=core.windows.net"
     #HTTP_TRIGGER_URL = function_app_email
-    HTTP_TRIGGER_URL="https://func-send-email-03.azurewebsites.net/api/HttpTrigger1?code=F_W7VCzqiw872WFUHhhjQHHOgl7qAsXJgl4LRo5FgN7AAzFuqhg8Bw=="
+    HTTP_TRIGGER_URL=var.HTTP_TRIGGER_URL
     MAIN_MANAGER=var.MAIN_MANAGER
     DOCUMENTATION_TABLE ="documentation"
     DELETED_ACCOUNTS_TABLE="deletedStorages"
@@ -342,7 +342,7 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
 #     FREQ_AUTOMATION_TEST_TYPE="weeks"
 #     FREQ_AUTOMATION_TEST_NUMBER=1
 #     DOCUMENTATION_TABLE ="documentation"
-#     HTTP_TRIGGER_URL="https://func-try-2.azurewebsites.net/api/HttpTrigger1?code=vqQyTSrot8Byr3-PUAWsHWWUBRImjzQp9DO_i8itYgKmAzFueI86Pg=="
+#     HTTP_TRIGGER_URL=var.HTTP_TRIGGER_URL
 #     ALERTS_DOCUMENTATION="alertsDocumentation"
 #     DOCUMENTATION_STORAGE_NAME="myfirsttrail"
 
@@ -357,7 +357,7 @@ resource "azurerm_logic_app_workflow" "logic_app_workflow" {
 #     FUNCTIONS_WORKER_RUNTIME = "python"
 #     EXCEL_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=sachayasubscriptiof6c98f;AccountKey=7VR6ivUm5kKambo7z4sEkrjEL8zx/CjYXz+9f9qwBi6ATKs4LBSbHPajZJF5DnG5LrVJQ7+rQ7Uc+AStDAwauA==;EndpointSuffix=core.windows.net"
 #     #HTTP_TRIGGER_URL = function_app_email
-#     HTTP_TRIGGER_URL="https://func-try-2.azurewebsites.net/api/HttpTrigger1?code=vqQyTSrot8Byr3-PUAWsHWWUBRImjzQp9DO_i8itYgKmAzFueI86Pg=="
+#     HTTP_TRIGGER_URL=var.HTTP_TRIGGER_URL
 #     MAIN_MANAGER="malkak@skyvar.co.il"
 #     DOCUMENTATION_TABLE ="documentation"
 #     DELETED_ACCOUNTS_TABLE="deletedStorages"
