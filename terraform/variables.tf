@@ -59,12 +59,12 @@ variable vnet_storage_account_name {
 
 variable key_vault_name {
   type        = string
-  default = "kv-chaya-try"
+  default = "kv-manage-storages"
 }
 
 variable key_vault_resource_group_name {
   type        = string
-  default     = "rg-chaya-subscription-management"
+  default     = "NetworkWatcherRG"
 }
 
 
