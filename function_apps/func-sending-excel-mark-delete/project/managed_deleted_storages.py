@@ -2,12 +2,13 @@ from azure.data.tables import TableClient
 from azure.core.exceptions import ResourceNotFoundError
 
 from config_variables import connection_string, deleted_accounts_table
-import pandas as pd, json
+import pandas as pd
+import json
 
 
 def deleted_storages(table_name,  test_number, all_storages):
     parameters = {'name': str(test_number)}
-    last_test_storages = retrieve_data_from_table(False,connection_string,table_name, query_filter="PartitionKey eq @name", parameters=parameters,select=["PartitionKey,storage_name"] )
+    last_test_storages = retrieve_data_from_table(False, connection_string,table_name,query_filter="PartitionKey eq @name",parameters=parameters, select=["PartitionKey,storage_name"])
     delete_storages = check_deleted_storage(all_storages, last_test_storages)
     upload_deleted_storages_table(connection_string, table_name, delete_storages)
 
