@@ -2,8 +2,8 @@
 # from azure.core.exceptions import ResourceNotFoundError
 
 # from config_variables import connection_string, deleted_accounts_table
-import pandas as pd
-import json
+# import pandas as pd
+# import json
 
 
 def deleted_storages(table_name,  test_number, all_storages):
