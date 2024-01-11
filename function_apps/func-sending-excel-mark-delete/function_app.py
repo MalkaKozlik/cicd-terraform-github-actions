@@ -1,6 +1,5 @@
 import azure.functions as func
-# from project import write_to_excel, managed_deleted_storages
-# from project.write_to_excel import *
+from project.write_to_excel import *
 from project.managed_deleted_storages import deleted_storages
 from config_variables import excel_connection_string, http_trigger_url, main_manager, documentation_table
 import logging, requests ,json
@@ -25,7 +24,7 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         partition_key=data['partition_key']
         all_storages=data['all_storages']
         
-        # write_to_excel(excel_connection_string, alerts_to_excel)
+        write_to_excel(excel_connection_string, alerts_to_excel)
         
         # requests.post(
         #     http_trigger_url,
