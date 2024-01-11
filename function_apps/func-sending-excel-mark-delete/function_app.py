@@ -1,8 +1,8 @@
 import azure.functions as func
 # from project import write_to_excel, managed_deleted_storages
 # from project.write_to_excel import *
-from project.managed_deleted_storages import deleted_storages
-from config_variables import excel_connection_string, http_trigger_url, main_manager, documentation_table
+# from project.managed_deleted_storages import deleted_storages
+# from config_variables import excel_connection_string, http_trigger_url, main_manager, documentation_table
 import logging, requests ,json
 
 app = func.FunctionApp()
