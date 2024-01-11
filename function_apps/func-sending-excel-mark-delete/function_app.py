@@ -3,10 +3,10 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-# from project.write_to_excel import write_to_excel
-# from project.managed_deleted_storages import deleted_storages
+from project.write_to_excel import write_to_excel
+from project.managed_deleted_storages import deleted_storages
 
-# from config_variables import excel_connection_string, http_trigger_url, main_manager, documentation_table
+from config_variables import excel_connection_string, http_trigger_url, main_manager, documentation_table
 import logging, requests ,json
 
 app = func.FunctionApp()
@@ -41,7 +41,7 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         })
         
 
-        deleted_storages(documentation_table, int(partition_key)-1 , all_storages)
+        # deleted_storages(documentation_table, int(partition_key)-1 , all_storages)
 
     except Exception as e:
         logging.warn(f"-<<->>-{e}")
