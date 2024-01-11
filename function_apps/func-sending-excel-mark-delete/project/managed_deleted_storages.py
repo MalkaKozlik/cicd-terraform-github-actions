@@ -1,5 +1,5 @@
 from azure.data.tables import TableClient
-from azure.core.exceptions import ResourceNotFoundError
+# from azure.core.exceptions import ResourceNotFoundError
 
 from config_variables import connection_string, deleted_accounts_table
 # import pandas?
@@ -14,15 +14,15 @@ def deleted_storages(table_name,  test_number, all_storages):
     upload_deleted_storages_table(connection_string, table_name, delete_storages)
 
 def retrieve_data_from_table(flag,con_str, table_name, query_filter, parameters="None", select=["*"]):
-    try:
+    # try:
         table = TableClient.from_connection_string(con_str, table_name)
         queried_entities = table.query_entities(
             query_filter=query_filter, select=select, parameters=parameters
         )
         # return convert_to_json(queried_entities) if flag else queried_entities
 
-    except ResourceNotFoundError:
-        raise ResourceNotFoundError("This table does not exist")
+    # except ResourceNotFoundError:
+    #     raise ResourceNotFoundError("This table does not exist")
 
 
 # def convert_to_json(queried_entities):
