@@ -1,9 +1,9 @@
 from azure.data.tables import TableClient
 from azure.core.exceptions import ResourceNotFoundError
 
-import os
-import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+# import os
+# import sys
+# sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import json, pandas as pd
 from project.config_variables import connection_string, deleted_accounts_table
