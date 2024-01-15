@@ -48,6 +48,7 @@ jobs:
     # - run: |
     #     echo "DIRECTORY=${{ matrix.directory }}" >> "$GITHUB_ENV"
 
+
     - run: |
         echo "WORKING_DIRECTORY=function_apps" >> "$GITHUB_ENV"
 
