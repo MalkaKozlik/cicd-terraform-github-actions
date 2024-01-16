@@ -59,12 +59,12 @@ variable vnet_storage_account_name {
 
 variable key_vault_name {
   type        = string
-  default = "kv-chaya-try"
+  default = "kv-connection-string"
 }
 
 variable key_vault_resource_group_name {
   type        = string
-  default     = "rg-chaya-subscription-management"
+  default     = "rg-administrators"
 }
 
 
@@ -105,7 +105,7 @@ variable key_vault_secret_name {
 
 variable key_vault_secret_excel_name {
   type        = string
-  default     = ""
+  default     = "ADMINISTRATORS-SECRET"
 }
 
 
