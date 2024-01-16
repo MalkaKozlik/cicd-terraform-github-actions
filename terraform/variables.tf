@@ -103,6 +103,13 @@ variable key_vault_secret_name {
   default     = "CONNECTION-STRING-MANAGEMENT-STORAGES"
 }
 
+variable key_vault_secret_excel_name {
+  type        = string
+  default     = ""
+  description = "description"
+}
+
+
 variable app_service_plan_name{
   type = list(string)
   default = ["app-get-last-fetch-time-for-each-storage-account","app-get-subscription-list","app-get-storage-list-by-subscription","app-test-storage","app-send-excel-mark-delete"]
