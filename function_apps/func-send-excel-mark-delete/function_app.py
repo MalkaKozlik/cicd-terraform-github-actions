@@ -28,14 +28,15 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         my_json = body.decode('utf8').replace("'", '"')
         data = json.loads(my_json)
         logging.warn("---------------------")
-        logging.info(data)
-        logging.warn("------------------")
+        # logging.info(data)
+        # logging.warn("------------------")
         alerts_to_excel=data["alerts_to_excel"]
-        # partition_key=data['partition_key']
-        # all_storages=data['all_storages']
+        partition_key=data['partition_key']
+        all_storages=data['all_storages']
 
-        # result = write_to_excel(excel_connection_string, alerts_to_excel)
-        # logging.info(result)
+        result = write_to_excel(excel_connection_string, alerts_to_excel)
+        logging.warn("WOW!!!")
+        logging.info(result)
         
         # requests.post(
         #     http_trigger_url,
