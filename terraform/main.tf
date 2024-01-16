@@ -127,6 +127,7 @@ resource "azurerm_linux_function_app" "linux_function_app" {
   app_settings = count.index==0 ? {
     FUNCTIONS_WORKER_RUNTIME = "python"
     WEBSITE_CONTENTOVERVNET = 1
+    PYTHON_ENABLE_WORKER_EXTENSIONS=1
 
     DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH=30
     TIME_INDEX_FOR_CHECK_LAST_FETCH="days"
@@ -140,6 +141,8 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     FUNCTIONS_WORKER_RUNTIME = "python"
     WEBSITE_CONTENTOVERVNET = 1
     vnetrouteallenabled=1
+    
+    PYTHON_ENABLE_WORKER_EXTENSIONS=1
 
     DOCUMENTATION_TABLE = "documentation"
     # SECRET = azurerm_key_vault_secret.key_vault_secret.name
@@ -154,6 +157,7 @@ resource "azurerm_linux_function_app" "linux_function_app" {
   } : count.index==2 ? {
     FUNCTIONS_WORKER_RUNTIME = "python"
     WEBSITE_CONTENTOVERVNET = 1
+    PYTHON_ENABLE_WORKER_EXTENSIONS=1
 
     ESSENTIAL_TAG=" "
     https_only                          = true
@@ -165,6 +169,7 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     FUNCTIONS_WORKER_RUNTIME = "python"
     WEBSITE_CONTENTOVERVNET = 1
     vnetrouteallenabled=1
+    PYTHON_ENABLE_WORKER_EXTENSIONS=1
 
     DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_LAST_FETCH = 30
     DESIRED_TIME_PERIOD_SINCE_LAST_RETRIEVAL_FOR_CHECK_USED_CAPACITY = 30
@@ -191,6 +196,7 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     FUNCTIONS_WORKER_RUNTIME = "python"
     WEBSITE_CONTENTOVERVNET = 1
     vnetrouteallenabled=1
+    PYTHON_ENABLE_WORKER_EXTENSIONS=1
 
     EXCEL_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=sachayasubscriptiof6c98f;AccountKey=7VR6ivUm5kKambo7z4sEkrjEL8zx/CjYXz+9f9qwBi6ATKs4LBSbHPajZJF5DnG5LrVJQ7+rQ7Uc+AStDAwauA==;EndpointSuffix=core.windows.net"
     #HTTP_TRIGGER_URL = function_app_email
