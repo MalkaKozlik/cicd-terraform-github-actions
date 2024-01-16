@@ -29,6 +29,7 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         data = json.loads(my_json)
         logging.warn("---------------------")
         logging.info(data)
+        logging.info(type(data))
         logging.warn("------------------")
         alerts_to_excel=data[0]
         # partition_key=data['partition_key']
