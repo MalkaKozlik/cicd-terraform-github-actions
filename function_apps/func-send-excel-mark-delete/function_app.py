@@ -32,7 +32,8 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         partition_key=data['partition_key']
         all_storages=data['all_storages']
 
-        logging.info(write_to_excel(excel_connection_string, alerts_to_excel))
+        result = write_to_excel(excel_connection_string, alerts_to_excel)
+        logging.info(result)
         
         # requests.post(
         #     http_trigger_url,

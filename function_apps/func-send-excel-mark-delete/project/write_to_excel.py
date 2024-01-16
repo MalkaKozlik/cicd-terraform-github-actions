@@ -35,4 +35,5 @@ def write_to_excel(connection_string, excel_array):
         # blob_client.upload_blob(file_stream.getvalue(), overwrite=True)
 
     except Exception as e:
+        return "false"
         raise Exception ("Could not succeed write to Excel")
