@@ -30,7 +30,7 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         logging.warn("---------------------")
         logging.info(data)
         logging.warn("------------------")
-        alerts_to_excel=data["alerts_to_excel"]
+        alerts_to_excel=data[0]
         # partition_key=data['partition_key']
         # all_storages=data['all_storages']
 
