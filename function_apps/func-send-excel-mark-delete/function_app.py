@@ -7,9 +7,9 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-# from project.write_to_excel import write_to_excel
+from project.write_to_excel import write_to_excel
 # from project.managed_deleted_storages import deleted_storages
-# from project.config_variables import *
+from project.config_variables import *
 
 
 app = func.FunctionApp()
@@ -28,11 +28,11 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         my_json = body.decode('utf8').replace("'", '"')
         data = json.loads(my_json)
         
-        # alerts_to_excel=data['alerts_to_excel']
-        # partition_key=data['partition_key']
-        # all_storages=data['all_storages']
+        alerts_to_excel=data['alerts_to_excel']
+        partition_key=data['partition_key']
+        all_storages=data['all_storages']
         
-        # write_to_excel(excel_connection_string, alerts_to_excel)
+        write_to_excel(excel_connection_string, alerts_to_excel)
         
         # requests.post(
         #     http_trigger_url,
