@@ -24,7 +24,7 @@ jobs:
           # - func-get-storage-list-by-subscription
           # - func-test-storage          
           # - func-send-excel-mark-delete
-          - func-subscription-list
+          - func-subscriptions-list
 
     steps:
     - name: 📂 Checkout repository
