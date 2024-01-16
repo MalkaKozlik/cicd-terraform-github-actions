@@ -104,8 +104,6 @@ resource "azurerm_key_vault_secret" "key_vault_secret" {
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
-data "azurerm_client_config" "current_client" {}
-
 resource "azurerm_key_vault_access_policy" "principal" {
   key_vault_id = data.azurerm_key_vault.key_vault.id
   tenant_id    = data.azurerm_client_config.current_client.tenant_id
