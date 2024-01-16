@@ -1,13 +1,11 @@
-azure-functions
 azure-cli
+azure-functions
 azure-identity
-azure-data-tables
-azure-storage-blob
 azure-mgmt-monitor
 azure-mgmt-consumption
-azure-mgmt-resource 
 azure-mgmt-storage
-azure-keyvault-secrets
+azure-mgmt-resource
+azure-storage-blob
 pytest
 pytest_mock
 black
