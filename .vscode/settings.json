@@ -1,0 +1,9 @@
+{
+    "azureFunctions.projectSubpath": "function_apps\\func-sending-excel-mark-delete",
+    "azureFunctions.deploySubpath": "function_apps\\func-sending-excel-mark-delete",
+    "azureFunctions.scmDoBuildDuringDeployment": true,
+    "azureFunctions.projectLanguage": "Python",
+    "azureFunctions.projectRuntime": "~4",
+    "debug.internalConsoleOptions": "neverOpen",
+    "azureFunctions.projectLanguageModel": 2
+}
