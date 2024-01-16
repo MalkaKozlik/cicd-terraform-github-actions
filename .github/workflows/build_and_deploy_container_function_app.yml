@@ -24,10 +24,7 @@ jobs:
           - func-get-storage-list-by-subscription
           - func-test-storage          
           - func-send-excel-mark-delete
-          - func-emails
-          - func-subscriptions-automation
-          - func-subscriptions-list
-
+          
     steps:
     - name: 📂 Checkout repository
       uses: actions/checkout@v4
