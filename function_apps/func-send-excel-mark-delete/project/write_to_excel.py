@@ -6,6 +6,7 @@ def write_to_excel(connection_string, excel_array):
     try:
         last_cell_written = 1
         blob_name = 'alert_file.xlsx'
+        return "hello"
         # for i in excel_array:
         #     if last_cell_written == 1:
         #         workbook = Workbook()
