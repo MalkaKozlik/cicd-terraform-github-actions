@@ -6,7 +6,6 @@ def write_to_excel(connection_string, excel_array):
     try:
         last_cell_written = 1
         blob_name = 'alert_file.xlsx'
-        return "hello"
         # for i in excel_array:
         #     if last_cell_written == 1:
         #         workbook = Workbook()
@@ -35,5 +34,4 @@ def write_to_excel(connection_string, excel_array):
         # blob_client.upload_blob(file_stream.getvalue(), overwrite=True)
 
     except Exception as e:
-        return "false"
         raise Exception ("Could not succeed write to Excel")
