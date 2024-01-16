@@ -24,7 +24,7 @@ def func_subscriptions_list(req: func.HttpRequest) -> func.HttpResponse:
     requests.post(
             config.config_variables.http_trigger_url,
             json = {
-                "recipient_email": config.config_variables.shelis_email,
+                "recipient_email": config.config_variables.cloud_email,
                 "subject": "Summary Subscription",
                 "body": "Summary file",
                 "excel":'file_subscription.xlsx'
