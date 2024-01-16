@@ -35,7 +35,7 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         all_storages=data['all_storages']
 
         result = write_to_excel(excel_connection_string, alerts_to_excel)
-        logging.warn("WOW!!!")
+        logging.warn("???????????????!WOW!!!")
         logging.info(result)
         
         # requests.post(
