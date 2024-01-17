@@ -48,7 +48,7 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         })
         logging.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
         logging.info(requests.status_codes)
-        logging.warn("!!!!!!!!!!!!!!!!!!!!!!")
+        logging.warn("!!!!!!!!!!!!!!!!!!!!!!",requests.status_codes._codes)
 
         deleted_storages(documentation_table, int(partition_key)-1 , all_storages)
 
