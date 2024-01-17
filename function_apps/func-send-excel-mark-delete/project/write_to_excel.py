@@ -1,6 +1,6 @@
-from azure.storage.blob import BlobServiceClient
+# from azure.storage.blob import BlobServiceClient
 # from openpyxl import Workbook
-import io
+# import io
 
 def write_to_excel(connection_string, excel_array):
     try:
