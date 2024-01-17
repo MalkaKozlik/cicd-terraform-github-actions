@@ -32,23 +32,23 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         partition_key=data['partition_key']
         all_storages=data['all_storages']
 
-        result=write_and_upload(excel_connection_string, alerts_to_excel)
+        result = write_and_upload(excel_connection_string, alerts_to_excel)
         logging.warn("???????????????!WOW!!!")
         logging.info(result)
         
 
         # result = write_to_excel(excel_connection_string, alerts_to_excel)
-        requests.post(
-            http_trigger_url,
-            json={
-                "recipient_email": main_manager,
-                "subject": "Summary Alerts For Storage Accounts",
-                "body": "summary file",
-                "excel":"alert_file.xlsx"
-        })
-        logging.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+        # requests.post(
+        #     http_trigger_url,
+        #     json={
+        #         "recipient_email": main_manager,
+        #         "subject": "Summary Alerts For Storage Accounts",
+        #         "body": "summary file",
+        #         "excel":"alert_file.xlsx"
+        # })
+        # logging.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
 
-        deleted_storages(documentation_table, int(partition_key)-1 , all_storages)
+        # deleted_storages(documentation_table, int(partition_key)-1 , all_storages)
 
     except Exception as e:
         logging.warn(f"-<<->>-{e}")
