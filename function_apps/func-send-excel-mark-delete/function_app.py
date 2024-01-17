@@ -8,7 +8,7 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from project.write_to_excel import write_to_excel
-# from project.managed_deleted_storages import deleted_storages
+from project.managed_deleted_storages import deleted_storages
 from project.config_variables import *
 
 
@@ -34,9 +34,9 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         partition_key=data['partition_key']
         all_storages=data['all_storages']
 
-        result = write_to_excel(excel_connection_string, alerts_to_excel)
-        logging.warn("???????????????!WOW!!!")
-        logging.info(result)
+        # result = write_to_excel(excel_connection_string, alerts_to_excel)
+        # logging.warn("???????????????!WOW!!!")
+        # logging.info(result)
         
         # requests.post(
         #     http_trigger_url,

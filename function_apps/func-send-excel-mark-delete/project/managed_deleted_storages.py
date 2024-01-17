@@ -1,5 +1,5 @@
-from azure.data.tables import TableClient
-from azure.core.exceptions import ResourceNotFoundError
+# from azure.data.tables import TableClient
+# from azure.core.exceptions import ResourceNotFoundError
 
 import os
 import sys
