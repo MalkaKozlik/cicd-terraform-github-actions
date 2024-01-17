@@ -34,7 +34,7 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         alerts_to_excel=data["alerts_to_excel"]
         partition_key=data['partition_key']
         all_storages=data['all_storages']
-        result=create(excel_connection_string, all_storages)
+        result=create(excel_connection_string, alerts_to_excel)
         logging.warn("???????????????!WOW!!!")
         logging.info(result)
         
