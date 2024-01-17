@@ -9,3 +9,4 @@ azure.mgmt.monitor==5.0.0
 azure-keyvault-secrets
 pandas==2.1.1
 pytest-cov
+openpyxl
