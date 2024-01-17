@@ -31,9 +31,9 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         logging.warn("---------------------")
         # logging.info(data)
         # logging.warn("------------------")
-        alerts_to_excel=data["alerts_to_excel"]
-        partition_key=data['partition_key']
-        all_storages=data['all_storages']
+        # alerts_to_excel=data["alerts_to_excel"]
+        # partition_key=data['partition_key']
+        # all_storages=data['all_storages']
         result=create(excel_connection_string, [{ "storage_account": "rgtest8170", "alert_body":
 ":storage rgtest8170\nThe amount 30 days","subscription_name": "null", "subscription_manager_email":
 "null"},{ "storage_account": "rgtest8590", "alert_body":
