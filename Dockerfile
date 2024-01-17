@@ -7,5 +7,7 @@ ENV AzureWebJobsScriptRoot=/home/site/wwwroot \
 
 COPY requirements.txt /
 RUN pip install -r /requirements.txt
-RUN pip3 install openpyxl
+RUN python3 -m pip install openpyxl
+
+# RUN pip3 install openpyxl
 COPY . /home/site/wwwroot
