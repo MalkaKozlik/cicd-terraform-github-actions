@@ -10,3 +10,4 @@ azure-keyvault-secrets
 pandas==2.1.1
 pytest-cov
 openpyxl
+azure.storage.blob
