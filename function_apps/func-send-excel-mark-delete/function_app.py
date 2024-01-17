@@ -46,7 +46,9 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
                 "body": "summary file",
                 "excel":"alert_file.xlsx"
         })
-        
+        logging.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+        logging.info(requests.status_codes)
+        logging.warn("!!!!!!!!!!!!!!!!!!!!!!")
 
         deleted_storages(documentation_table, int(partition_key)-1 , all_storages)
 
