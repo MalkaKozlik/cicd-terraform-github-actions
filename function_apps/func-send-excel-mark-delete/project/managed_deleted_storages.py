@@ -7,9 +7,10 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 import json, pandas as pd
 from project.config_variables import connection_string, deleted_accounts_table
-
+import logging
 
 def deleted_storages(table_name,  test_number, all_storages):
+    logging.warn("><><><><><><><><><><<><><><><><><><><")
     parameters = {'name': str(test_number)}
     last_test_storages = retrieve_data_from_table(False, connection_string,table_name,query_filter="PartitionKey eq @name",parameters=parameters, select=["PartitionKey,storage_name"])
     delete_storages = check_deleted_storage(all_storages, last_test_storages)

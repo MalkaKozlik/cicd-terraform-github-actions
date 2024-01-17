@@ -48,7 +48,7 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         # })
         
 
-        # deleted_storages(documentation_table, int(partition_key)-1 , all_storages)
+        deleted_storages(documentation_table, int(partition_key)-1 , all_storages)
 
     except Exception as e:
         logging.warn(f"-<<->>-{e}")
