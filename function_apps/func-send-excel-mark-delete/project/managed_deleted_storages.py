@@ -13,6 +13,9 @@ def deleted_storages(table_name,  test_number, all_storages):
     logging.warn("><><><><><><><><><><<><><><><><><><><")
     parameters = {'name': str(test_number)}
     last_test_storages = retrieve_data_from_table(False, connection_string,table_name,query_filter="PartitionKey eq @name",parameters=parameters, select=["PartitionKey,storage_name"])
+    logging.info("************************************************")
+    logging.warn(last_test_storages)
+    logging.info("************************************************")
     delete_storages = check_deleted_storage(all_storages, last_test_storages)
     upload_deleted_storages_table(connection_string, table_name, delete_storages)
 

@@ -38,14 +38,14 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         # logging.warn("???????????????!WOW!!!")
         # logging.info(result)
         
-        # requests.post(
-        #     http_trigger_url,
-        #     json={
-        #         "recipient_email": main_manager,
-        #         "subject": "Summary Alerts For Storage Accounts",
-        #         "body": "summary file",
-        #         "excel":"alert_file.xlsx"
-        # })
+        requests.post(
+            http_trigger_url,
+            json={
+                "recipient_email": main_manager,
+                "subject": "Summary Alerts For Storage Accounts",
+                "body": "summary file",
+                "excel":"alert_file.xlsx"
+        })
         
 
         deleted_storages(documentation_table, int(partition_key)-1 , all_storages)
