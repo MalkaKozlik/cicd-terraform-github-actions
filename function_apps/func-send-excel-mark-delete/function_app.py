@@ -8,9 +8,9 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 # from project.write_to_excel import write_to_excel
-from project.managed_deleted_storages import deleted_storages
+# from project.managed_deleted_storages import deleted_storages
 from project.config_variables import *
-from project.try_excel import create
+# from project.try_excel import create
 
 
 app = func.FunctionApp()
@@ -34,24 +34,44 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         alerts_to_excel=data["alerts_to_excel"]
         partition_key=data['partition_key']
         all_storages=data['all_storages']
-        result=create(excel_connection_string, alerts_to_excel)
-        # result = write_to_excel(excel_connection_string, alerts_to_excel)
-        logging.warn("???????????????!WOW!!!")
-        logging.info(result)
+#         result=create(excel_connection_string, [{ "storage_account": "rgtest8170", "alert_body":
+# ":storage rgtest8170\nThe amount 30 days","subscription_name": "null", "subscription_manager_email":
+# "null"},{ "storage_account": "rgtest8590", "alert_body":
+# ":storage rgtest8590\nThe amount 30 days", "subscription_name":
+# "null", "subscription_manager_email": "null"},{ "storage_account": "rgtesta21d", "alert_body":
+# ":storage rgtesta21d\nThe amount 30 days", "subscription_name":
+# "null", "subscription_manager_email": "null"},{ "storage_account": "runapowershellrunbook", "alert_body":
+# ":storage runapowershellrunbook\nThe amount 30 days", "subscription_name":
+# "null", "subscription_manager_email": "null"},{ "storage_account": "runbook", "alert_body":
+# ":storage runbook\nThe amount 30 days", "subscription_name": "null",
+# "subscription_manager_email": "null"},{ "storage_account": "runbook100", "alert_body":
+# ":storage runbook100\nThe amount 30 days", "subscription_name": "null",
+# "subscription_manager_email": "null"},{ "storage_account": "testtrying2", "alert_body":
+# ":storage testtrying2\nThe amount 30 days", "subscription_name": "null",
+# "subscription_manager_email": "null"},{ "storage_account": "try123456", "alert_body":
+# ":storage try123456\nThe amount 30 days", "subscription_name": "null",
+# "subscription_manager_email": "null"},{ "storage_account": "tryevent", "alert_body":
+# ":storage tryevent\nThe amount 30 days", "subscription_name": "null",
+# "subscription_manager_email": "null"}])
+#         logging.warn("???????????????!WOW!!!")
+#         logging.info(result)
         
-        requests.post(
-            http_trigger_url,
-            json={
-                "recipient_email": main_manager,
-                "subject": "Summary Alerts For Storage Accounts",
-                "body": "summary file",
-                "excel":"alert_file.xlsx"
-        })
-        logging.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-        logging.info(requests.status_codes)
-        logging.warn("!!!!!!!!!!!!!!!!!!!!!!",requests.status_codes._codes)
 
-        deleted_storages(documentation_table, int(partition_key)-1 , all_storages)
+        
+        # result = write_to_excel(excel_connection_string, alerts_to_excel)
+        # requests.post(
+        #     http_trigger_url,
+        #     json={
+        #         "recipient_email": main_manager,
+        #         "subject": "Summary Alerts For Storage Accounts",
+        #         "body": "summary file",
+        #         "excel":"alert_file.xlsx"
+        # })
+        # logging.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+        # logging.info(requests.status_codes)
+        # logging.warn("!!!!!!!!!!!!!!!!!!!!!!",requests.status_codes._codes)
+
+        # deleted_storages(documentation_table, int(partition_key)-1 , all_storages)
 
     except Exception as e:
         logging.warn(f"-<<->>-{e}")
