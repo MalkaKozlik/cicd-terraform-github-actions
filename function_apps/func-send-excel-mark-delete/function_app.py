@@ -7,7 +7,6 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-# from project.write_to_excel import write_to_excel
 from project.managed_deleted_storages import deleted_storages
 from project.config_variables import *
 from project.write_to_excel2 import write_and_upload
@@ -23,7 +22,6 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
     try:
-        
         body = req.get_body()
         my_json = body.decode('utf8').replace("'", '"')
         data = json.loads(my_json)
@@ -32,23 +30,19 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         partition_key=data['partition_key']
         all_storages=data['all_storages']
 
-        result = write_and_upload(excel_connection_string, alerts_to_excel)
-        logging.warn("???????????????!WOW!!!")
-        logging.info(result)
+        write_and_upload(excel_connection_string, alerts_to_excel)
         
+        requests.post(
+            http_trigger_url,
+            json={
+                "recipient_email": main_manager,
+                "subject": "Summary Alerts For Storage Accounts",
+                "body": "summary file",
+                "excel":"alert_file.xlsx"
+        })
+        logging.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
 
-        # result = write_to_excel(excel_connection_string, alerts_to_excel)
-        # requests.post(
-        #     http_trigger_url,
-        #     json={
-        #         "recipient_email": main_manager,
-        #         "subject": "Summary Alerts For Storage Accounts",
-        #         "body": "summary file",
-        #         "excel":"alert_file.xlsx"
-        # })
-        # logging.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-
-        # deleted_storages(documentation_table, int(partition_key)-1 , all_storages)
+        deleted_storages(documentation_table, int(partition_key)-1 , all_storages)
 
     except Exception as e:
         logging.warn(f"-<<->>-{e}")
