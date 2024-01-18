@@ -3,13 +3,13 @@ import azure.functions as func
 import logging
 import requests 
 import json
-import os
-import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+# import os
+# import sys
+# sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from project.managed_deleted_storages import deleted_storages
 from project.config_variables import *
-from project.write_to_excel2 import write_and_upload
+from project.managed_deleted_storages import deleted_storages
+from project.write_to_excel import write_and_upload
 
 
 app = func.FunctionApp()
@@ -40,7 +40,6 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
                 "body": "summary file",
                 "excel":"alert_file.xlsx"
         })
-        logging.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
 
         deleted_storages(documentation_table, int(partition_key)-1 , all_storages)
 
