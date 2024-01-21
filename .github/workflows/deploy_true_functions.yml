@@ -2,15 +2,17 @@ name: 🚀 Build and deploy to Azure Function App
 
 on:
   push:
-    branches:
-      - main
-      - development
-      - feature/ci-cd
-      - feature/deploy-with-exist-stroge-with-terrafrom
+    # branches:
+    #   - main
+    #   - development
+    #   - feature/ci-cd
+    #   - feature/deploy-with-exist-stroge-with-terrafrom
 
     paths:
       # - 'services/emails/**'
       - 'services/storage_account/**'
+
+
 
 jobs:
   set-up:
