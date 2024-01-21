@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - main
-      # - development
-      # - feature/ci-cd
-      # - feature/deploy-with-exist-stroge-with-terrafrom
+      - development
+      - feature/ci-cd
+      - feature/deploy-with-exist-stroge-with-terrafrom
 
     paths:
       # - 'services/emails/**'
