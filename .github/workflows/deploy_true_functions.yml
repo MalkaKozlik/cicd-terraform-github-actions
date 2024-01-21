@@ -1,16 +1,15 @@
 name: 🚀 Build and deploy to Azure Function App
 
-# on:
-#   push:
-#     branches:
-#       - main
-#       # - development
-#       # - feature/ci-cd
-#       # - feature/deploy-with-exist-stroge-with-terrafrom
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+      # - development
+      # - feature/ci-cd
+      # - feature/deploy-with-exist-stroge-with-terrafrom
 
     paths:
+      # - 'services/emails/**'
       - 'services/storage_account/**'
 
 jobs:
@@ -33,9 +32,8 @@ jobs:
         id: determine_directories
         run: |   
           changed_files=$(git diff --name-only HEAD^ HEAD)
-          paths=(
-            'services/emails' 
-            'services/subscriptions' 
+          paths=( 
+            'services/storage_account' 
           )
           declare -A changed_dirs=() 
           for file in $changed_files; do
