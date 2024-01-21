@@ -13,7 +13,7 @@ on:
     paths:
       - 'services/emails/**'
       - 'services/subscriptions/**'
-      - 'services/storage_account/func-get-storage-list-by-subscription'
+      - 'services/storage_account/**'
 
 jobs:
   set-up:
