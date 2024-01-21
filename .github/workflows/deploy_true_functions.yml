@@ -10,10 +10,8 @@ name: 🚀 Build and deploy to Azure Function App
 on:
   workflow_dispatch:
 
-    paths:
-      - 'services/emails/**'
-      - 'services/subscriptions/**'
-      - 'services/storage_account/**'
+paths:
+  - 'services/storage_account/**'
 
 jobs:
   set-up:
