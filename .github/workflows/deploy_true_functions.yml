@@ -134,7 +134,10 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      
+
+      - name: echo matrix directory 
+        run: echo "${{ matrix.directory }}"
+
       - name: 🏗️ Build and push container image to registry
         uses: docker/build-push-action@v3
         with:
