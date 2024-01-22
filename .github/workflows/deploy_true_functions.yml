@@ -150,5 +150,5 @@ jobs:
         uses: Azure/functions-container-action@v1
         with:
           app-name: ${{ steps.get-last-level.outputs.last_level }}
-          image: 'ghcr.io/${{ env.REPO }}-${{ steps.get-last-level.outputs.last_level }}:${{ env.TAG }}'
+          image: 'ghcr.io/${{ env.REPO }}-${{ steps.get-last-level.outputs.last_level }}:latest'
           
