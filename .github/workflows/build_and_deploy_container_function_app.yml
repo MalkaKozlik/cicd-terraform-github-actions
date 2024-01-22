@@ -20,10 +20,10 @@ jobs:
       matrix:
         directory:
           - func-get-last-fetch-time-for-each-storage-account
-          - func-get-subscription-list
+          # - func-get-subscription-list
           - func-get-storage-list-by-subscription
-          - func-test-storage          
-          - func-send-excel-mark-delete
+          # - func-test-storage          
+          # - func-send-excel-mark-delete
 
     steps:
     - name: 📂 Checkout repository
