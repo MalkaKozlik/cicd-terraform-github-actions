@@ -144,6 +144,8 @@ jobs:
           labels: ${{ env.LABELS }}
           file: ./${{ matrix.directory }}/Dockerfile
 
+      - name: echo repo 
+        run: echo "${{ env.REPO }}"
 
       - name: 🚀 Deploy to Azure Functions
         id: deploy-to-functions
