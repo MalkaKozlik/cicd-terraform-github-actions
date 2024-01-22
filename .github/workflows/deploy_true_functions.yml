@@ -144,13 +144,13 @@ jobs:
           labels: ${{ env.LABELS }}
           file: ./${{ matrix.directory }}/Dockerfile
 
-      - name: echo repo 
-        run: echo "${{ env.REPO }}"
+      - name: echo last_level 
+        run: echo "${{ steps.get-last-level.outputs.last_level }}"
 
       - name: 🚀 Deploy to Azure Functions
         id: deploy-to-functions
         uses: Azure/functions-container-action@v1
         with:
-          app-name: func-get-storage-list-by-subscription
-          image: 'ghcr.io/malkakozlik/cicd-terraform-github-actions-func-get-storage-list-by-subscription:v1.6.2'
-          # ghcr.io/malkakozlik/cicd-terraform-github-actions-func-get-storage-list-by-subscription:v1.6.3
+          app-name: ${{ steps.get-last-level.outputs.last_level }}
+          image: 'ghcr.io/${{ env.REPO }}-${{ steps.get-last-level.outputs.last_level }}:latest'
+          
