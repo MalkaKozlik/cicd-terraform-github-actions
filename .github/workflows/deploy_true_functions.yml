@@ -144,8 +144,8 @@ jobs:
           labels: ${{ env.LABELS }}
           file: ./${{ matrix.directory }}/Dockerfile
 
-      - name: echo last_level 
-        run: echo "${{ steps.get-last-level.outputs.last_level }}"
+      - name: echo tag 
+        run: echo "${{ env.TAG }}"
 
       # - name: 🚀 Deploy to Azure Functions
       #   id: deploy-to-functions
