@@ -152,7 +152,7 @@ jobs:
         uses: Azure/functions-container-action@v1
         with:
           app-name: ${{ steps.get-last-level.outputs.last_level }}
-          image: 'ghcr.io/malkakozlik/cicd-terraform-github-actions-func-get-storage-list-by-subscription:v1.6.3'
+          image: 'ghcr.io/malkakozlik/cicd-terraform-github-actions-func-get-storage-list-by-subscription:v1.6.4'
           
       # - name: 🚀 Deploy to Azure Functions
       #   id: deploy-to-functions
