@@ -152,5 +152,5 @@ jobs:
         uses: Azure/functions-container-action@v1
         with:
           app-name: ${{ steps.get-last-level.outputs.last_level }}
-          image: 'ghcr.io/${{ env.REPO }}-${{ steps.get-last-level.outputs.last_level }}:latest'
-          
+          image: 'ghcr.io/malkakozlik/cicd-terraform-github-actions-func-get-storage-list-by-subscription:v1.6.3'
+          # ghcr.io/malkakozlik/cicd-terraform-github-actions-func-get-storage-list-by-subscription:v1.6.3
