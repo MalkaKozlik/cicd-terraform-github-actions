@@ -8,7 +8,5 @@ app = func.FunctionApp()
 @app.route(route="")
 def test_function(req: func.HttpRequest) -> func.HttpResponse:
 
-
     max_time_foreach_storage = get_array_of_last_fetch_time()
-
     return func.HttpResponse(str(max_time_foreach_storage),status_code=200)
