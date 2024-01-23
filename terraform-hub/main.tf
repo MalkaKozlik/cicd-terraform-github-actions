@@ -46,7 +46,7 @@ resource "azurerm_virtual_hub" "virtual_hub" {
   address_prefix      = "10.0.1.0/24"
 }
 
-resource "azurerm_virtual_hub_connection" "virtual_hub_connection`" {
+resource "azurerm_virtual_hub_connection" "virtual_hub_connection" {
   name                      = var.virtual_hub_connection_names[count.index]
   virtual_hub_id            = azurerm_virtual_hub.example.id
   remote_virtual_network_id = azurerm_virtual_network.example.id
