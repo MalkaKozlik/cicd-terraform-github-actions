@@ -23,7 +23,8 @@ jobs:
           echo "ARM_TENANT_ID=${{secrets.ARM_TENANT_ID}}" >> "$GITHUB_ENV"
           echo "ARM_CLIENT_ID=${{secrets.ARM_CLIENT_ID}}" >> "$GITHUB_ENV"
           echo "ARM_CLIENT_SECRET=${{secrets.ARM_CLIENT_SECRET}}" >> "$GITHUB_ENV"
-     
+          echo "TF_VAR_subscription_id=${{secrets.SUBSCRIPTION_ID}}" >> "$GITHUB_ENV"
+
 
       - name: 🧩 HashiCorp - Setup Terraform
         uses: hashicorp/setup-terraform@v2.0.0
