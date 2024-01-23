@@ -48,7 +48,7 @@ resource "azurerm_virtual_hub" "virtual_hub" {
 
 resource "azurerm_virtual_hub_connection" "virtual_hub_connection" {
   name                      = var.virtual_hub_connection_names[count.index]
-  virtual_hub_id            = azurerm_virtual_hub.virtual_hub[count.index].id
+  virtual_hub_id            = azurerm_virtual_hub.virtual_hub.id
   remote_virtual_network_id = azurerm_virtual_network.virtual_network[count.index].id
   count= length(var.virtual_hub_connection_names)
 }
