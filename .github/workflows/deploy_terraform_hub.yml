@@ -39,14 +39,14 @@ jobs:
         run: terraform init 
 
  
-      # - name: 📋 Terraform Plan
-      #   id: plan
-      #   run: terraform plan -out=tfplan -input=false 
+      - name: 📋 Terraform Plan
+        id: plan
+        run: terraform plan -out=tfplan -input=false 
 
-      # - name: ✅ Terraform Apply
-      #   id: apply
-      #   run: terraform apply -input=false -auto-approve tfplan
+      - name: ✅ Terraform Apply
+        id: apply
+        run: terraform apply -input=false -auto-approve tfplan
 
-      - name: ✅ Terraform Destroy
-        id: destroy
-        run: terraform destroy -input=false -auto-approve 
+      # - name: ✅ Terraform Destroy
+      #   id: destroy
+      #   run: terraform destroy -input=false -auto-approve 
