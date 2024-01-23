@@ -33,7 +33,7 @@ resource "azurerm_virtual_network" "virtual_network" {
 }
 
 resource "azurerm_virtual_wan" "virtual_wan" {
-  name                = "vwan"
+  name                = "vwan-example"
   resource_group_name = azurerm_resource_group.resource_group.name
   location            = azurerm_resource_group.resource_group.location
 }
