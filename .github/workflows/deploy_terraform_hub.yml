@@ -1,4 +1,4 @@
-name: 'Terraform Automation'
+name: 'Terraform Automation hub'
 
 on:
   workflow_dispatch: 
