@@ -8,8 +8,8 @@ variable virtual_networks_names {
 }
 
 variable virtual_networks_address_space {
-  type        = list(string)
-  default     = ["172.16.0.0/16","172.17.0.0/16","172.18.0.0/16","172.19.0.0/16"]
+  type        = list
+  default     = [["172.16.0.0/16"],["172.17.0.0/16"],["172.18.0.0/16"],["172.19.0.0/16"]]
 }
 
 
