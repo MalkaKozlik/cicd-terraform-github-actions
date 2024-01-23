@@ -59,7 +59,7 @@ variable vnet_storage_account_name {
 
 variable key_vault_name {
   type        = string
-  default = "kv-connection-string"
+  default = "kv-connection-string1"
 }
 
 variable key_vault_resource_group_name {
