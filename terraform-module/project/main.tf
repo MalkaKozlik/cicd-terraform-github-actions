@@ -19,6 +19,13 @@ provider "azurerm" {
 }
 
 
-module storages{
+module storages {
     source = "../modules/storages"
+    resource_group_name = "terraform-module-try"
+    resource_group_location = "West Europe"
 }
+
+output id {
+  value       = module.storages.id
+}
+

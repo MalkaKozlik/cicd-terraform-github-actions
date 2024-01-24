@@ -1,4 +1,8 @@
 resource "azurerm_resource_group" "resource"{
-  name     = "terraform-module-try"
-  location = "West Europe"
+  name     = var.resource_group_name
+  location = var.resource_group_location
+}
+
+output id {
+  value       = azurerm_resource_group.resource.id
 }
