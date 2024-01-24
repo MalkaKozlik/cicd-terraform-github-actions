@@ -15,8 +15,7 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
         fix_bytes_value = req.get_body().replace(b"'", b'"')
         subscriptions_json = json.load(io.BytesIO(fix_bytes_value))
                 
-        # storage_account_list = get_storage_list(subscriptions_json['subscription_id'])
-        storage_account_list = []
+        storage_account_list = get_storage_list(subscriptions_json['subscription_id'])
 
         storage_accounts=[]
         for storage_account in storage_account_list:
