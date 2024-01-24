@@ -93,33 +93,33 @@ data "azurerm_client_config" "current_client" {}
 #   key_vault_id = azurerm_key_vault.key_vault.id
 # }
 
-data "azurerm_key_vault" "key_vault" {
-  name                = var.key_vault_name
-  resource_group_name = var.key_vault_resource_group_name
-}
+# data "azurerm_key_vault" "key_vault" {
+#   name                = var.key_vault_name
+#   resource_group_name = var.key_vault_resource_group_name
+# }
 
-resource "azurerm_key_vault_secret" "key_vault_secret" {
-  name         = var.key_vault_secret_name
-  value        = data.azurerm_storage_account.vnet_storage_account.primary_connection_string
-  key_vault_id = data.azurerm_key_vault.key_vault.id
-}
+# resource "azurerm_key_vault_secret" "key_vault_secret" {
+#   name         = var.key_vault_secret_name
+#   value        = data.azurerm_storage_account.vnet_storage_account.primary_connection_string
+#   key_vault_id = data.azurerm_key_vault.key_vault.id
+# }
 
-resource "azurerm_key_vault_access_policy" "principal" {
-  key_vault_id = data.azurerm_key_vault.key_vault.id
-  tenant_id    = data.azurerm_client_config.current_client.tenant_id
-  object_id    = azurerm_linux_function_app.linux_function_app[count.index].identity[0].principal_id
+# resource "azurerm_key_vault_access_policy" "principal" {
+#   key_vault_id = data.azurerm_key_vault.key_vault.id
+#   tenant_id    = data.azurerm_client_config.current_client.tenant_id
+#   object_id    = azurerm_linux_function_app.linux_function_app[count.index].identity[0].principal_id
 
-  key_permissions = [
-    "Get", "List", "Encrypt", "Decrypt"
-  ]
+#   key_permissions = [
+#     "Get", "List", "Encrypt", "Decrypt"
+#   ]
 
-  secret_permissions = [
-    "Get",
-  ]
+#   secret_permissions = [
+#     "Get",
+#   ]
 
-  count= length(var.function_app_name)
+#   count= length(var.function_app_name)
 
-}
+# }
 
 resource "azurerm_service_plan" "service_plan" {
   name                = var.app_service_plan_name[count.index]
@@ -159,8 +159,8 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     vnetrouteallenabled=1
     
     DOCUMENTATION_TABLE = "documentation"
-    SECRET = azurerm_key_vault_secret.key_vault_secret.name
-    KEYVAULT_URI = data.azurerm_key_vault.key_vault.vault_uri
+    # SECRET = azurerm_key_vault_secret.key_vault_secret.name
+    # KEYVAULT_URI = data.azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
     DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
@@ -192,8 +192,8 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     HTTP_TRIGGER_URL=var.HTTP_TRIGGER_URL
     ALERTS_DOCUMENTATION="alertsDocumentation"
     DOCUMENTATION_STORAGE_NAME="myfirsttrail"
-    SECRET = azurerm_key_vault_secret.key_vault_secret.name
-    KEYVAULT_URI = data.azurerm_key_vault.key_vault.vault_uri
+    # SECRET = azurerm_key_vault_secret.key_vault_secret.name
+    # KEYVAULT_URI = data.azurerm_key_vault.key_vault.vault_uri
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
     DOCKER_REGISTRY_SERVER_USERNAME     = var.DOCKER_REGISTRY_SERVER_USERNAME
@@ -211,8 +211,8 @@ resource "azurerm_linux_function_app" "linux_function_app" {
     DOCUMENTATION_TABLE ="documentation"
     DELETED_ACCOUNTS_TABLE="deletedStorages"
 
-    KEYVAULT_URI = data.azurerm_key_vault.key_vault.vault_uri
-    SECRET = azurerm_key_vault_secret.key_vault_secret.name
+    # KEYVAULT_URI = data.azurerm_key_vault.key_vault.vault_uri
+    # SECRET = azurerm_key_vault_secret.key_vault_secret.name
     SECRET_EXCEL = var.key_vault_secret_excel_name
     https_only                          = true
     DOCKER_REGISTRY_SERVER_URL          = var.DOCKER_REGISTRY_SERVER_URL
