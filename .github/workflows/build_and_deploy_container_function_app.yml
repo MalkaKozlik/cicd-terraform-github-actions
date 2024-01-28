@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         directory:
-          # - func-get-last-fetch-time-for-each-storage-account
+          - func-get-last-fetch-time-for-each-storage-account
           # - func-get-subscription-list
           - func-get-storage-list-by-subscription
           # - func-test-storage          
