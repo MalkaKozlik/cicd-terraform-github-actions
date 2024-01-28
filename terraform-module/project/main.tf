@@ -29,8 +29,4 @@ output id {
   value       = module.storages.id
 }
 
-output resource_group {
-  value       = module.storages.resource_group_name
- 
-}
 

@@ -7,6 +7,3 @@ output id {
   value       = azurerm_resource_group.resource.id
 }
 
-output resource_group_name {
-  value       = var.hello
-}
