@@ -20,10 +20,10 @@ jobs:
       matrix:
         directory:
           - func-get-last-fetch-time-for-each-storage-account
-          # - func-get-subscription-list
+          - func-get-subscription-list
           - func-get-storage-list-by-subscription
-          # - func-test-storage          
-          # - func-send-excel-mark-delete
+          - func-test-storage          
+          - func-send-excel-mark-delete
 
     steps:
     - name: 📂 Checkout repository
@@ -123,5 +123,5 @@ jobs:
       with:
         app-name: ${{ matrix.directory }}
         image: 'ghcr.io/${{ env.REPO }}-${{ matrix.directory }}:${{ steps.get_release.outputs.tag_name }}'
-        # slot-name: 'development'
+        slot-name: 'development'
       if: env.DIRECTORY == matrix.directory
