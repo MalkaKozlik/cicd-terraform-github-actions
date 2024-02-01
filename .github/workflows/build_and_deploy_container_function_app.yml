@@ -13,7 +13,7 @@ jobs:
         working-directory: function_apps
 
     environment:
-      name: 'production'
+      name: 'development'
       url: ${{ steps.deploy-to-functions.outputs.app-url }}
 
     strategy:
@@ -123,5 +123,5 @@ jobs:
       with:
         app-name: ${{ matrix.directory }}
         image: 'ghcr.io/${{ env.REPO }}-${{ matrix.directory }}:${{ steps.get_release.outputs.tag_name }}'
-        # slot-name: 'development'
+        slot-name: 'development'
       if: env.DIRECTORY == matrix.directory
