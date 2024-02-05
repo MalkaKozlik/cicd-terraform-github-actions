@@ -28,7 +28,19 @@
                         }
                     },
                     "actions": {
-                      
+                        "Initialize_temp": {
+                            "runAfter": {},
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "temp",
+                                        "type": "string"
+                                    }
+                                ]
+                            }
+                        },
+                       
                     },
                     "outputs": {}
                 },
