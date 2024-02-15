@@ -13,7 +13,7 @@ app = func.FunctionApp()
 def func_three_03(req: func.HttpRequest) -> func.HttpResponse:
     fix_bytes_value = req.get_body().replace(b"'", b'"')
     subscriptions_json = json.load(io.BytesIO(fix_bytes_value))
-            
+    logging.warn(subscriptions_json['subscription_id'])        
     storage_account_list = get_storage_list(subscriptions_json['subscription_id'])
     storage_accounts=[]
     for storage_account in storage_account_list:
