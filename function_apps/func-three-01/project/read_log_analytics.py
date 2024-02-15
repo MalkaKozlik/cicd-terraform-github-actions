@@ -6,6 +6,7 @@ from datetime import timedelta
 from itertools import groupby
 from operator import itemgetter
 
+import logging
 
 def get_array_of_last_fetch_time():
     
@@ -21,7 +22,9 @@ def get_times():
     times=[]
 
     for type in storage_types:
+        logging.info(type)
         data_for_type_query = get_workspace_table(type)
+        logging.warn(data_for_type_query)
         times_array = get_times_logs(data_for_type_query)
         times.extend(times_array)
 
