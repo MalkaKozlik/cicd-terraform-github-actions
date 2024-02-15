@@ -4,7 +4,6 @@ import io
 
 from project.managed_storages import *
 from config.config_variables import essential_tag
-import logging
 
 app = func.FunctionApp()
 
@@ -13,12 +12,9 @@ app = func.FunctionApp()
 def func_three_03(req: func.HttpRequest) -> func.HttpResponse:
     fix_bytes_value = req.get_body().replace(b"'", b'"')
     subscriptions_json = json.load(io.BytesIO(fix_bytes_value))
-    logging.warn(subscriptions_json['subscription_id'])        
     storage_account_list = get_storage_list(subscriptions_json['subscription_id'])
     storage_accounts=[]
     for storage_account in storage_account_list:
-        logging.info('true' if storage_account.tags.get(essential_tag) else 'false')
         storage_accounts.append({'name':storage_account.name,'id':storage_account.id,'tags':'true' if storage_account.tags.get(essential_tag) else 'false'})
 
-    logging.warn(storage_accounts)
     return func.HttpResponse(str(storage_accounts), status_code=200)
