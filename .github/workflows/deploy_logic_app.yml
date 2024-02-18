@@ -37,12 +37,12 @@ jobs:
         azPSVersion: latest
 
     - name: Deploy Azure Logic App
-        uses: azure/arm-deploy@v1
-        with:
-          subscriptionId: ${{ secrets.SUBSCRIPTION_ID }}
-          resourceGroupName: ${{ inputs.resourceGroupName }}
-          template: ./templates/template.json
-          # parameters:   # Specify any necessary parameters
+      uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.SUBSCRIPTION_ID }}
+        resourceGroupName: ${{ inputs.resourceGroupName }}
+        template: ./templates/template.json
+        # parameters:   # Specify any necessary parameters
     # - name: Deploy to Azure Logic App
     #   uses: Azure/functions-action@v1.3.1
     #   id: la
