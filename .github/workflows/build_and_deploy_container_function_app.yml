@@ -29,7 +29,8 @@ jobs:
           # - func-three-03
           # - func-three-04
           # - func-three-05
-          - func-user-disable
+          - func-try-user-disable-automation
+
 
     steps:
     - name: 📂 Checkout repository
