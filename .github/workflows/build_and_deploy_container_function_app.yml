@@ -24,11 +24,12 @@ jobs:
           # - func-get-storage-list-by-subscription
           # - func-test-storage          
           # - func-send-excel-mark-delete
-          - func-three-01
+          # - func-three-01
           # - func-three-02
           # - func-three-03
           # - func-three-04
           # - func-three-05
+          - user-disable-automation
 
     steps:
     - name: 📂 Checkout repository
