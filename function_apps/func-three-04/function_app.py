@@ -34,7 +34,7 @@ def func_three_04(req: func.HttpRequest) -> func.HttpResponse:
             "nextLink": None
             }
             return func.HttpResponse(json.dumps(paginated_response), mimetype="application/json")
-        
+        logging.warn("----------------------------------------")
         if(storage_account['name']==documentation_storage_name):
             paginated_response = {
             "value": [response_for_null_storages],
@@ -42,7 +42,7 @@ def func_three_04(req: func.HttpRequest) -> func.HttpResponse:
             }
             return func.HttpResponse(json.dumps(paginated_response), mimetype="application/json")
 
-        
+        logging.warn("before storages")
         object_for_alerts_to_excel=storage_account_test(
             storage_account['name'],
             partition_key,

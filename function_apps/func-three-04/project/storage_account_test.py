@@ -9,7 +9,7 @@ from project.used_capacity_comparison import *
 
 
 def storage_account_test(storage_account,partitionKey,row_key,subscription_id,subscription_name,storage_account_id,last_fetch_time):
-
+    logging.warn('in storage_account_test')
     storage_client = create_storage_management_client(subscription_id)
     resource_group_name = find_resource_group_name(storage_account_id)
     used_capacity_comparison_test_result = used_capacity_comparison_test(resource_group_name, storage_account, subscription_id)
@@ -39,9 +39,11 @@ def storage_account_test(storage_account,partitionKey,row_key,subscription_id,su
         last_fetch_is_early_result["alert"],
         alert_reason_for_check_last_fetch,
     )
-
+    logging.warn("before upload")
+    logging.warn(documentation_table)
+    logging.warn(entity)
     upload_to_table(documentation_table, entity)
-
+    logging.info('after-------')
     try:
         object_for_alerts_to_excel= check_alert(
         used_capacity_comparison_test_result["alert"],
