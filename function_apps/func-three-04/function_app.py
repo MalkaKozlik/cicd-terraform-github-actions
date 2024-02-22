@@ -1,6 +1,5 @@
 import azure.functions as func
 import json
-import logging
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -42,12 +41,7 @@ def func_three_04(req: func.HttpRequest) -> func.HttpResponse:
             "nextLink": None
             }
             return func.HttpResponse(json.dumps(paginated_response), mimetype="application/json")
-        logging.warn({'subscription_name':subscription_name,
-                    'storage_account':storage_account,
-                    'partition_key':partition_key,
-                    'row_key':row_key,
-                    'last_fetch_time':last_fetch_time
-                    })
+
         
         object_for_alerts_to_excel=storage_account_test(
             storage_account['name'],
