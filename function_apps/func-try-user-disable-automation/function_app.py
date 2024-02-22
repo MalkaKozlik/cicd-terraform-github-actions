@@ -12,6 +12,6 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
 
     logging.info('Python HTTP trigger function processed a request.')
 
-    inspection_process_management("Moon","3")
+    inspection_process_management("moon","3")
         
     return func.HttpResponse("success - end logic app", status_code=200)

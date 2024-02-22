@@ -27,9 +27,9 @@ jobs:
           # - func-three-01
           # - func-three-02
           # - func-three-03
-          # - func-three-04
+          - func-three-04
           # - func-three-05
-          - func-try-user-disable-automation
+          # - func-try-user-disable-automation
 
 
     steps:
