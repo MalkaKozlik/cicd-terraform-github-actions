@@ -11,9 +11,13 @@ from project.used_capacity_comparison import *
 def storage_account_test(storage_account,partitionKey,row_key,subscription_id,subscription_name,storage_account_id,last_fetch_time):
     logging.warn('in storage_account_test')
     storage_client = create_storage_management_client(subscription_id)
+    logging.warn(f"storage_client: {storage_client}")
     resource_group_name = find_resource_group_name(storage_account_id)
+    logging.warn(f"resource_group_name: {resource_group_name}")
     used_capacity_comparison_test_result = used_capacity_comparison_test(resource_group_name, storage_account, subscription_id)
+    logging.warn(f"used_capacity_comparison_test_result: {used_capacity_comparison_test_result}")
     last_fetch_is_early_result = check_last_fetch_is_early(storage_client,used_capacity_comparison_test_result["resource_group"],storage_account,last_fetch_time)
+    logging.warn(f"last_fetch_is_early_result: {last_fetch_is_early_result}")
 
     alert_reason_for_check_used_capacity = (
         alert_reasons.USED_CAPACITY.value
@@ -25,6 +29,7 @@ def storage_account_test(storage_account,partitionKey,row_key,subscription_id,su
         if last_fetch_is_early_result["alert"]
         else "null"
     )
+    logging.info(f"{alert_reason_for_check_used_capacity} - {alert_reason_for_check_last_fetch}")
     entity = creating_an_object_for_sending_to_a_documentation_table(
         str(partitionKey),
         str(row_key),
