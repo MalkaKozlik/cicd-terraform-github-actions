@@ -59,7 +59,7 @@ variable vnet_storage_account_name {
 
 variable key_vault_name {
   type        = string
-  default = "kv"
+  default = "kv-try-deploy"
 }
 
 variable key_vault_resource_group_name {
