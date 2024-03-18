@@ -28,20 +28,20 @@ data "azurerm_resource_group" "vnet_resource_group" {
   # location = var.rg_location
 }
 
-resource "azurerm_virtual_network" "virtual_network" {
-  name                = var.vnet_name
-  location            = data.azurerm_resource_group.vnet_resource_group.location
-  resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
-  address_space       = var.address_space
-  dns_servers         = var.dns_servers
-}
+# resource "azurerm_virtual_network" "virtual_network" {
+#   name                = var.vnet_name
+#   location            = data.azurerm_resource_group.vnet_resource_group.location
+#   resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
+#   address_space       = var.address_space
+#   dns_servers         = var.dns_servers
+# }
 
-resource "azurerm_subnet" "vnet_subnet" {
-  name                 = var.subnet_name
-  resource_group_name  = data.azurerm_resource_group.vnet_resource_group.name
-  virtual_network_name = azurerm_virtual_network.virtual_network.name
-  address_prefixes     = var.subnet_address_prefix
-}
+# resource "azurerm_subnet" "vnet_subnet" {
+#   name                 = var.subnet_name
+#   resource_group_name  = data.azurerm_resource_group.vnet_resource_group.name
+#   virtual_network_name = azurerm_virtual_network.virtual_network.name
+#   address_prefixes     = var.subnet_address_prefix
+# }
 
 
 # resource "azurerm_storage_account" "vnet_storage_account" {
@@ -93,33 +93,33 @@ data "azurerm_client_config" "current_client" {}
 #   key_vault_id = azurerm_key_vault.key_vault.id
 # }
 
-# data "azurerm_key_vault" "key_vault" {
-#   name                = var.key_vault_name
-#   resource_group_name = var.key_vault_resource_group_name
-# }
+data "azurerm_key_vault" "key_vault" {
+  name                = var.key_vault_name
+  resource_group_name = var.key_vault_resource_group_name
+}
 
-# resource "azurerm_key_vault_secret" "key_vault_secret" {
-#   name         = var.key_vault_secret_name
-#   value        = data.azurerm_storage_account.vnet_storage_account.primary_connection_string
-#   key_vault_id = data.azurerm_key_vault.key_vault.id
-# }
+resource "azurerm_key_vault_secret" "key_vault_secret" {
+  name         = var.key_vault_secret_name
+  value        = data.azurerm_storage_account.vnet_storage_account.primary_connection_string
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
 
-# resource "azurerm_key_vault_access_policy" "principal" {
-#   key_vault_id = data.azurerm_key_vault.key_vault.id
-#   tenant_id    = data.azurerm_client_config.current_client.tenant_id
-#   object_id    = azurerm_linux_function_app.linux_function_app[count.index].identity[0].principal_id
+resource "azurerm_key_vault_access_policy" "principal" {
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+  tenant_id    = data.azurerm_client_config.current_client.tenant_id
+  object_id    = azurerm_linux_function_app.linux_function_app[count.index].identity[0].principal_id
 
-#   key_permissions = [
-#     "Get", "List", "Encrypt", "Decrypt"
-#   ]
+  key_permissions = [
+    "Get", "List", "Encrypt", "Decrypt"
+  ]
 
-#   secret_permissions = [
-#     "Get",
-#   ]
+  secret_permissions = [
+    "Get",
+  ]
 
-#   count= length(var.function_app_name)
+  count= length(var.function_app_name)
 
-# }
+}
 
 resource "azurerm_service_plan" "service_plan" {
   name                = var.app_service_plan_name[count.index]
@@ -274,22 +274,22 @@ resource "azurerm_linux_function_app" "linux_function_app" {
 # }
 
 
-resource "azurerm_logic_app_workflow" "logic_app_workflow" {
-  name                = var.logic_app_workflow_name
-  location            = data.azurerm_resource_group.vnet_resource_group.location
-  resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
-  workflow_parameters = {
-    "workflows_logic_app_name" : "{ \"defaultValue\":\"${var.logic_app_workflow_name}\", \"type\" : \"string\"}"
-    "sites_func_get_last_fetch_time_for_each_storage_account_externalid": "{\"defaultValue\": \"${azurerm_linux_function_app.linux_function_app[0].id}\",\"type\": \"string\"}"
-    "sites_func_get_subscription_list_externalid": "{\"defaultValue\": \"${azurerm_linux_function_app.linux_function_app[1].id}\", \"type\": \"string\"}"
-    "sites_func_get_storage_list_by_subscription_externalid": "{\"defaultValue\": \"${azurerm_linux_function_app.linux_function_app[2].id}\",\"type\": \"string\" }"
-    "sites_func_test_storage_externalid": "{ \"defaultValue\":\"${azurerm_linux_function_app.linux_function_app[3].id}\", \"type\": \"string\"}"
-    "sites_func_sending_excel_by_email_and_mark_storages_for_deletion_externalid": "{\"defaultValue\": \"${azurerm_linux_function_app.linux_function_app[4].id}\",\"type\": \"string\" }"
-    "location":"{\"defaultValue\": \"${data.azurerm_resource_group.vnet_resource_group.location}\",\"type\": \"string\" }"
-    "frequency":"{\"defaultValue\": \"${var.FREQ_AUTOMATION_TEST_TYPE}\",\"type\": \"string\",\"allowedValues\": [\"Month\",\"Week\",\"Day\",\"Hour\",\"Minute\",\"Second\"]}"
-    "interval": "{ \"defaultValue\": ${var.FREQ_AUTOMATION_TEST_NUMBER}, \"type\": \"int\" }"
-  }
-}
+# resource "azurerm_logic_app_workflow" "logic_app_workflow" {
+#   name                = var.logic_app_workflow_name
+#   location            = data.azurerm_resource_group.vnet_resource_group.location
+#   resource_group_name = data.azurerm_resource_group.vnet_resource_group.name
+#   workflow_parameters = {
+#     "workflows_logic_app_name" : "{ \"defaultValue\":\"${var.logic_app_workflow_name}\", \"type\" : \"string\"}"
+#     "sites_func_get_last_fetch_time_for_each_storage_account_externalid": "{\"defaultValue\": \"${azurerm_linux_function_app.linux_function_app[0].id}\",\"type\": \"string\"}"
+#     "sites_func_get_subscription_list_externalid": "{\"defaultValue\": \"${azurerm_linux_function_app.linux_function_app[1].id}\", \"type\": \"string\"}"
+#     "sites_func_get_storage_list_by_subscription_externalid": "{\"defaultValue\": \"${azurerm_linux_function_app.linux_function_app[2].id}\",\"type\": \"string\" }"
+#     "sites_func_test_storage_externalid": "{ \"defaultValue\":\"${azurerm_linux_function_app.linux_function_app[3].id}\", \"type\": \"string\"}"
+#     "sites_func_sending_excel_by_email_and_mark_storages_for_deletion_externalid": "{\"defaultValue\": \"${azurerm_linux_function_app.linux_function_app[4].id}\",\"type\": \"string\" }"
+#     "location":"{\"defaultValue\": \"${data.azurerm_resource_group.vnet_resource_group.location}\",\"type\": \"string\" }"
+#     "frequency":"{\"defaultValue\": \"${var.FREQ_AUTOMATION_TEST_TYPE}\",\"type\": \"string\",\"allowedValues\": [\"Month\",\"Week\",\"Day\",\"Hour\",\"Minute\",\"Second\"]}"
+#     "interval": "{ \"defaultValue\": ${var.FREQ_AUTOMATION_TEST_NUMBER}, \"type\": \"int\" }"
+#   }
+# }
 
 # data "azurerm_subscription" "primary" {
 # }

@@ -27,30 +27,30 @@ variable rg_location {
 }
 
 
-variable vnet_name {
-  type        = string
-  default = "vnet-manage-storages"
-}
+# variable vnet_name {
+#   type        = string
+#   default = "vnet-manage-storages"
+# }
 
-variable address_space {
-  type        = list
-  default = ["10.1.0.0/16"]
-}
+# variable address_space {
+#   type        = list
+#   default = ["10.1.0.0/16"]
+# }
 
-variable dns_servers {
-  type        = list
-  default = []
-}
+# variable dns_servers {
+#   type        = list
+#   default = []
+# }
 
-variable subnet_name {
-  type        = string
-  default = "snet-manage-storages"
-}
+# variable subnet_name {
+#   type        = string
+#   default = "snet-manage-storages"
+# }
 
-variable subnet_address_prefix {
-  type        = list
-  default = ["10.1.1.0/24"]
-}
+# variable subnet_address_prefix {
+#   type        = list
+#   default = ["10.1.1.0/24"]
+# }
 
 variable vnet_storage_account_name {
   type        = string
@@ -59,12 +59,12 @@ variable vnet_storage_account_name {
 
 variable key_vault_name {
   type        = string
-  default = "kv-connection-string1"
+  default = "kv"
 }
 
 variable key_vault_resource_group_name {
   type        = string
-  default     = "rg-administrators"
+  default     = "NetworkWatcherRG"
 }
 
 
@@ -109,14 +109,24 @@ variable key_vault_secret_excel_name {
 }
 
 
-variable app_service_plan_name{
-  type = list(string)
-  default = ["app-get-last-fetch-time-for-each-storage-account","app-get-subscription-list","app-get-storage-list-by-subscription","app-test-storage","app-send-excel-mark-delete"]
+# variable app_service_plan_name{
+#   type = list(string)
+#   default = ["app-get-last-fetch-time-for-each-storage-account","app-get-subscription-list","app-get-storage-list-by-subscription","app-test-storage","app-send-excel-mark-delete"]
+# }
+
+# variable function_app_name {
+#   type        = list(string)
+#   default = ["func-get-last-fetch-time-for-each-storage-account","func-get-subscription-list","func-get-storage-list-by-subscription","func-test-storage","func-send-excel-mark-delete"]
+# }
+
+variable "app_service_plan_name" {
+  type =  list(string)
+  default = [ "app-try-deploy" ]
 }
 
-variable function_app_name {
-  type        = list(string)
-  default = ["func-get-last-fetch-time-for-each-storage-account","func-get-subscription-list","func-get-storage-list-by-subscription","func-test-storage","func-send-excel-mark-delete"]
+variable "function_app_name"{
+  type = list(string)
+  default = [ "func-try-deploy" ]
 }
 
 variable DOCKER_REGISTRY_SERVER_PASSWORD {
@@ -132,10 +142,10 @@ variable DOCKER_REGISTRY_SERVER_URL {
   type        = string
 }
 
-variable linux_fx_version {
-  type        = string
-  default     = "DOCKER|mcr.microsoft.com/azure-functions/dotnet:4-appservice-quickstart"
-}
+# variable linux_fx_version {
+#   type        = string
+#   default     = "DOCKER|mcr.microsoft.com/azure-functions/dotnet:4-appservice-quickstart"
+# }
 
 variable IMAGE_NAME {
   type        = string
@@ -191,5 +201,5 @@ variable FREQ_AUTOMATION_TEST_NUMBER {
 
 variable logic_app_workflow_name {
   type        = string
-  default = "logic-app-storage-management"
+  default = "logic-app-try"
 }
