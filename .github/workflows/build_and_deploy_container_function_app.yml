@@ -112,11 +112,16 @@ jobs:
         file: ./Dockerfile
       if: env.DIRECTORY == matrix.directory
 
+    # - name: 🔑 Login to Azure
+    #   uses: azure/login@v1
+    #   with:
+    #     creds: ${{ secrets.AZURE_CREDENTIALS }}
+    #   if: env.DIRECTORY == matrix.directory
+
     - name: 🔑 Login to Azure
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-      if: env.DIRECTORY == matrix.directory
+      id : az-login
+      run : az login --service-principal -u ${{secrets.ARM_CLIENT_ID}} -p ${{secrets.ARM_CLIENT_SECRET}} --tenant ${{secrets.ARM_TENANT_ID}} 
+ 
  
     - name: 🚀 Deploy to Azure Functions
       id: deploy-to-functions
