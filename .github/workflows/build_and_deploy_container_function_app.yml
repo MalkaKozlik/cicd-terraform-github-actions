@@ -122,7 +122,7 @@ jobs:
       id: deploy-to-functions
       uses: Azure/functions-container-action@v1
       with:
-        app-name: "${{ matrix.directory }}1"
+        app-name: "${{ matrix.directory }}"
         image: 'ghcr.io/${{ env.REPO }}-${{ matrix.directory }}:${{ steps.get_release.outputs.tag_name }}'
         # slot-name: 'development'
       if: env.DIRECTORY == matrix.directory
